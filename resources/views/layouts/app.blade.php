@@ -18,7 +18,7 @@
                 <div class="nav-dropdown">
                     <a href="{{ url('/schools') }}" class="dropdown-trigger">Schools</a>
                     <div class="nav-dropdown-menu" aria-label="Schools menu">
-                        <a href="{{ url('/schools') }}">Mathematics and Natural Science</a>
+                        <a href="{{ url('/schools/mathematics-natural-sciences') }}">school of Mathematics and Natural Science</a>
                         <a href="{{ url('/schools') }}">School of Agriculture and Environmental Science</a>
                         <a href="{{ url('/schools') }}">School of Medicine</a>
                         <a href="{{ url('/schools') }}">School of Education</a>

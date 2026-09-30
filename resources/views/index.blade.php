@@ -12,23 +12,23 @@
             <div class="hero-panels" aria-label="University highlights">
                 <a href="#programmes"><span>01</span><strong>Find your programme</strong><small>Discover your next path <b>→</b></small></a>
                 <a href="#schools"><span>02</span><strong>Explore our schools</strong><small>Learn with purpose <b>→</b></small></a>
-                <a href="#contact"><span>03</span><strong>Accommodations</strong><small>Meet your community <b>→</b></small></a>
+                <a href="/accommodation"><span>03</span><strong>Accommodations</strong><small>Meet your community <b>→</b></small></a>
             </div>
         </div>
     </section>
     <section class="intro" aria-labelledby="news-title"><div class="page-width">
         <div class="news-heading"><h1 id="news-title" class="section-title">Events And News</h1><div class="news-controls"><button class="news-control" type="button" data-news-prev aria-label="Show previous news"><span aria-hidden="true">&#8592;</span></button><button class="news-control" type="button" data-news-next aria-label="Show next news"><span aria-hidden="true">&#8594;</span></button></div></div>
         <div class="news-carousel" aria-label="University news and events"><div class="news-track">
-            <article class="news-card"><div class="news-image"><img src="{{ asset('images/campus/news-campus.jpg') }}" alt="Students on campus"><p class="news-type">Admissions</p></div><div class="news-card-body"><h2>Applications are now open</h2><p>Start your Mukuba University journey and submit your application for the next intake.</p><a href="#apply">Read more <span aria-hidden="true">&#8594;</span></a></div></article>
-            <article class="news-card"><div class="news-image"><img src="{{ asset('images/campus/news-graduation.jpg') }}" alt="Graduates celebrating"><p class="news-type">Upcoming event</p></div><div class="news-card-body"><h2>12th graduation ceremony</h2><p>Join us as we celebrate the achievements of our graduating class and their families.</p><a href="#contact">Read more <span aria-hidden="true">&#8594;</span></a></div></article>
-            <article class="news-card"><div class="news-image"><img src="{{ asset('images/campus/study-classroom.jpg') }}" alt="Students learning in a classroom"><p class="news-type">Academic notice</p></div><div class="news-card-body"><h2>Publication of results</h2><p>Students can review their latest examination results through the academic office.</p><a href="#contact">Read more <span aria-hidden="true">&#8594;</span></a></div></article>
-            <article class="news-card"><div class="news-image"><img src="{{ asset('images/campus/program-degree.jpg') }}" alt="Students collaborating"><p class="news-type">Academic update</p></div><div class="news-card-body"><h2>Moving to semester learning</h2><p>Learn what the transition from terms to semester-based learning means for your studies.</p><a href="#programmes">Read more <span aria-hidden="true">&#8594;</span></a></div></article>
-            <article class="news-card"><div class="news-image"><img src="{{ asset('images/campus/event-group.jpg') }}" alt="Students and staff at a university event"><p class="news-type">Campus life</p></div><div class="news-card-body"><h2>Student leadership forum</h2><p>Students and staff come together to shape a stronger campus community.</p><a href="#contact">Read more <span aria-hidden="true">&#8594;</span></a></div></article>
+            <article class="news-card"><div class="news-image"><img src="{{ asset('images/app.jpg') }}" alt="Students on campus"><p class="news-type">Admissions</p></div><div class="news-card-body"><h2>Applications are now open</h2><p>Start your Mukuba University journey and submit your application for the next intake.</p><a href="#apply">Read more <span aria-hidden="true">&#8594;</span></a></div></article>
+            <article class="news-card"><div class="news-image"><img src="{{ asset('images/grad.jpg') }}" alt="Graduates celebrating"><p class="news-type">Upcoming event</p></div><div class="news-card-body"><h2>12th graduation ceremony</h2><p>Join us as we celebrate the achievements of our graduating class and their families.</p><a href="#contact">Read more <span aria-hidden="true">&#8594;</span></a></div></article>
+            <article class="news-card"><div class="news-image"><img src="{{ asset('images/logo.png') }}" alt="Students learning in a classroom"><p class="news-type">Academic notice</p></div><div class="news-card-body"><h2>Publication of results</h2><p>Students can review their latest examination results through the academic office.</p><a href="#contact">Read more <span aria-hidden="true">&#8594;</span></a></div></article>
+            <article class="news-card"><div class="news-image"><img src="{{ asset('images/logo.png') }}" alt="Students collaborating"><p class="news-type">Academic update</p></div><div class="news-card-body"><h2>Moving to semester learning</h2><p>Learn what the transition from terms to semester-based learning means for your studies.</p><a href="#programmes">Read more <span aria-hidden="true">&#8594;</span></a></div></article>
+            <article class="news-card"><div class="news-image"><img src="{{ asset('images/logo.png') }}" alt="Students and staff at a university event"><p class="news-type">Campus life</p></div><div class="news-card-body"><h2>Student leadership forum</h2><p>Students and staff come together to shape a stronger campus community.</p><a href="#contact">Read more <span aria-hidden="true">&#8594;</span></a></div></article>
         </div></div>
     </div></section>
     <section id="schools" class="section page-width" aria-labelledby="schools-title"><div class="school-heading"><h2 id="schools-title" class="section-title">Our Schools</h2><div class="school-controls"><button class="school-control" type="button" data-school-prev aria-label="Show previous schools"><span aria-hidden="true">&#8592;</span></button><button class="school-control" type="button" data-school-next aria-label="Show next schools"><span aria-hidden="true">&#8594;</span></button></div></div><div class="school-carousel" aria-label="Mukuba University schools"><div class="school-grid">
         <article class="school-card"><img src="{{ asset('images/smns.jpeg') }}" alt="Students studying natural sciences"><h3>School of Mathematics and Natural Sciences</h3><a href="#programmes">Learn more</a></article>
-        <article class="school-card"><img src="{{ asset('images/NUT.jpeg') }}" alt="Students studying natural sciences"><h3>School of Applied Sciences And Technology</h3><a href="#programmes">Learn more</a></article>
+        <article class="school-card"><img src="{{ asset('images/nut.jpg') }}" alt="Students studying natural sciences"><h3>School of Applied Sciences And Technology</h3><a href="#programmes">Learn more</a></article>
         <article class="school-card"><img src="{{ asset('images/agric.jpg') }}" alt="University landscape"><h3>School of Agriculture and Environmental Sciences</h3><a href="#programmes">Learn more</a></article>
         <article class="school-card"><img src="{{ asset('images/teach.jpg') }}" alt="Education students"><h3>School of Education</h3><a href="#programmes">Learn more</a></article>
         <article class="school-card"><img src="{{ asset('images/logo.png') }}" alt="Students collaborating on a project"><h3>School of Engineering</h3><a href="#programmes">Learn more</a></article>
@@ -39,7 +39,7 @@
         <a href="/programmes" class="programme-card-link"><article class="programme-card"><h3>Bachelor's Degree Programmes</h3></article></a>
         <a href="/programmes" class="programme-card-link"><article class="programme-card"><h3>Masters Programmes</h3></article></a>
     </div><div class="hero-actions"><a id="apply" class="apply-button" href="#contact">Apply now</a></div></div></section>
-    <section class="section page-width" aria-labelledby="study-title"><h2 id="study-title" class="section-title">Study Modes on offer</h2><div class="study-grid"><article><img src="{{ asset('images/campus/study-classroom.jpg') }}" alt="Students learning together"><h3>FULLTIME LEARNING MODE</h3></article><article><img src="{{ asset('images/campus/study-student.jpg') }}" alt="Student reading"><h3>DISTANCE LEARNING MODE</h3></article></div></section>
+    <section class="section page-width" aria-labelledby="study-title"><h2 id="study-title" class="section-title">Study Modes on offer</h2><div class="study-grid"><article><img src="{{ asset('images/Full-time.jpg') }}" alt="Students learning together"><h3>FULLTIME LEARNING MODE</h3></article><article><img src="{{ asset('images/home.jpg') }}" alt="Student reading"><h3>DISTANCE LEARNING MODE</h3></article></div></section>
 
     <section class="strategic-section page-width" aria-labelledby="strategic-title">
         <div class="strategic-grid">
@@ -52,14 +52,13 @@
             <div class="strategic-media">
                 <video controls playsinline preload="metadata" poster="{{ asset('images/Mukuba University.jpg') }}">
                     <source src="{{ asset('images/WhatsApp-Video-2026-03-18-at-1.35.17-PM.mp4') }}" type="video/mp4">
-                    Your browser does not support the video tag.
                 </video>
             </div>
         </div>
     </section>
 
     <section class="alumni page-width" aria-labelledby="alumni-title"><h2 id="alumni-title" class="section-title">Graduates testimonies</h2><div class="alumni-quote"><div class="portrait">AM</div><p>"MUKU gave me the confidence to lead, the perspective to grow, and friendships I will always value."</p><strong>Alumni Association</strong></div></section>
-    <section class="section page-width events" aria-labelledby="events-title"><h2 id="events-title" class="section-title">Events</h2><img src="{{ asset('images/campus/event-group.jpg') }}" alt="University students and staff at an event"><p>Celebrating community, achievement and a shared future.</p></section>
+    <section class="section page-width events" aria-labelledby="events-title"><h2 id="events-title" class="section-title">Events</h2><img src="{{ asset('images/event.jpg') }}" alt="University students and staff at an event"><p>Celebrating community, achievement and a shared future.</p></section>
     <section class="partner-strip" aria-labelledby="partners-title">
         <div class="page-width">
             <h2 id="partners-title" class="section-title">Our Partners</h2>
