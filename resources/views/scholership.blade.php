@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Scholarships and Loans | Mukuba University</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body>
+    @include('header contents.header')
+    <main><h1>Scholarships and Loans</h1></main>
+    @include('header contents.footer')
+</body>
+</html>
