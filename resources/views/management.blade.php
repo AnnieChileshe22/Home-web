@@ -9,7 +9,7 @@
             <div class="management-grid">
                 <div class="management-row management-row-single">
                     <article class="management-card management-card-featured management-card-centered">
-                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80" alt="Professor Frank P. Tailoka">
+                        <img src="{{ asset('images/Prof_Tailoka.png') }}" alt="Professor Frank P. Tailoka">
                         <div class="management-body">
                             <h2>Professor. Frank P. Tailoka</h2>
                             <p class="management-role">VICE CHANCELLOR</p>
@@ -20,7 +20,7 @@
 
                 <div class="management-row management-row-dual">
                     <article class="management-card">
-                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80" alt="Professor Benjamin Mapani">
+                        <img src="{{ asset('images/DVC_MAPANI.png') }}" alt="Professor Benjamin Mapani">
                         <div class="management-body">
                             <h2>Professor Benjamin Mapani</h2>
                             <p class="management-role">DEPUTY VICE CHANCELLOR - ACADEMIC</p>
@@ -29,7 +29,7 @@
                     </article>
 
                     <article class="management-card">
-                        <img src="https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=900&q=80" alt="Professor Felix Kalaba">
+                        <img src="{{ asset('images/Proff_Kalaba.png') }}" alt="Professor Felix Kalaba">
                         <div class="management-body">
                             <h2>Professor Felix Kalaba</h2>
                             <p class="management-role">DEPUTY VICE CHANCELLOR - RESEARCH AND INNOVATIONS</p>
@@ -40,7 +40,7 @@
 
                 <div class="management-row management-row-single">
                     <article class="management-card management-card-centered-standalone">
-                        <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=900&q=80" alt="Dr. Masondo Maybin">
+                        <img src="{{ asset('images/Dr.Masando1.png') }}" alt="Dr. Masondo Maybin">
                         <div class="management-body">
                             <h2>Dr. Masondo Maybin</h2>
                             <p class="management-role">REGISTRAR</p>
@@ -51,7 +51,7 @@
 
                 <div class="management-row management-row-triple">
                     <article class="management-card">
-                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=900&q=80" alt="Mr Mweemba Mulunda">
+                        <img src="{{ asset('images/CFO.png') }}" alt="Mr Mweemba Mulunda">
                         <div class="management-body">
                             <h2>Mr Mweemba Mulunda</h2>
                             <p class="management-role">CHIEF FINANCIAL OFFICER</p>
@@ -60,7 +60,7 @@
                     </article>
 
                     <article class="management-card">
-                        <img src="https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?auto=format&fit=crop&w=900&q=80" alt="Mr Matuka Chipembele">
+                        <img src="{{ asset('images/Mr_Chipembele.png') }}" alt="Mr Matuka Chipembele">
                         <div class="management-body">
                             <h2>Mr.Matuka Chipembele</h2>
                             <p class="management-role">CHIEF LIBRARIAN</p>
@@ -69,7 +69,7 @@
                     </article>
 
                     <article class="management-card">
-                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80" alt="Dr. Benson Simango">
+                        <img src="{{ asset('images/SIM.png') }}" alt="Dr. Benson Simango">
                         <div class="management-body">
                             <h2>Dr. Benson Simango</h2>
                             <p class="management-role">DEAN OF STUDENTS</p>
