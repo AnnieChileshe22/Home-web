@@ -115,6 +115,45 @@
         </div>
         <div class="copyright">©2026. Mukuba University. All Rights Reserved.</div>
     </footer>
-    <script>const visibleCards=()=>window.innerWidth<=760?1:window.innerWidth<=960?2:3;const setupCarousel=(trackSelector,cardSelector,previousSelector,nextSelector,gap)=>{const track=document.querySelector(trackSelector);const cards=[...document.querySelectorAll(cardSelector)];const previous=document.querySelector(previousSelector);const next=document.querySelector(nextSelector);let index=0;let timer;const render=()=>{const maxIndex=Math.max(0,cards.length-visibleCards());index=Math.min(Math.max(index,0),maxIndex);const cardWidth=cards[0].getBoundingClientRect().width;track.style.transform=`translateX(-${index*(cardWidth+gap)}px)`;previous.disabled=index===0;next.disabled=index===maxIndex;};const restart=()=>{clearInterval(timer);timer=setInterval(()=>{const maxIndex=Math.max(0,cards.length-visibleCards());index=index>=maxIndex?0:index+1;render();},3000);};previous.addEventListener('click',()=>{index--;render();restart();});next.addEventListener('click',()=>{index++;render();restart();});window.addEventListener('resize',render);render();restart();};setupCarousel('.news-track','.news-card','[data-news-prev]','[data-news-next]',18);setupCarousel('.school-grid','.school-card','[data-school-prev]','[data-school-next]',22);</script>
+    <script>
+        const visibleCards=()=>window.innerWidth<=760?1:window.innerWidth<=960?2:3;
+        const setupCarousel=(trackSelector,cardSelector,previousSelector,nextSelector,gap)=>{const track=document.querySelector(trackSelector);const cards=[...document.querySelectorAll(cardSelector)];const previous=document.querySelector(previousSelector);const next=document.querySelector(nextSelector);let index=0;let timer;const render=()=>{const maxIndex=Math.max(0,cards.length-visibleCards());index=Math.min(Math.max(index,0),maxIndex);const cardWidth=cards[0].getBoundingClientRect().width;track.style.transform=`translateX(-${index*(cardWidth+gap)}px)`;previous.disabled=index===0;next.disabled=index===maxIndex;};const restart=()=>{clearInterval(timer);timer=setInterval(()=>{const maxIndex=Math.max(0,cards.length-visibleCards());index=index>=maxIndex?0:index+1;render();},3000);};previous.addEventListener('click',()=>{index--;render();restart();});next.addEventListener('click',()=>{index++;render();restart();});window.addEventListener('resize',render);render();restart();};setupCarousel('.news-track','.news-card','[data-news-prev]','[data-news-next]',18);setupCarousel('.school-grid','.school-card','[data-school-prev]','[data-school-next]',22);
+
+        const menuToggle = document.querySelector('.menu-toggle');
+        const siteNav = document.querySelector('.site-nav');
+
+        if (menuToggle && siteNav) {
+            menuToggle.addEventListener('click', () => {
+                const isOpen = siteNav.classList.toggle('open');
+                menuToggle.setAttribute('aria-expanded', String(isOpen));
+            });
+        }
+
+        document.querySelectorAll('.nav-dropdown').forEach((dropdown) => {
+            const trigger = dropdown.querySelector('.dropdown-trigger');
+            if (!trigger) return;
+
+            trigger.addEventListener('click', (event) => {
+                if (window.innerWidth > 760) return;
+
+                event.preventDefault();
+                const isOpen = dropdown.classList.contains('is-open');
+
+                document.querySelectorAll('.nav-dropdown').forEach((item) => {
+                    item.classList.remove('is-open');
+                });
+
+                dropdown.classList.toggle('is-open', !isOpen);
+            });
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 760) {
+                document.querySelectorAll('.nav-dropdown').forEach((dropdown) => dropdown.classList.remove('is-open'));
+                if (siteNav) siteNav.classList.remove('open');
+                if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+    </script>
 </body>
 </html>
