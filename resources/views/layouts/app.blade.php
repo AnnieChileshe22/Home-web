@@ -62,15 +62,15 @@
                     <a href="{{ url('/') }}#contact" class="dropdown-trigger">Directorates</a>
                     <div class="nav-dropdown-menu" aria-label="Directorates menu">
                         <a href="{{ url('/innovation-and-research') }}">Innovation &amp; Research</a>
-                        <a href="{{ url('/') }}#contact">Directorate of Research &amp; Graduate Studies</a>
+                        <a href="{{ url('/directorate-of-research-and-graduate-studies') }}">Directorate of Research &amp; Graduate Studies</a>
                         <a href="{{ url('/') }}#contact">Open Distance Learning</a>
                     </div>
                 </div>
                 <div class="nav-dropdown">
                     <a href="{{ url('/') }}#contact" class="dropdown-trigger">About us</a>
                     <div class="nav-dropdown-menu" aria-label="About us menu">
-                        <a href="{{ url('/') }}#contact">Management</a>
-                        <a href="{{ url('/') }}#contact">University Partners</a>
+                        <a href="{{ url('/management') }}">Management</a>
+                        <a href="{{ url('/university-partners') }}">University Partners</a>
                     </div>
                 </div>
                 <a class="apply-nav" href="https://unicosis.mukuba.edu.zm/login" target="_blank" rel="noopener noreferrer">Apply now</a>

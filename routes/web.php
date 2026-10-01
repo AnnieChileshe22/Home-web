@@ -34,6 +34,18 @@ Route::get('/innovation-and-research', function () {
     return view('innovation-and-research');
 });
 
+Route::get('/directorate-of-research-and-graduate-studies', function () {
+    return view('directorate-of-research-and-graduate-studies');
+});
+
+Route::get('/management', function () {
+    return view('management');
+});
+
+Route::get('/university-partners', function () {
+    return view('university-partners');
+});
+
 Route::get('/admin', function () {
     return view('admin.index');
 });
