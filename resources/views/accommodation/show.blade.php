@@ -154,10 +154,14 @@
                 <article class="panel">
                     <h2>Gallery</h2>
                     <div class="gallery">
-                        <img src="{{ asset('images/campus/event-group.jpg') }}" alt="Hostel exterior">
-                        <img src="{{ asset('images/campus/study-classroom.jpg') }}" alt="Hostel room">
-                        <img src="{{ asset('images/campus/study-student.jpg') }}" alt="Hostel lounge">
-                        <img src="{{ asset('images/campus/campus-river.jpg') }}" alt="Hostel surroundings">
+                        <img src="{{ asset('images/to use/room.png') }}" alt="Hostel exterior">
+                        <img src="{{ asset('images/to use/kitchen.png') }}" alt="Hostel room">
+                        <img src="{{ asset('images/to use/shower.png') }}" alt="Hostel lounge">
+                        <img src="{{ asset('images/to use/mirror.png') }}" alt="Hostel surroundings">
+                        <img src="{{ asset('images/to use/tv.png') }}" alt="Hostel exterior">
+                        <img src="{{ asset('images/to use/kariba.png') }}" alt="Hostel room">
+                        <img src="{{ asset('images/to use/toilet.png') }}" alt="Hostel lounge">
+                        <img src="{{ asset('images/to use/corrider.png') }}" alt="Hostel surroundings">
                     </div>
                 </article>
 
@@ -166,12 +170,9 @@
                     <div class="services">
                         <span class="service-pill">Wi-Fi</span>
                         <span class="service-pill">Security</span>
-                        <span class="service-pill">Laundry</span>
+                        <span class="service-pill">Laundry room</span>
                         <span class="service-pill">Water</span>
-                        <span class="service-pill">Power backup</span>
                         <span class="service-pill">Study area</span>
-                        <span class="service-pill">Housekeeping</span>
-                        <span class="service-pill">Reception</span>
                     </div>
                     <ul class="meta-list" style="margin-top: 18px;">
                         <li>Comfortable rooms</li>

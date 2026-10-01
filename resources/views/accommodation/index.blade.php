@@ -155,7 +155,7 @@
                 <div class="hostel-grid">
                     <a href="/accommodation/bangweulu-hostel" class="hostel-card">
                         <div class="hostel-image">
-                            <img src="{{ asset('images/campus/event-group.jpg') }}" alt="Bangweulu Hostel">
+                            <img src="{{ asset('images/to use/kariba.png') }}" alt="Bangweulu Hostel">
                         </div>
                         <div class="hostel-body">
                             <h2>Bangweulu Hostel</h2>
@@ -170,7 +170,7 @@
 
                     <a href="/accommodation/kafue-hostel" class="hostel-card">
                         <div class="hostel-image">
-                            <img src="{{ asset('images/campus/study-classroom.jpg') }}" alt="Kafue Hostel">
+                            <img src="{{ asset('images/to use/kafue.jpg') }}" alt="Kafue Hostel">
                         </div>
                         <div class="hostel-body">
                             <h2>Kafue Hostel</h2>
@@ -185,7 +185,7 @@
 
                     <a href="/accommodation/zambezi-hostel" class="hostel-card">
                         <div class="hostel-image">
-                            <img src="{{ asset('images/campus/school-education.jpg') }}" alt="Zambezi Hostel">
+                            <img src="{{ asset('images/to use/zambezi.jpg') }}" alt="Zambezi Hostel">
                         </div>
                         <div class="hostel-body">
                             <h2>Zambezi Hostel</h2>
@@ -205,7 +205,7 @@
                 <div class="hostel-grid">
                     <a href="/accommodation/kariba-hostel" class="hostel-card">
                         <div class="hostel-image">
-                            <img src="{{ asset('images/campus/program-degree.jpg') }}" alt="Kariba Hostel">
+                            <img src="{{ asset('images/to use/kariba.png') }}" alt="Kariba Hostel">
                         </div>
                         <div class="hostel-body">
                             <h2>Kariba Hostel</h2>
@@ -220,7 +220,7 @@
 
                     <a href="/accommodation/luangwa-hostel" class="hostel-card">
                         <div class="hostel-image">
-                            <img src="{{ asset('images/campus/campus-river.jpg') }}" alt="Luangwa Hostel">
+                            <img src="{{ asset('images/to use/luangwa.jpg') }}" alt="Luangwa Hostel">
                         </div>
                         <div class="hostel-body">
                             <h2>Luangwa Hostel</h2>
@@ -235,7 +235,7 @@
 
                     <a href="/accommodation/luapula-hostel" class="hostel-card">
                         <div class="hostel-image">
-                            <img src="{{ asset('images/campus/school-science.jpg') }}" alt="Luapula Hostel">
+                            <img src="{{ asset('images/to use/luangwa.jpg') }}" alt="Luapula Hostel">
                         </div>
                         <div class="hostel-body">
                             <h2>Luapula Hostel</h2>
@@ -255,7 +255,7 @@
                 <div class="hostel-grid">
                     <a href="/accommodation/mansion" class="hostel-card">
                         <div class="hostel-image">
-                            <img src="{{ asset('images/campus/study-student.jpg') }}" alt="Mansion Hostel">
+                            <img src="{{ asset('images/to use/mansion.png') }}" alt="Mansion Hostel">
                         </div>
                         <div class="hostel-body">
                             <h2>Mansion</h2>
@@ -270,7 +270,7 @@
 
                     <a href="/accommodation/lecturers-compound" class="hostel-card">
                         <div class="hostel-image">
-                            <img src="{{ asset('images/campus/program-masters.jpg') }}" alt="Lecturers Compound">
+                            <img src="{{ asset('images/to use/lectures.jpg') }}" alt="Lecturers Compound">
                         </div>
                         <div class="hostel-body">
                             <h2>Lecturers Compound</h2>
