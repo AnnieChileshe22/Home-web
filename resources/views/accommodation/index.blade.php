@@ -1,19 +1,10 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Accommodation | Mukuba University</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    
-</head>
-<body>
-    @include('header contents.header')
+@extends('layouts.app')
+@section('content')
     <main class="accommodation-page">
         <div class="container">
             <header class="page-header">
-                <p>Safe and comfortable living</p>
                 <h1>University Hostels</h1>
+                <p>Explore our range of accommodation options,each designed to provide a safe and comfortable living environment for students.</p>
             </header>
 
             <section class="category-section" aria-labelledby="female-hostels">
@@ -152,6 +143,4 @@
             </section>
         </div>
     </main>
-    @include('header contents.footer')
-</body>
-</html>
+@endsection

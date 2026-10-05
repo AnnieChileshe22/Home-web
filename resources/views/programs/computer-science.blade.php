@@ -4,7 +4,7 @@
         <div class="container">
             <header class="top-banner">
                 <span>Computer Science</span>
-                <h1>BSc in Computer Science</h1>
+                <h1 color="white">BSc in Computer Science</h1>
             </header>
 
             <section class="content-grid">
