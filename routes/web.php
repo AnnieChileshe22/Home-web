@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SchoolController;
+use App\Http\Controllers\ProgramController;
 
 Route::get('/', function () {
     return view('index');
@@ -69,3 +70,4 @@ Route::get('/accommodation/{hostel}', function ($hostel) {
 
 
 Route::resource('schools', SchoolController::class);
+Route::resource('programs', ProgramController::class);

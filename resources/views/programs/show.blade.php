@@ -1,25 +1,26 @@
 @extends('layouts.app')
     @section('content')
+    @php($qualification = \App\Support\Qualification::fullName($program['qualification_type'] ?? null))
     <main class="programme-page">
         <div class="container">
             <header class="top-banner">
-                <span>Computer Science</span>
-                <h1>BSc in Computer Science</h1>
+                <span>{{ $qualification }}</span>
+                <h1>{{ $qualification }} in {{ $program['name'] }}</h1>
             </header>
 
             <section class="content-grid">
                 <article class="panel">
                     <h2>Programme overview</h2>
-                    <p>The Bachelor of Science in Computer Science is designed to produce technically competent, ethically grounded, and innovation-driven graduates. The programme builds strong foundations in programming, algorithms, systems design, data management, networking, and intelligent systems while encouraging problem solving for real-world societal and industrial challenges.</p>
+                    <p>{!! $program['description'] !!}</p>
 
                     <div class="stats">
                         <div class="stat">
                             <span class="stat-label">Duration</span>
-                            <strong>4 years</strong>
+                            <strong>{{ $program['duration'] }} Years</strong>
                         </div>
                         <div class="stat">
                             <span class="stat-label">Award</span>
-                            <strong>BSc</strong>
+                            <strong>{{ $program['qualification_type'] }}</strong>
                         </div>
                     </div>
 
@@ -34,7 +35,7 @@
                 </article>
 
                 <aside class="panel">
-                    <h2>Why study Computer Science?</h2>
+                    <h2>Why study {{ $qualification }}?</h2>
                     <p>Computer Science is at the centre of digital transformation, innovation, and economic growth. It equips students to design systems that improve communication, healthcare, agriculture, education, governance, and business operations.</p>
                     <p>Graduates may pursue careers in software engineering, database administration, systems analysis, cybersecurity, data analytics, artificial intelligence, ICT consultancy, and technology entrepreneurship.</p>
                 </aside>

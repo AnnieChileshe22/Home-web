@@ -12,7 +12,7 @@
                      <div class="dean-block">
                         <div class="dean-badge">D</div>
                         <div>
-                            <p class="dean-name">{{ $school['dean_'] ?? '' }}</p>
+                            <p class="dean-name">{{ $school['dean_name'] ?? data_get($school, 'dean.name') ?? 'Not assigned' }}</p>
                             <p class="dean-role">Current Dean</p>
                         </div>
                     </div>
