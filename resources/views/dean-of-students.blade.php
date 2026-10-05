@@ -1,37 +1,5 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dean of Students | Mukuba University</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <style>
-        .dean-page { background: #f5f7f3; color: #26372e; }
-        .dean-wrap { width: min(1080px, calc(100% - 40px)); margin: 0 auto; padding: 46px 0 72px; }
-        .dean-kicker { margin: 0 0 8px; color: #347b52; font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
-        .dean-title { margin: 0 0 28px; color: #064b2a; font: 400 38px/1.15 Georgia, serif; }
-        .dean-profile { display: grid; grid-template-columns: minmax(0, 1fr) minmax(270px, .8fr); align-items: stretch; gap: 32px; margin-bottom: 48px; }
-        .dean-profile-copy { align-self: center; }
-        .dean-profile-copy h2 { margin: 0 0 12px; color: #064b2a; font: 400 25px/1.2 Georgia, serif; }
-        .dean-page p { color: #526158; font-size: 14px; line-height: 1.8; }
-        .dean-profile-copy p { margin: 0; }
-        .dean-photo { width: 100%; min-height: 320px; max-height: 405px; object-fit: cover; object-position: center 30%; background: #dfe8df; }
-        .dean-section { padding: 30px 0; border-top: 1px solid #dce5db; }
-        .dean-section h2 { margin: 0 0 14px; color: #064b2a; font: 400 25px/1.2 Georgia, serif; }
-        .dean-section h3 { margin: 24px 0 8px; color: #173429; font-size: 12px; font-weight: 800; letter-spacing: .55px; }
-        .dean-section p { max-width: 920px; margin: 0 0 15px; }
-        .office-topics { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 20px 0 0; padding: 15px 0; border-top: 1px solid #e1e8df; border-bottom: 1px solid #e1e8df; list-style: none; }
-        .office-topics li { color: #347b52; font-size: 10px; font-weight: 800; letter-spacing: .55px; }
-        .objectives { display: grid; gap: 10px; margin: 20px 0 0; padding-left: 23px; color: #526158; font-size: 13px; line-height: 1.75; }
-        .objectives li::marker { color: #347b52; font-weight: 800; }
-        .clinic-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 32px; margin: 18px 0; padding-left: 20px; color: #526158; font-size: 13px; line-height: 1.7; }
-        .clinic-list li::marker { color: #347b52; }
-        .dean-emphasis { color: #173429 !important; font-weight: 700; }
-        @media (max-width: 700px) { .dean-wrap { width: calc(100% - 32px); padding: 35px 0 52px; }.dean-title { font-size: 32px; }.dean-profile { grid-template-columns: 1fr; gap: 19px; margin-bottom: 30px; }.dean-photo { min-height: 240px; max-height: 330px; }.dean-section { padding: 24px 0; }.dean-section h2 { font-size: 22px; }.clinic-list { grid-template-columns: 1fr; gap: 6px; } }
-    </style>
-</head>
-<body>
-    @include('header contents.header')
+@extends('layouts.app')
+    @section('content')
     <main class="dean-page">
         <div class="dean-wrap">
             <p class="dean-kicker">Student Affairs</p>
@@ -101,6 +69,4 @@
             </section>
         </div>
     </main>
-    @include('header contents.footer')
-</body>
-</html>
+  @endsection

@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="nav-dropdown">
-                    <a href="{{ url('/') }}#apply" class="dropdown-trigger">Admissions</a>
+                    <a href="{{ url('/admissions') }}" class="dropdown-trigger">Admissions</a>
                     <div class="nav-dropdown-menu" aria-label="Admissions menu">
                         <a href="{{ url('/scholership') }}">Scholarships and Loan</a>
                         <a href="{{ url('/fees') }}">Fee Structure</a>
@@ -36,14 +36,14 @@
                     </div>
                 </div>
                 <div class="nav-dropdown">
-                    <a href="{{ url('/programmes') }}" class="dropdown-trigger">Academic office</a>
+                    <a href="{{ url('/academic-office') }}" class="dropdown-trigger">Academic office</a>
                     <div class="nav-dropdown-menu" aria-label="Academic office menu">
                         <a href="{{ url('/register') }}">How to Register</a>
                         <a href="{{ url('/calender') }}">Academic Calendar</a>
                     </div>
                 </div>
                 <div class="nav-dropdown">
-                    <a href="{{ url('/accommodation') }}" class="dropdown-trigger">Student Affairs</a>
+                    <a class="dropdown-trigger">Student Affairs</a>
                     <div class="nav-dropdown-menu" aria-label="Student affairs menu">
                         <a href="{{ url('https://unicosis.mukuba.edu.zm/login') }}" target="_blank" rel="noopener noreferrer">Student Portal</a>
                         <a href="{{ url('https://app.myloft.xyz/user/login?institute=clv672kgw4n4jx8jyodtkqsb7') }}" target="_blank" rel="noopener noreferrer">E-Resources</a>
@@ -52,14 +52,14 @@
                     </div>
                 </div>
                 <div class="nav-dropdown">
-                    <a href="{{ url('/') }}#contact" class="dropdown-trigger">Staff</a>
+                    <a class="dropdown-trigger">Staff</a>
                     <div class="nav-dropdown-menu" aria-label="Staff menu">
                         <a href="{{ url('https://edurole.mukuba.edu.zm/') }}" target="_blank" rel="noopener noreferrer">Staff Portal</a>
                         <a href="{{ url('https://app.myloft.xyz/user/login?institute=clv672kgw4n4jx8jyodtkqsb7') }}" target="_blank" rel="noopener noreferrer">E-Resources</a>
                     </div>
                 </div>
                 <div class="nav-dropdown">
-                    <a href="{{ url('/') }}#contact" class="dropdown-trigger">Directorates</a>
+                    <a class="dropdown-trigger">Directorates</a>
                     <div class="nav-dropdown-menu" aria-label="Directorates menu">
                         <a href="{{ url('/innovation-and-research') }}">Innovation &amp; Research</a>
                         <a href="{{ url('/directorate-of-research-and-graduate-studies') }}">Directorate of Research &amp; Graduate Studies</a>
@@ -67,7 +67,7 @@
                     </div>
                 </div>
                 <div class="nav-dropdown">
-                    <a href="{{ url('/') }}#contact" class="dropdown-trigger">About us</a>
+                    <a class="dropdown-trigger">About us</a>
                     <div class="nav-dropdown-menu" aria-label="About us menu">
                         <a href="{{ url('/management') }}">Management</a>
                         <a href="{{ url('/university-partners') }}">University Partners</a>

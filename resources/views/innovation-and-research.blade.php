@@ -1,35 +1,6 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Innovation &amp; Research | Mukuba University</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <style>
-        .research-page { background: #f5f7f3; color: #26372e; }
-        .research-wrap { width: min(1080px, calc(100% - 40px)); margin: 0 auto; padding: 46px 0 72px; }
-        .research-kicker { margin: 0 0 8px; color: #347b52; font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
-        .research-title { margin: 0; color: #064b2a; font: 400 38px/1.15 Georgia, serif; }
-        .research-director { margin: 13px 0 0; color: #526158; font-size: 14px; line-height: 1.7; }
-        .research-section { padding: 30px 0; border-top: 1px solid #dce5db; }
-        .research-intro + .research-section { margin-top: 30px; }
-        .research-section h2 { margin: 0 0 18px; color: #064b2a; font: 400 25px/1.25 Georgia, serif; }
-        .research-section h3 { margin: 26px 0 12px; color: #173429; font-size: 12px; font-weight: 800; letter-spacing: .65px; }
-        .research-section h4 { margin: 19px 0 7px; color: #347b52; font-size: 10px; font-weight: 800; letter-spacing: .75px; }
-        .research-list { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
-        .research-list li { padding: 13px 0; border-top: 1px solid #e2e8e1; color: #405146; font-size: 13px; font-weight: 700; line-height: 1.65; }
-        .research-list li:last-child { border-bottom: 1px solid #e2e8e1; }
-        .research-group { padding: 20px 0; border-top: 1px solid #e2e8e1; }
-        .research-group:last-child { border-bottom: 1px solid #e2e8e1; }
-        .research-group h3 { margin: 0 0 10px; }
-        .research-group p { margin: 0 0 10px; color: #526158; font-size: 13px; line-height: 1.7; }
-        .research-label { margin: 14px 0 5px; color: #347b52; font-size: 9px; font-weight: 800; letter-spacing: .75px; text-transform: uppercase; }
-        @media (max-width: 640px) { .research-wrap { width: calc(100% - 32px); padding: 36px 0 54px; }.research-title { font-size: 32px; }.research-section { padding: 24px 0; }.research-section h2 { font-size: 22px; } }
-    </style>
-</head>
-<body>
-    @include('header contents.header')
-    <main class="research-page">
+@extends('layouts.app')
+@section('content')
+<main class="research-page">
         <div class="research-wrap">
             <section class="research-intro" aria-labelledby="research-title">
                 <p class="research-kicker">Mukuba University</p>
@@ -94,6 +65,4 @@
             </section>
         </div>
     </main>
-    @include('header contents.footer')
-</body>
-</html>
+  @endsection
