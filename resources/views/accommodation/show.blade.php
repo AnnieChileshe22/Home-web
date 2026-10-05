@@ -53,6 +53,7 @@
                         <li>Convenient access to campus essentials</li>
                         <li>Supportive student living conditions</li>
                     </ul>
+                    <a class="hostel-apply-button" href="https://unicosis.mukuba.edu.zm/login" target="_blank" rel="noopener noreferrer">Apply now</a>
                 </aside>
             </section>
 
