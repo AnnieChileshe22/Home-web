@@ -44,6 +44,68 @@
     </div><div class="hero-actions"><a id="apply" class="apply-button" href="#contact">Apply now</a></div></div></section>
     <section class="section page-width" aria-labelledby="study-title"><h2 id="study-title" class="section-title">Study Modes on offer</h2><div class="study-grid"><article><img src="{{ asset('images/Full-time.jpg') }}" alt="Students learning together"><h3>FULLTIME LEARNING MODE</h3></article><article><img src="{{ asset('images/home.jpg') }}" alt="Student reading"><h3>DISTANCE LEARNING MODE</h3></article></div></section>
 
+    <section class="hostel-preview" aria-labelledby="hostel-preview-title">
+        <div class="page-width">
+            <div class="hostel-preview-heading">
+                <div>
+                    <p class="hostel-preview-kicker">Campus accommodation</p>
+                    <h2 id="hostel-preview-title" class="section-title left">Our Hostels</h2>
+                </div>
+                <div class="hostel-preview-actions">
+                    <a class="hostel-preview-link" href="/accommodation">View all hostels <span aria-hidden="true">&#8594;</span></a>
+                    <div class="hostel-controls">
+                        <button class="hostel-control" type="button" data-hostel-prev aria-label="Show previous hostels"><span aria-hidden="true">&#8592;</span></button>
+                        <button class="hostel-control" type="button" data-hostel-next aria-label="Show next hostels"><span aria-hidden="true">&#8594;</span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="hostel-carousel" role="region" aria-label="Mukuba University hostels" aria-roledescription="carousel">
+                <div class="hostel-preview-grid">
+                    <article class="hostel-preview-card">
+                        <img src="{{ asset('images/to use/kariba.png') }}" alt="Bangweulu Hostel">
+                        <h3>Bangweulu Hostel</h3>
+                        <div class="hostel-preview-details"><span>Gender: Female</span><span>Combined: No</span></div>
+                    </article>
+                    <article class="hostel-preview-card">
+                        <img src="{{ asset('images/to use/kafue.jpg') }}" alt="Kafue Hostel">
+                        <h3>Kafue Hostel</h3>
+                        <div class="hostel-preview-details"><span>Gender: Female</span><span>Combined: No</span></div>
+                    </article>
+                    <article class="hostel-preview-card">
+                        <img src="{{ asset('images/to use/zambezi.jpg') }}" alt="Zambezi Hostel">
+                        <h3>Zambezi Hostel</h3>
+                        <div class="hostel-preview-details"><span>Gender: Female</span><span>Combined: No</span></div>
+                    </article>
+                    <article class="hostel-preview-card">
+                        <img src="{{ asset('images/to use/kariba.png') }}" alt="Kariba Hostel">
+                        <h3>Kariba Hostel</h3>
+                        <div class="hostel-preview-details"><span>Gender: Male</span><span>Combined: No</span></div>
+                    </article>
+                    <article class="hostel-preview-card">
+                        <img src="{{ asset('images/to use/luangwa.jpg') }}" alt="Luangwa Hostel">
+                        <h3>Luangwa Hostel</h3>
+                        <div class="hostel-preview-details"><span>Gender: Male</span><span>Combined: No</span></div>
+                    </article>
+                    <article class="hostel-preview-card">
+                        <img src="{{ asset('images/to use/luangwa.jpg') }}" alt="Luapula Hostel">
+                        <h3>Luapula Hostel</h3>
+                        <div class="hostel-preview-details"><span>Gender: Male</span><span>Combined: No</span></div>
+                    </article>
+                    <article class="hostel-preview-card">
+                        <img src="{{ asset('images/to use/mansion.png') }}" alt="Mansion">
+                        <h3>Mansion</h3>
+                        <div class="hostel-preview-details"><span>Gender: Male &amp; Female</span><span>Combined: Yes</span></div>
+                    </article>
+                    <article class="hostel-preview-card">
+                        <img src="{{ asset('images/to use/lectures.jpg') }}" alt="Lecturers Compound">
+                        <h3>Lecturers Compound</h3>
+                        <div class="hostel-preview-details"><span>Gender: Male &amp; Female</span><span>Combined: Yes</span></div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="strategic-section page-width" aria-labelledby="strategic-title">
         <div class="strategic-grid">
             <div class="strategic-copy">
@@ -139,8 +201,8 @@
 
     setupCarousel('.news-track', '.news-card', '[data-news-prev]', '[data-news-next]', 18, () => 1);
     setupCarousel('.school-grid', '.school-card', '[data-school-prev]', '[data-school-next]', 22);
-    const hostelVisibleCards = () => (window.innerWidth <= 760 ? 1 : window.innerWidth <= 960 ? 2 : 3);
-    setupCarousel('.hostel-preview-grid', '.hostel-preview-card', '[data-hostel-prev]', '[data-hostel-next]', 22, hostelVisibleCards, hostelVisibleCards);
+    const hostelVisibleCards = () => (window.innerWidth <= 760 ? 1 : window.innerWidth <= 960 ? 2 : 4);
+    setupCarousel('.hostel-preview-grid', '.hostel-preview-card', '[data-hostel-prev]', '[data-hostel-next]', 22, hostelVisibleCards);
     setupCarousel('.event-track', '.event-slide', '[data-event-prev]', '[data-event-next]', 0, () => 1);
 </script>
 @endsection
