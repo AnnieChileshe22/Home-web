@@ -1748,3 +1748,26 @@ main h1:not(#hero-title):not(.section-title) {
 body.admin-page main.main {
     padding: 10px;
 }
+
+main h1:not(#hero-title):not(.section-title),
+body.admin-page h1,
+main.accommodation-page .page-header h1,
+main.hostel-page .header h1,
+main.management-page .management-title,
+main.directorate-page .directorate-title,
+main.dean-page .dean-title,
+main.fees-page .fees-title,
+main.research-page .research-title,
+main.programme-page .top-banner h1,
+main.programmes-page .page-header h1,
+main.requirements-page .requirements-title,
+main.schools-page .page-header h1,
+main.school-page .hero h1,
+main.partners-page .partners-title {
+    margin: 0 0 30px;
+    color: #0d422e;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    font-weight: 400;
+    line-height: 1.12;
+}
