@@ -798,7 +798,7 @@ main.management-page {
             width: 100%;
             height: 260px;
             display: block;
-            object-fit: cover;
+            object-fit: contain;
             background: #e7efe9;
         }
 
