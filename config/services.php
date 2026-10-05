@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'ecms' => [
+        'base_url' => env('ECMS_BASE_URL'),
+        'api_key' => env('ECMS_API_KEY'),
+    ],
+
 ];

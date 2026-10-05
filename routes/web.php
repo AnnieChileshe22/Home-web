@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SchoolController;
 
 Route::get('/', function () {
     return view('index');
@@ -66,10 +67,5 @@ Route::get('/accommodation/{hostel}', function ($hostel) {
     return view('accommodation.show', ['hostel' => $hostel]);
 });
 
-Route::get('/schools', function () {
-    return view('schools.index');
-});
 
-Route::get('/schools/mathematics-natural-sciences', function () {
-    return view('schools.mathematics-natural-sciences');
-});
+Route::resource('schools', SchoolController::class);
