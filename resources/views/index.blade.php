@@ -32,14 +32,7 @@
     <section id="schools" class="section page-width" aria-labelledby="schools-title"><div class="school-heading">
         <h2 id="schools-title" class="section-title">Our Schools</h2>
         <div class="school-controls">
-            <button class="school-control" type="button" data-school-prev aria-label="Show previous schools"><span aria-hidden="true">&#8592;</span></button><button class="school-control" type="button" data-school-next aria-label="Show next schools"><span aria-hidden="true">&#8594;</span></button></div></div><div class="school-carousel" aria-label="Mukuba University schools"><div class="school-grid">
-        @foreach ($schools as $school)
-        <article style="cursor: pointer;" onclick="window.location.href='{{ route('schools.show', $school['id']) }}'" class="school-card">
-            <img src="{{ $school['thumbnail'] }}" alt="{{ $school['name'] }} school image" @if ($loop->first) fetchpriority="high" @else loading="lazy" @endif>
-            <h3>{{ $school['name'] }}</h3>
-            <a href="{{ route('schools.show', $school['id']) }}">Learn more</a>
-        </article>
-        @endforeach
+            <button class="school-control" type="button" data-school-prev aria-label="Show previous schools"><span aria-hidden="true">&#8592;</span></button><button class="school-control" type="button" data-school-next aria-label="Show next schools"><span aria-hidden="true">&#8594;</span></button></div></div><div class="school-carousel" aria-label="Mukuba University schools"><div class="school-grid" data-api-section="{{ route('data.home', 'schools') }}" aria-busy="true" aria-live="polite">@include('partials.loading')
     </div></div></section>
     <section id="programmes" class="section programmes" aria-labelledby="programmes-title"><div class="page-width"><h2 id="programmes-title" class="section-title">Programmes on offer</h2><div class="programme-grid">
         <a href="/programmes" class="programme-card-link"><article class="programme-card"><h3>Diploma Programmes</h3></article></a>
@@ -50,14 +43,7 @@
     <section id="programs" class="section page-width" aria-labelledby="programs-title"><div class="school-heading">
         <h2 id="programs-title" class="section-title">Our Programs</h2>
         <div class="school-controls">
-            <button class="school-control" type="button" data-program-prev aria-label="Show previous programs"><span aria-hidden="true">&#8592;</span></button><button class="school-control" type="button" data-program-next aria-label="Show next programs"><span aria-hidden="true">&#8594;</span></button></div></div><div class="school-carousel" aria-label="Mukuba University programs"><div class="school-grid">
-        @foreach ($programs as $program)
-        <article style="cursor: pointer;" onclick="window.location.href='{{ route('programs.show', $program['id']) }}'" class="school-card">
-            <img src="{{ $program['thumbnail'] }}" alt="{{ $program['name'] }} program image" @if ($loop->first) fetchpriority="high" @else loading="lazy" @endif>
-            <h3>{{ $program['name'] }}</h3>
-            <a href="{{ route('programs.show', $program['id']) }}">Learn more</a>
-        </article>
-        @endforeach
+            <button class="school-control" type="button" data-program-prev aria-label="Show previous programs"><span aria-hidden="true">&#8592;</span></button><button class="school-control" type="button" data-program-next aria-label="Show next programs"><span aria-hidden="true">&#8594;</span></button></div></div><div class="school-carousel" aria-label="Mukuba University programs"><div class="school-grid" data-api-section="{{ route('data.home', 'programs') }}" aria-busy="true" aria-live="polite">@include('partials.loading')
     </div></div></section>
     <section class="section page-width" aria-labelledby="study-title"><h2 id="study-title" class="section-title">Study Modes on offer</h2><div class="study-grid"><article><img src="{{ asset('images/Full-time.jpg') }}" alt="Students learning together"><h3>FULLTIME LEARNING MODE</h3></article><article><img src="{{ asset('images/home.jpg') }}" alt="Student reading"><h3>DISTANCE LEARNING MODE</h3></article></div></section>
 
@@ -161,9 +147,16 @@
         restart();
     };
 
+    document.addEventListener('api-section-loaded', (event) => {
+        const resource = event.target.closest('#schools, #programs')?.id;
+        if (!resource) return;
+        const control = resource === 'schools' ? 'school' : 'program';
+        setupCarousel('#' + resource + ' .school-grid', '.school-card', '[data-' + control + '-prev]', '[data-' + control + '-next]', 22);
+    });
+    document.querySelectorAll('[data-school-prev], [data-school-next], [data-program-prev], [data-program-next]').forEach(button => button.disabled = true);
     setupCarousel('.news-track', '.news-card', '[data-news-prev]', '[data-news-next]', 18, () => 1);
-    setupCarousel('#schools .school-grid', '.school-card', '[data-school-prev]', '[data-school-next]', 22);
-    setupCarousel('#programs .school-grid', '.school-card', '[data-program-prev]', '[data-program-next]', 22);
+
+
     const hostelVisibleCards = () => (window.innerWidth <= 760 ? 1 : window.innerWidth <= 960 ? 2 : 3);
     setupCarousel('.hostel-preview-grid', '.hostel-preview-card', '[data-hostel-prev]', '[data-hostel-next]', 22, hostelVisibleCards, hostelVisibleCards);
     setupCarousel('.event-track', '.event-slide', '[data-event-prev]', '[data-event-next]', 0, () => 1);

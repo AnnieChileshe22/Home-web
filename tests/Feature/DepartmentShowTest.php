@@ -24,7 +24,10 @@ class DepartmentShowTest extends TestCase
             ]),
         ]);
 
-        $this->get('http://localhost/departments/science')
+        $this->get('http://localhost/departments/science')->assertOk()->assertSee('Loading...');
+        Http::assertNothingSent();
+
+        $this->get('http://localhost/data/departments/science')
             ->assertOk()
             ->assertSee('Computer Science')
             ->assertSee('Head of Department')
@@ -37,7 +40,7 @@ class DepartmentShowTest extends TestCase
     {
         Http::fake(['*' => Http::response(['name' => 'Mathematics'])]);
 
-        $this->get('http://localhost/departments/mathematics')
+        $this->get('http://localhost/data/departments/mathematics')
             ->assertOk()
             ->assertSee('Not assigned')
             ->assertSee('No programmes are currently listed for this department.');

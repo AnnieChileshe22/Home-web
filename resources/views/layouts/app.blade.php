@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mukuba University</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="{{ asset('css/api-sections.css') }}">
+    <script src="{{ asset('js/api-sections.js') }}" defer></script>
 </head>
 <body>
     <header class="site-header">
