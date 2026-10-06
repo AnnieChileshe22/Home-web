@@ -12,7 +12,7 @@
                     @php($qualification = \App\Support\Qualification::fullName($program['qualification_type'] ?? null))
                     <article class="programme-card">
                         <div class="programme-image">
-                            <img src="{{ $program['thumbnail'] }}" alt="{{ $program['name'] }}">
+                            <img src="{{ !empty(trim($program['thumbnail'] ?? '')) ? $program['thumbnail'] : asset('images/nut.jpg') }}" alt="{{ $program['name'] }}">
                         </div>
                         <div class="programme-body">
                             <span class="programme-level">{{ $qualification }}</span>

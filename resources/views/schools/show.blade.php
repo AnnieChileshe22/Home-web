@@ -29,7 +29,13 @@
                     <h2 class="section-title">Departments</h2>
                     <ul class="meta-list">
                         @foreach ($departments as $department)
-                            <li>{{ $department['name'] }}</li>
+                            <li onclick="window.location.href='{{ route('departments.show', $department['id']) }}'">
+                                @if (!empty($department['id']))
+                                    <a href="{{ route('departments.show', $department['id']) }}">{{ $department['name'] }}</a>
+                                @else
+                                    {{ $department['name'] }}
+                                @endif
+                            </li>
                         @endforeach
                     </ul>
                 </aside>

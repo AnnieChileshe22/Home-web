@@ -773,6 +773,19 @@ main.programme-page * { box-sizing: border-box; }
             line-height: 1.15;
         }
 
+        main.programme-page .programme-thumbnail {
+            margin-bottom: 24px;
+            overflow: hidden;
+            border-radius: 16px;
+        }
+
+        main.programme-page .programme-thumbnail img {
+            display: block;
+            width: 100%;
+            max-height: 420px;
+            object-fit: cover;
+        }
+
         main.programme-page .content-grid {
             display: grid;
             grid-template-columns: 1.5fr 1fr;

@@ -3,10 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\IndexController;
+use App\Http\Controllers\DepartmentController;
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::resource('/', IndexController::class)->only(['index']);
 
 Route::get('/fees', function () {
     return view('fees');
@@ -71,3 +71,4 @@ Route::get('/accommodation/{hostel}', function ($hostel) {
 
 Route::resource('schools', SchoolController::class);
 Route::resource('programs', ProgramController::class);
+Route::resource('departments', DepartmentController::class)->only(['show']);

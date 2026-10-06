@@ -116,8 +116,6 @@
         <div class="copyright">©2026. Mukuba University. All Rights Reserved.</div>
     </footer>
     <script>
-        const visibleCards=()=>window.innerWidth<=760?1:window.innerWidth<=960?2:3;
-        const setupCarousel=(trackSelector,cardSelector,previousSelector,nextSelector,gap)=>{const track=document.querySelector(trackSelector);const cards=[...document.querySelectorAll(cardSelector)];const previous=document.querySelector(previousSelector);const next=document.querySelector(nextSelector);let index=0;let timer;const render=()=>{const maxIndex=Math.max(0,cards.length-visibleCards());index=Math.min(Math.max(index,0),maxIndex);const cardWidth=cards[0].getBoundingClientRect().width;track.style.transform=`translateX(-${index*(cardWidth+gap)}px)`;previous.disabled=index===0;next.disabled=index===maxIndex;};const restart=()=>{clearInterval(timer);timer=setInterval(()=>{const maxIndex=Math.max(0,cards.length-visibleCards());index=index>=maxIndex?0:index+1;render();},3000);};previous.addEventListener('click',()=>{index--;render();restart();});next.addEventListener('click',()=>{index++;render();restart();});window.addEventListener('resize',render);render();restart();};setupCarousel('.news-track','.news-card','[data-news-prev]','[data-news-next]',18);setupCarousel('.school-grid','.school-card','[data-school-prev]','[data-school-next]',22);
 
         const menuToggle = document.querySelector('.menu-toggle');
         const siteNav = document.querySelector('.site-nav');
