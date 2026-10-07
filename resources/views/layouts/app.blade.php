@@ -13,7 +13,7 @@
         <div class="page-width masthead">
             <a class="brand" href="{{ url('/') }}" aria-label="Mukuba University home">
                 <img class="brand-logo" src="{{ asset('images/logo.png') }}" alt="Mukuba University logo">
-                <span class="brand-copy"><strong>mukuba university</strong><small><span class="hero-education">Education</span>, <span class="hero-freedom">Freedom</span>, <span class="hero-responsibility">Responsibility</span></small></span>
+                <span class="brand-copy"><strong>Mukuba University</strong><small><span class="hero-education">Education</span>, <span class="hero-freedom">Freedom</span>, <span class="hero-responsibility">Responsibility</span></small></span>
             </a>
             <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button>
             <nav class="site-nav" aria-label="Main navigation">
