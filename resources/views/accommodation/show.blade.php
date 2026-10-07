@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ str_replace('-', ' ', ucfirst($hostel)) }} | Accommodation</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    
-</head>
-<body>
-    @include('header contents.header')
+@extends('layouts.app')
+@section('content')
     <main class="hostel-page">
         <div class="container">
             <header class="header">
@@ -20,14 +11,30 @@
                 <article class="panel">
                     <h2>Gallery</h2>
                     <div class="gallery">
-                        <img src="{{ asset('images/to use/room.png') }}" alt="Hostel exterior">
-                        <img src="{{ asset('images/to use/kitchen.png') }}" alt="Hostel room">
-                        <img src="{{ asset('images/to use/shower.png') }}" alt="Hostel lounge">
-                        <img src="{{ asset('images/to use/mirror.png') }}" alt="Hostel surroundings">
-                        <img src="{{ asset('images/to use/tv.png') }}" alt="Hostel exterior">
-                        <img src="{{ asset('images/to use/kariba.png') }}" alt="Hostel room">
-                        <img src="{{ asset('images/to use/toilet.png') }}" alt="Hostel lounge">
-                        <img src="{{ asset('images/to use/corrider.png') }}" alt="Hostel surroundings">
+                        <button class="gallery-trigger" type="button" aria-label="View full image: Hostel room">
+                            <img src="{{ asset('images/to use/room.png') }}" alt="Hostel room">
+                        </button>
+                        <button class="gallery-trigger" type="button" aria-label="View full image: Hostel kitchen">
+                            <img src="{{ asset('images/to use/kitchen.png') }}" alt="Hostel kitchen">
+                        </button>
+                        <button class="gallery-trigger" type="button" aria-label="View full image: Hostel shower">
+                            <img src="{{ asset('images/to use/shower.png') }}" alt="Hostel shower">
+                        </button>
+                        <button class="gallery-trigger" type="button" aria-label="View full image: Hostel mirror">
+                            <img src="{{ asset('images/to use/mirror.png') }}" alt="Hostel mirror">
+                        </button>
+                        <button class="gallery-trigger" type="button" aria-label="View full image: Hostel TV area">
+                            <img src="{{ asset('images/to use/tv.png') }}" alt="Hostel TV area">
+                        </button>
+                        <button class="gallery-trigger" type="button" aria-label="View full image: Kariba Hostel">
+                            <img src="{{ asset('images/to use/kariba.png') }}" alt="Kariba Hostel">
+                        </button>
+                        <button class="gallery-trigger" type="button" aria-label="View full image: Hostel toilet">
+                            <img src="{{ asset('images/to use/toilet.png') }}" alt="Hostel toilet">
+                        </button>
+                        <button class="gallery-trigger" type="button" aria-label="View full image: Hostel corridor">
+                            <img src="{{ asset('images/to use/corrider.png') }}" alt="Hostel corridor">
+                        </button>
                     </div>
                 </article>
 
@@ -46,6 +53,7 @@
                         <li>Convenient access to campus essentials</li>
                         <li>Supportive student living conditions</li>
                     </ul>
+                    <a class="hostel-apply-button" href="https://unicosis.mukuba.edu.zm/login" target="_blank" rel="noopener noreferrer">Apply now</a>
                 </aside>
             </section>
 
@@ -55,6 +63,11 @@
             </section>
         </div>
     </main>
-    @include('header contents.footer')
-</body>
-</html>
+    <dialog class="gallery-lightbox" aria-label="Full-size gallery image">
+        <button class="gallery-lightbox-close" type="button" aria-label="Close full-size image">&times;</button>
+        <button class="gallery-lightbox-nav gallery-lightbox-previous" type="button" aria-label="Previous image">&#8592;</button>
+        <img class="gallery-lightbox-image" alt="">
+        <button class="gallery-lightbox-nav gallery-lightbox-next" type="button" aria-label="Next image">&#8594;</button>
+        <p class="gallery-lightbox-counter" aria-live="polite"></p>
+    </dialog>
+@endsection

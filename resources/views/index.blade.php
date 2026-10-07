@@ -18,7 +18,7 @@
     </section>
     <section class="intro" aria-labelledby="news-title">
         <div class="page-width">
-            <div class="news-heading"><h1 id="news-title" class="section-title">Events And News</h1><div class="news-controls"><button class="news-control" type="button" data-news-prev aria-label="Show previous news"><span aria-hidden="true">&#8592;</span></button><button class="news-control" type="button" data-news-next aria-label="Show next news"><span aria-hidden="true">&#8594;</span></button></div></div>
+            <div class="news-heading"><h1 id="news-title" class="section-title">Events And News</h1></div>
             <div class="news-carousel" aria-label="University news and events"><div class="news-track">
             <article class="news-card"><div class="news-image"><img src="{{ asset('images/app.jpg') }}" alt="Students on campus"><p class="news-type">Admissions</p></div><div class="news-card-body"><h2>Applications are now open</h2><p>Start your Mukuba University journey and submit your application for the next intake.</p><a href="#apply">Read more <span aria-hidden="true">&#8594;</span></a></div></article>
             <article class="news-card"><div class="news-image"><img src="{{ asset('images/grad.jpg') }}" alt="Graduates celebrating"><p class="news-type">Upcoming event</p></div><div class="news-card-body"><h2>12th graduation ceremony</h2><p>Join us as we celebrate the achievements of our graduating class and their families.</p><a href="#contact">Read more <span aria-hidden="true">&#8594;</span></a></div></article>
@@ -26,13 +26,17 @@
             <article class="news-card"><div class="news-image"><img src="{{ asset('images/logo.png') }}" alt="Students collaborating"><p class="news-type">Academic update</p></div><div class="news-card-body"><h2>Moving to semester learning</h2><p>Learn what the transition from terms to semester-based learning means for your studies.</p><a href="#programmes">Read more <span aria-hidden="true">&#8594;</span></a></div></article>
             <article class="news-card"><div class="news-image"><img src="{{ asset('images/logo.png') }}" alt="Students and staff at a university event"><p class="news-type">Campus life</p></div><div class="news-card-body"><h2>Student leadership forum</h2><p>Students and staff come together to shape a stronger campus community.</p><a href="#contact">Read more <span aria-hidden="true">&#8594;</span></a></div></article>
             </div>
+            <div class="school-controls"><button class="school-control" type="button" data-news-prev aria-label="Show previous news"><span aria-hidden="true">&#8592;</span></button><button class="school-control" type="button" data-news-next aria-label="Show next news"><span aria-hidden="true">&#8594;</span></button></div>
             </div>
         </div>
     </section>
-    <section id="schools" class="section page-width" aria-labelledby="schools-title"><div class="school-heading">
-        <h2 id="schools-title" class="section-title">Our Schools</h2>
-        <div class="school-controls">
-            <button class="school-control" type="button" data-school-prev aria-label="Show previous schools"><span aria-hidden="true">&#8592;</span></button><button class="school-control" type="button" data-school-next aria-label="Show next schools"><span aria-hidden="true">&#8594;</span></button></div></div><div class="school-carousel" aria-label="Mukuba University schools"><div class="school-grid" data-api-section="{{ route('data.home', 'schools') }}" aria-busy="true" aria-live="polite">@include('partials.loading')
+    <section id="schools" class="section page-width" aria-labelledby="schools-title"><div class="school-heading"><h2 id="schools-title" class="section-title">Our Schools</h2><div class="school-controls"><button class="school-control" type="button" data-school-prev aria-label="Show previous schools"><span aria-hidden="true">&#8592;</span></button><button class="school-control" type="button" data-school-next aria-label="Show next schools"><span aria-hidden="true">&#8594;</span></button></div></div><div class="school-carousel" aria-label="Mukuba University schools"><div class="school-grid">
+        <article class="school-card"><img src="{{ asset('images/smns.jpeg') }}" alt="Students studying natural sciences"><h3>School of Mathematics and Natural Sciences</h3><a href="#programmes">Learn more</a></article>
+        <article class="school-card"><img src="{{ asset('images/nut.jpg') }}" alt="Students studying natural sciences"><h3>School of Applied Sciences And Technology</h3><a href="#programmes">Learn more</a></article>
+        <article class="school-card"><img src="{{ asset('images/agric.jpg') }}" alt="University landscape"><h3>School of Agriculture and Environmental Sciences</h3><a href="#programmes">Learn more</a></article>
+        <article class="school-card"><img src="{{ asset('images/teach.jpg') }}" alt="Education students"><h3>School of Education</h3><a href="#programmes">Learn more</a></article>
+        <article class="school-card"><img src="{{ asset('images/engineering.jpeg') }}" alt="Students collaborating on a project"><h3>School of Engineering</h3><a href="#programmes">Learn more</a></article>
+        <article class="school-card"><img src="{{ asset('images/business.png') }}" alt="Students learning in a classroom"><h3>School of Medicine</h3><a href="#programmes">Learn more</a></article>
     </div></div></section>
     <section id="programmes" class="section programmes" aria-labelledby="programmes-title"><div class="page-width"><h2 id="programmes-title" class="section-title">Programmes on offer</h2><div class="programme-grid">
         <a href="/programmes" class="programme-card-link"><article class="programme-card"><h3>Diploma Programmes</h3></article></a>
@@ -46,6 +50,65 @@
             <button class="school-control" type="button" data-program-prev aria-label="Show previous programs"><span aria-hidden="true">&#8592;</span></button><button class="school-control" type="button" data-program-next aria-label="Show next programs"><span aria-hidden="true">&#8594;</span></button></div></div><div class="school-carousel" aria-label="Mukuba University programs"><div class="school-grid" data-api-section="{{ route('data.home', 'programs') }}" aria-busy="true" aria-live="polite">@include('partials.loading')
     </div></div></section>
     <section class="section page-width" aria-labelledby="study-title"><h2 id="study-title" class="section-title">Study Modes on offer</h2><div class="study-grid"><article><img src="{{ asset('images/Full-time.jpg') }}" alt="Students learning together"><h3>FULLTIME LEARNING MODE</h3></article><article><img src="{{ asset('images/home.jpg') }}" alt="Student reading"><h3>DISTANCE LEARNING MODE</h3></article></div></section>
+
+    <section class="hostel-preview" aria-labelledby="hostel-preview-title">
+        <div class="page-width">
+            <div class="hostel-preview-heading">
+                <div>
+                    <p class="hostel-preview-kicker">Campus accommodation</p>
+                    <h2 id="hostel-preview-title" class="section-title left">Our Hostels</h2>
+                </div>
+                <div class="hostel-preview-actions">
+                    <a class="hostel-preview-link" href="/accommodation">View all hostels <span aria-hidden="true">&#8594;</span></a>
+                </div>
+            </div>
+            <div class="hostel-carousel" role="region" aria-label="Mukuba University hostels" aria-roledescription="carousel">
+                <div class="hostel-preview-grid">
+                    <article class="hostel-preview-card">
+                        <img src="{{ asset('images/to use/kariba.png') }}" alt="Bangweulu Hostel">
+                        <h3>Bangweulu Hostel</h3>
+                        <div class="hostel-preview-details"><span>Gender: Female</span><span>Combined: No</span></div>
+                    </article>
+                    <article class="hostel-preview-card">
+                        <img src="{{ asset('images/to use/kafue.jpg') }}" alt="Kafue Hostel">
+                        <h3>Kafue Hostel</h3>
+                        <div class="hostel-preview-details"><span>Gender: Female</span><span>Combined: No</span></div>
+                    </article>
+                    <article class="hostel-preview-card">
+                        <img src="{{ asset('images/to use/zambezi.jpg') }}" alt="Zambezi Hostel">
+                        <h3>Zambezi Hostel</h3>
+                        <div class="hostel-preview-details"><span>Gender: Female</span><span>Combined: No</span></div>
+                    </article>
+                    <article class="hostel-preview-card">
+                        <img src="{{ asset('images/to use/kariba.png') }}" alt="Kariba Hostel">
+                        <h3>Kariba Hostel</h3>
+                        <div class="hostel-preview-details"><span>Gender: Male</span><span>Combined: No</span></div>
+                    </article>
+                    <article class="hostel-preview-card">
+                        <img src="{{ asset('images/to use/luangwa.jpg') }}" alt="Luangwa Hostel">
+                        <h3>Luangwa Hostel</h3>
+                        <div class="hostel-preview-details"><span>Gender: Male</span><span>Combined: No</span></div>
+                    </article>
+                    <article class="hostel-preview-card">
+                        <img src="{{ asset('images/to use/luangwa.jpg') }}" alt="Luapula Hostel">
+                        <h3>Luapula Hostel</h3>
+                        <div class="hostel-preview-details"><span>Gender: Male</span><span>Combined: No</span></div>
+                    </article>
+                    <article class="hostel-preview-card">
+                        <img src="{{ asset('images/to use/mansion.png') }}" alt="Mansion">
+                        <h3>Mansion</h3>
+                        <div class="hostel-preview-details"><span>Gender: Male &amp; Female</span><span>Combined: Yes</span></div>
+                    </article>
+                    <article class="hostel-preview-card">
+                        <img src="{{ asset('images/to use/lectures.jpg') }}" alt="Lecturers Compound">
+                        <h3>Lecturers Compound</h3>
+                        <div class="hostel-preview-details"><span>Gender: Male &amp; Female</span><span>Combined: Yes</span></div>
+                    </article>
+                </div>
+                <div class="school-controls"><button class="school-control" type="button" data-hostel-prev aria-label="Show previous hostels"><span aria-hidden="true">&#8592;</span></button><button class="school-control" type="button" data-hostel-next aria-label="Show next hostels"><span aria-hidden="true">&#8594;</span></button></div>
+            </div>
+        </div>
+    </section>
 
     <section class="strategic-section page-width" aria-labelledby="strategic-title">
         <div class="strategic-grid">
@@ -74,8 +137,10 @@
                     </article>
                 @endforeach
             </div>
-            <button class="event-control event-prev" type="button" data-event-prev aria-label="Show previous event photo"><span aria-hidden="true">&#8592;</span></button>
-            <button class="event-control event-next" type="button" data-event-next aria-label="Show next event photo"><span aria-hidden="true">&#8594;</span></button>
+            <div class="school-controls">
+                <button class="school-control" type="button" data-event-prev aria-label="Show previous event photo"><span aria-hidden="true">&#8592;</span></button>
+                <button class="school-control" type="button" data-event-next aria-label="Show next event photo"><span aria-hidden="true">&#8594;</span></button>
+            </div>
         </div>
     </section>
     <section class="partner-strip" aria-labelledby="partners-title">
@@ -155,8 +220,7 @@
     });
     document.querySelectorAll('[data-school-prev], [data-school-next], [data-program-prev], [data-program-next]').forEach(button => button.disabled = true);
     setupCarousel('.news-track', '.news-card', '[data-news-prev]', '[data-news-next]', 18, () => 1);
-
-
+    setupCarousel('.school-grid', '.school-card', '[data-school-prev]', '[data-school-next]', 22);
     const hostelVisibleCards = () => (window.innerWidth <= 760 ? 1 : window.innerWidth <= 960 ? 2 : 3);
     setupCarousel('.hostel-preview-grid', '.hostel-preview-card', '[data-hostel-prev]', '[data-hostel-next]', 22, hostelVisibleCards, hostelVisibleCards);
     setupCarousel('.event-track', '.event-slide', '[data-event-prev]', '[data-event-next]', 0, () => 1);
