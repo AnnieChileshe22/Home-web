@@ -13,7 +13,7 @@
                             }
                         }
                     @endphp
-                    <article class="school-card">
+                    <article style="cursor: pointer;" onclick="window.location.href='{{ route('schools.show', $school['id']) }}'" class="school-card">
                         <div class="school-image">
                             <img src="{{ $imageUrl }}" alt="{{ $school['name'] }}">
                         </div>

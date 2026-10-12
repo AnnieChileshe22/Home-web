@@ -3,7 +3,7 @@
         <div class="container">
             <header class="top-banner">
                 <span>{{ $qualification }}</span>
-                <h1>{{ $qualification }} in {{ $program['name'] }}</h1>
+                <h1 style="color: #fff">{{ $qualification }} in {{ $program['name'] }}</h1>
             </header>
 
             <div class="programme-thumbnail">

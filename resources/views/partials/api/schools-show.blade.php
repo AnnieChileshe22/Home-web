@@ -1,7 +1,7 @@
 <main class="school-page">
         <div class="container">
             <header class="hero">
-                <h1>School of {{ $school['name'] }}</h1>
+                <h1 style="color: #fff">School of {{ $school['name'] }}</h1>
             </header>
 
             <section class="content-grid">
@@ -49,7 +49,7 @@
                 <h2 id="programmes-title" class="section-title">Programmes offered</h2>
                 <div class="programmes-grid">
                     @forelse ($programmes as $programme)
-                        <article class="programme-card">
+                        <article style="cursor: pointer" onclick="window.location.href='{{ route('programs.show', $programme['id']) }}'" class="programme-card">
                             <span class="level">{{ ucfirst($programme['academic_level'] ?? '') }}</span>
                             <h3>{{ trim(($programme['qualification_type'] ?? '') . ' ' . $programme['name']) }}</h3>
                             @if (!empty($programme['description']))
