@@ -30,13 +30,7 @@
             </div>
         </div>
     </section>
-    <section id="schools" class="section page-width" aria-labelledby="schools-title"><div class="school-heading"><h2 id="schools-title" class="section-title">Our Schools</h2><div class="school-controls"><button class="school-control" type="button" data-school-prev aria-label="Show previous schools"><span aria-hidden="true">&#8592;</span></button><button class="school-control" type="button" data-school-next aria-label="Show next schools"><span aria-hidden="true">&#8594;</span></button></div></div><div class="school-carousel" aria-label="Mukuba University schools"><div class="school-grid">
-        <article class="school-card"><img src="{{ asset('images/smns.jpeg') }}" alt="Students studying natural sciences"><h3>School of Mathematics and Natural Sciences</h3><a href="#programmes">Learn more</a></article>
-        <article class="school-card"><img src="{{ asset('images/nut.jpg') }}" alt="Students studying natural sciences"><h3>School of Applied Sciences And Technology</h3><a href="#programmes">Learn more</a></article>
-        <article class="school-card"><img src="{{ asset('images/agric.jpg') }}" alt="University landscape"><h3>School of Agriculture and Environmental Sciences</h3><a href="#programmes">Learn more</a></article>
-        <article class="school-card"><img src="{{ asset('images/teach.jpg') }}" alt="Education students"><h3>School of Education</h3><a href="#programmes">Learn more</a></article>
-        <article class="school-card"><img src="{{ asset('images/engineering.jpeg') }}" alt="Students collaborating on a project"><h3>School of Engineering</h3><a href="#programmes">Learn more</a></article>
-        <article class="school-card"><img src="{{ asset('images/business.png') }}" alt="Students learning in a classroom"><h3>School of Medicine</h3><a href="#programmes">Learn more</a></article>
+    <section id="schools" class="section page-width" aria-labelledby="schools-title"><div class="school-heading"><h2 id="schools-title" class="section-title">Our Schools</h2><div class="school-controls"><button class="school-control" type="button" data-school-prev aria-label="Show previous schools"><span aria-hidden="true">&#8592;</span></button><button class="school-control" type="button" data-school-next aria-label="Show next schools"><span aria-hidden="true">&#8594;</span></button></div></div><div class="school-carousel" aria-label="Mukuba University schools"><div class="school-grid" data-api-section="{{ route('data.home', 'schools') }}" aria-busy="true" aria-live="polite">@include('partials.loading')
     </div></div></section>
     <section id="programmes" class="section programmes" aria-labelledby="programmes-title"><div class="page-width"><h2 id="programmes-title" class="section-title">Programmes on offer</h2><div class="programme-grid">
         <a href="/programmes" class="programme-card-link"><article class="programme-card"><h3>Diploma Programmes</h3></article></a>
