@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mukuba University</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="{{ asset('css/api-sections.css') }}">
+    <script src="{{ asset('js/api-sections.js') }}" defer></script>
 </head>
 <body>
     <header class="site-header">
         <div class="page-width masthead">
             <a class="brand" href="{{ url('/') }}" aria-label="Mukuba University home">
                 <img class="brand-logo" src="{{ asset('images/logo.png') }}" alt="Mukuba University logo">
-                <span class="brand-copy"><strong>mukuba university</strong><small><span class="hero-education">Education</span>, <span class="hero-freedom">Freedom</span>, <span class="hero-responsibility">Responsibility</span></small></span>
+                <span class="brand-copy"><strong>Mukuba University</strong><small><span class="hero-education">Education</span>, <span class="hero-freedom">Freedom</span>, <span class="hero-responsibility">Responsibility</span></small></span>
             </a>
             <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button>
             <nav class="site-nav" aria-label="Main navigation">
@@ -116,8 +118,6 @@
         <div class="copyright">©2026. Mukuba University. All Rights Reserved.</div>
     </footer>
     <script>
-        const visibleCards=()=>window.innerWidth<=760?1:window.innerWidth<=960?2:3;
-        const setupCarousel=(trackSelector,cardSelector,previousSelector,nextSelector,gap)=>{const track=document.querySelector(trackSelector);const cards=[...document.querySelectorAll(cardSelector)];const previous=document.querySelector(previousSelector);const next=document.querySelector(nextSelector);let index=0;let timer;const render=()=>{const maxIndex=Math.max(0,cards.length-visibleCards());index=Math.min(Math.max(index,0),maxIndex);const cardWidth=cards[0].getBoundingClientRect().width;track.style.transform=`translateX(-${index*(cardWidth+gap)}px)`;previous.disabled=index===0;next.disabled=index===maxIndex;};const restart=()=>{clearInterval(timer);timer=setInterval(()=>{const maxIndex=Math.max(0,cards.length-visibleCards());index=index>=maxIndex?0:index+1;render();},3000);};previous.addEventListener('click',()=>{index--;render();restart();});next.addEventListener('click',()=>{index++;render();restart();});window.addEventListener('resize',render);render();restart();};setupCarousel('.news-track','.news-card','[data-news-prev]','[data-news-next]',18);setupCarousel('.school-grid','.school-card','[data-school-prev]','[data-school-next]',22);
 
         const menuToggle = document.querySelector('.menu-toggle');
         const siteNav = document.querySelector('.site-nav');
