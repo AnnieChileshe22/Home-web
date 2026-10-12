@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <main id="top">
-    <section class="hero" aria-labelledby="hero-title">
+    <section class="hero" aria-labelledby="hero-title" style="--hero-image: url('{{ asset('images/library.jpg') }}');">
         <div class="page-width hero-inner">
             <div class="hero-copy">
                 <h2 class="hero-kicker">Mukuba University</h2>
@@ -26,7 +26,6 @@
             <article class="news-card"><div class="news-image"><img src="{{ asset('images/logo.png') }}" alt="Students collaborating"><p class="news-type">Academic update</p></div><div class="news-card-body"><h2>Moving to semester learning</h2><p>Learn what the transition from terms to semester-based learning means for your studies.</p><a href="#programmes">Read more <span aria-hidden="true">&#8594;</span></a></div></article>
             <article class="news-card"><div class="news-image"><img src="{{ asset('images/logo.png') }}" alt="Students and staff at a university event"><p class="news-type">Campus life</p></div><div class="news-card-body"><h2>Student leadership forum</h2><p>Students and staff come together to shape a stronger campus community.</p><a href="#contact">Read more <span aria-hidden="true">&#8594;</span></a></div></article>
             </div>
-            <div class="school-controls"><button class="school-control" type="button" data-news-prev aria-label="Show previous news"><span aria-hidden="true">&#8592;</span></button><button class="school-control" type="button" data-news-next aria-label="Show next news"><span aria-hidden="true">&#8594;</span></button></div>
             </div>
         </div>
     </section>
@@ -159,10 +158,9 @@
         const cards = [...track.querySelectorAll(cardSelector)];
         const previous = document.querySelector(previousSelector);
         const next = document.querySelector(nextSelector);
-        if (!previous || !next) return;
         if (!cards.length) {
-            previous.disabled = true;
-            next.disabled = true;
+            if (previous) previous.disabled = true;
+            if (next) next.disabled = true;
             return;
         }
         let index = 0;
@@ -174,8 +172,8 @@
             index = Math.min(Math.max(index, 0), maxIndex);
             const cardWidth = cards[0].getBoundingClientRect().width;
             track.style.transform = `translateX(-${index * (cardWidth + gap)}px)`;
-            previous.disabled = index === 0;
-            next.disabled = index === maxIndex;
+            if (previous) previous.disabled = index === 0;
+            if (next) next.disabled = index === maxIndex;
         };
 
         const restart = () => {
@@ -189,13 +187,13 @@
             }, 3000);
         };
 
-        previous.addEventListener('click', () => {
+        previous?.addEventListener('click', () => {
             const step = typeof stepCount === 'function' ? stepCount() : stepCount;
             index -= step;
             render();
             restart();
         });
-        next.addEventListener('click', () => {
+        next?.addEventListener('click', () => {
             const step = typeof stepCount === 'function' ? stepCount() : stepCount;
             index += step;
             render();
