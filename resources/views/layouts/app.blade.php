@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mukuba University</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="{{ asset('css/api-sections.css') }}">
+    <script src="{{ asset('js/api-sections.js') }}" defer></script>
 </head>
 <body>
     <header class="site-header">
         <div class="page-width masthead">
             <a class="brand" href="{{ url('/') }}" aria-label="Mukuba University home">
                 <img class="brand-logo" src="{{ asset('images/logo.png') }}" alt="Mukuba University logo">
-                <span class="brand-copy"><strong>mukuba university</strong><small><span class="hero-education">Education</span>, <span class="hero-freedom">Freedom</span>, <span class="hero-responsibility">Responsibility</span></small></span>
+                <span class="brand-copy"><strong>Mukuba University</strong><small><span class="hero-education">Education</span>, <span class="hero-freedom">Freedom</span>, <span class="hero-responsibility">Responsibility</span></small></span>
             </a>
             <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button>
             <nav class="site-nav" aria-label="Main navigation">
