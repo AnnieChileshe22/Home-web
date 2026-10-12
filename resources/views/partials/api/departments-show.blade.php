@@ -10,12 +10,13 @@
     @endphp
     <main class="school-page department-page">
         <div class="container">
-            <header class="hero">
-                <div>
-                    <span class="hero-label">Department</span>
-                    <h1>{{ $department['name'] ?? 'Department' }}</h1>
-                </div>
+            <header class="detail-header">
+                <h1>{{ $department['name'] ?? 'Department' }}</h1>
             </header>
+
+            <div class="school-thumbnail">
+                <img src="{{ trim($department['thumbnail'] ?? '') ?: asset('images/library.jpg') }}" alt="{{ $department['name'] ?? 'Department' }}" fetchpriority="high">
+            </div>
 
             <section class="content-grid">
                 <article class="panel">

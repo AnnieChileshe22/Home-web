@@ -1,8 +1,12 @@
 <main class="school-page">
         <div class="container">
-            <header class="hero">
-                <h1 style="color: #fff">School of {{ $school['name'] }}</h1>
+            <header class="detail-header">
+                <h1>School of {{ $school['name'] }}</h1>
             </header>
+
+            <div class="school-thumbnail">
+                <img src="{{ trim($school['thumbnail'] ?? '') ?: asset('images/library.jpg') }}" alt="{{ $school['name'] }}" fetchpriority="high">
+            </div>
 
             <section class="content-grid">
                 <article class="panel">

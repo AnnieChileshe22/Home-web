@@ -69,7 +69,7 @@ class ApiSectionController extends Controller
     {
         $thumbnail = trim($item['thumbnail'] ?? '');
         if ($thumbnail === '') {
-            $item['thumbnail'] = asset('images/Mukuba-Hero.jpg');
+            $item['thumbnail'] = asset('images/library.jpg');
         } elseif (! preg_match('#^(https?://|//)#i', $thumbnail)) {
             $path = ltrim($thumbnail, '/');
             $item['thumbnail'] = rtrim(config('services.ecms.base_url'), '/') . '/'

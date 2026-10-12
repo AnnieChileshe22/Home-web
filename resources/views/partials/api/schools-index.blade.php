@@ -1,7 +1,7 @@
 @foreach ($schools as $school)
                     @php
-                        $thumbnail = $school['thumbnail'] ?? null;
-                        $imageUrl = asset('images/Mukuba-Hero.jpg');
+                        $thumbnail = trim($school['thumbnail'] ?? '');
+                        $imageUrl = asset('images/library.jpg');
 
                         if ($thumbnail) {
                             if (Str::startsWith($thumbnail, ['http://', 'https://', '//'])) {
@@ -14,20 +14,8 @@
                         }
                     @endphp
                     <article style="cursor: pointer;" onclick="window.location.href='{{ route('schools.show', $school['id']) }}'" class="school-card">
-                        @if ($home ?? false)
                             <img src="{{ $imageUrl }}" alt="{{ $school['name'] }}" @if ($loop->first) fetchpriority="high" @else loading="lazy" @endif>
                             <h3>{{ $school['name'] }}</h3>
                             <a href="{{ route('schools.show', $school['id']) }}">Learn more</a>
-                        @else
-                        <div class="school-image">
-                            <img src="{{ $imageUrl }}" alt="{{ $school['name'] }}">
-                        </div>
-                        <div class="school-content">
-                            <span class="school-tag">{{ $school['code'] }}</span>
-                            <h2>{{ $school['name'] }}</h2>
-                            <p>{!! Str::limit($school['description'], 100, '...') !!}</p>
-                            <a href="{{ route('schools.show', $school['id']) }}">Learn more</a>
-                        </div>
-                        @endif
                     </article>
                   @endforeach
