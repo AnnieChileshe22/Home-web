@@ -10,9 +10,9 @@
                 <div class="hero-actions"><a class="hero-primary" href="https://unicosis.mukuba.edu.zm/login" target="_blank">Apply now</a></div>
             </div>
             <div class="hero-panels" aria-label="University highlights">
-                <a href="/programmes"><span>01</span><strong>Find your programme</strong><small>Discover your next path <b>→</b></small></a>
-                <a href="/schools"><span>02</span><strong>Explore our schools</strong><small>Learn with purpose <b>→</b></small></a>
-                <a href="/accommodation"><span>03</span><strong>Accommodations</strong><small>Meet your community <b>→</b></small></a>
+                <a href="{{ url('/programmes') }}"><span>01</span><strong>Find your programme</strong><small>Discover your next path <b>→</b></small></a>
+                <a href="{{ url('/schools') }}"><span>02</span><strong>Explore our schools</strong><small>Learn with purpose <b>→</b></small></a>
+                <a href="{{ url('/accommodation') }}"><span>03</span><strong>Accommodations</strong><small>Meet your community <b>→</b></small></a>
             </div>
         </div>
     </section>
