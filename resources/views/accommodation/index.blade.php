@@ -10,7 +10,7 @@
             <section class="category-section" aria-labelledby="female-hostels">
                 <div class="category-heading" id="female-hostels">Female Hostels</div>
                 <div class="hostel-grid">
-                    <a href="/accommodation/bangweulu-hostel" class="hostel-card">
+                    <a href="{{ url('/accommodation/bangweulu-hostel') }}" class="hostel-card">
                         <div class="hostel-image">
                             <img src="{{ asset('images/to use/kariba.png') }}" alt="Bangweulu Hostel">
                         </div>
@@ -25,7 +25,7 @@
                         </div>
                     </a>
 
-                    <a href="/accommodation/kafue-hostel" class="hostel-card">
+                    <a href="{{ url('/accommodation/kafue-hostel') }}" class="hostel-card">
                         <div class="hostel-image">
                             <img src="{{ asset('images/to use/kafue.jpg') }}" alt="Kafue Hostel">
                         </div>
@@ -40,7 +40,7 @@
                         </div>
                     </a>
 
-                    <a href="/accommodation/zambezi-hostel" class="hostel-card">
+                    <a href="{{ url('/accommodation/zambezi-hostel') }}" class="hostel-card">
                         <div class="hostel-image">
                             <img src="{{ asset('images/to use/zambezi.jpg') }}" alt="Zambezi Hostel">
                         </div>
@@ -60,7 +60,7 @@
             <section class="category-section" aria-labelledby="male-hostels">
                 <div class="category-heading" id="male-hostels">Male Hostels</div>
                 <div class="hostel-grid">
-                    <a href="/accommodation/kariba-hostel" class="hostel-card">
+                    <a href="{{ url('/accommodation/kariba-hostel') }}" class="hostel-card">
                         <div class="hostel-image">
                             <img src="{{ asset('images/to use/kariba.png') }}" alt="Kariba Hostel">
                         </div>
@@ -75,7 +75,7 @@
                         </div>
                     </a>
 
-                    <a href="/accommodation/luangwa-hostel" class="hostel-card">
+                    <a href="{{ url('/accommodation/luangwa-hostel') }}" class="hostel-card">
                         <div class="hostel-image">
                             <img src="{{ asset('images/to use/luangwa.jpg') }}" alt="Luangwa Hostel">
                         </div>
@@ -90,7 +90,7 @@
                         </div>
                     </a>
 
-                    <a href="/accommodation/luapula-hostel" class="hostel-card">
+                    <a href="{{ url('/accommodation/luapula-hostel') }}" class="hostel-card">
                         <div class="hostel-image">
                             <img src="{{ asset('images/to use/luangwa.jpg') }}" alt="Luapula Hostel">
                         </div>
@@ -110,7 +110,7 @@
             <section class="category-section" aria-labelledby="combined-hostels">
                 <div class="category-heading" id="combined-hostels">Combined Hostels</div>
                 <div class="hostel-grid">
-                    <a href="/accommodation/mansion" class="hostel-card">
+                    <a href="{{ url('/accommodation/mansion') }}" class="hostel-card">
                         <div class="hostel-image">
                             <img src="{{ asset('images/to use/mansion.png') }}" alt="Mansion Hostel">
                         </div>
@@ -125,7 +125,7 @@
                         </div>
                     </a>
 
-                    <a href="/accommodation/lecturers-compound" class="hostel-card">
+                    <a href="{{ url('/accommodation/lecturers-compound') }}" class="hostel-card">
                         <div class="hostel-image">
                             <img src="{{ asset('images/to use/lectures.jpg') }}" alt="Lecturers Compound">
                         </div>
