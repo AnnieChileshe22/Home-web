@@ -29,7 +29,7 @@
             </div>
         </div>
     </section>
-    <section id="schools" class="section page-width" aria-labelledby="schools-title"><div class="school-heading"><h2 id="schools-title" class="section-title">Our Schools</h2><div class="school-controls"><button class="school-control" type="button" data-school-prev aria-label="Show previous schools"><span aria-hidden="true">&#8592;</span></button><button class="school-control" type="button" data-school-next aria-label="Show next schools"><span aria-hidden="true">&#8594;</span></button></div></div><div class="school-carousel" aria-label="Mukuba University schools"><div class="school-grid" data-api-section="{{ route('data.home', 'schools') }}" aria-busy="true" aria-live="polite">@include('partials.loading')
+    <section id="schools" class="section page-width" aria-labelledby="schools-title"><div class="school-heading"><h2 id="schools-title" class="section-title">Our Schools</h2></div><div class="school-carousel" aria-label="Mukuba University schools"><div class="school-grid" data-api-section="{{ route('data.home', 'schools') }}" aria-busy="true" aria-live="polite">@include('partials.loading')
     </div></div></section>
     <section id="programmes" class="section programmes" aria-labelledby="programmes-title"><div class="page-width"><h2 id="programmes-title" class="section-title">Programmes on offer</h2><div class="programme-grid">
         <a href="/programmes" class="programme-card-link"><article class="programme-card"><h3>Diploma Programmes</h3></article></a>
@@ -39,8 +39,7 @@
 
     <section id="programs" class="section page-width" aria-labelledby="programs-title"><div class="school-heading">
         <h2 id="programs-title" class="section-title">Our Programs</h2>
-        <div class="school-controls">
-            <button class="school-control" type="button" data-program-prev aria-label="Show previous programs"><span aria-hidden="true">&#8592;</span></button><button class="school-control" type="button" data-program-next aria-label="Show next programs"><span aria-hidden="true">&#8594;</span></button></div></div><div class="school-carousel" aria-label="Mukuba University programs"><div class="school-grid" data-api-section="{{ route('data.home', 'programs') }}" aria-busy="true" aria-live="polite">@include('partials.loading')
+        </div><div class="school-carousel" aria-label="Mukuba University programs"><div class="school-grid" data-api-section="{{ route('data.home', 'programs') }}" aria-busy="true" aria-live="polite">@include('partials.loading')
     </div></div></section>
     <section class="section page-width" aria-labelledby="study-title"><h2 id="study-title" class="section-title">Study Modes on offer</h2><div class="study-grid"><article><img src="{{ asset('images/Full-time.jpg') }}" alt="Students learning together"><h3>FULLTIME LEARNING MODE</h3></article><article><img src="{{ asset('images/home.jpg') }}" alt="Student reading"><h3>DISTANCE LEARNING MODE</h3></article></div></section>
 
@@ -98,7 +97,7 @@
                         <div class="hostel-preview-details"><span>Gender: Male &amp; Female</span><span>Combined: Yes</span></div>
                     </article>
                 </div>
-                <div class="school-controls"><button class="school-control" type="button" data-hostel-prev aria-label="Show previous hostels"><span aria-hidden="true">&#8592;</span></button><button class="school-control" type="button" data-hostel-next aria-label="Show next hostels"><span aria-hidden="true">&#8594;</span></button></div>
+
             </div>
         </div>
     </section>
