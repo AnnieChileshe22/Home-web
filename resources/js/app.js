@@ -1,5 +1,27 @@
 import './bootstrap';
 
+const themeToggle = document.querySelector('.theme-toggle');
+const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+let savedTheme;
+try { savedTheme = localStorage.getItem('mukuba-theme'); } catch {}
+const applyTheme = (dark) => {
+    document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+    if (themeToggle) {
+        themeToggle.setAttribute('aria-pressed', String(dark));
+        themeToggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+        themeToggle.querySelector('.theme-label').textContent = dark ? 'Light mode' : 'Dark mode';
+    }
+};
+applyTheme(savedTheme === 'dark' || (savedTheme !== 'light' && systemTheme.matches));
+themeToggle?.addEventListener('click', () => {
+    savedTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    applyTheme(savedTheme === 'dark');
+    try { localStorage.setItem('mukuba-theme', savedTheme); } catch {}
+});
+systemTheme.addEventListener('change', (event) => {
+    if (savedTheme !== 'dark' && savedTheme !== 'light') applyTheme(event.matches);
+});
+
 const headerSearch = document.querySelector('.header-search');
 if (headerSearch) {
     const input = headerSearch.querySelector('input');

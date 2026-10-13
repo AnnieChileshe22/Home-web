@@ -4,6 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mukuba University</title>
+    <script>
+        (() => {
+            let theme;
+            try { theme = localStorage.getItem('mukuba-theme'); } catch {}
+            const dark = theme === 'dark' || (theme !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+        })();
+    </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="{{ asset('css/api-sections.css') }}">
     <script src="{{ asset('js/api-sections.js') }}" defer></script>
@@ -70,6 +78,11 @@
                     </div>
                 </div>
                 <a class="apply-nav" href="https://unicosis.mukuba.edu.zm/login" target="_blank" rel="noopener noreferrer">Apply now</a>
+            <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
+                <svg class="theme-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z"/></svg>
+                <svg class="theme-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
+                <span class="theme-label">Dark mode</span>
+            </button>
             </nav>
             <form class="header-search" role="search" aria-label="Search university pages">
                 <input type="search" name="q" placeholder="Search pages…" aria-label="Search university pages" autocomplete="off" aria-controls="header-search-results">
