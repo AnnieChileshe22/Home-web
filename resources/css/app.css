@@ -1,5 +1,18 @@
 @import 'tailwindcss';
 
+.header-search { position: relative; display: flex; flex: 0 0 180px; align-items: center; border: 1px solid rgba(255,255,255,.6); border-radius: 6px; background: white; color: #064b2a; }
+.header-search input { width: 100%; min-width: 0; padding: 9px 10px; border: 0; background: transparent; color: #173429; font: inherit; font-size: 12px; }
+.header-search input::placeholder { color: #6a786f; }
+.header-search:focus-within { outline: 2px solid #e4c56e; outline-offset: 2px; }
+.header-search input:focus { outline: none; }
+.header-search button { display: grid; place-items: center; flex-shrink: 0; padding: 10px; border: 0; border-radius: 5px; background: transparent; color: #087b42; cursor: pointer; }
+.header-search-results { position: absolute; top: calc(100% + 8px); right: 0; z-index: 35; width: 280px; max-width: calc(100vw - 24px); max-height: 320px; overflow-y: auto; padding: 6px; border: 1px solid #e2e8e2; border-radius: 8px; background: white; box-shadow: 0 10px 24px rgba(5,48,27,.2); }
+.header-search-results a { display: block; padding: 10px; font-size: 13px; }
+.header-search-results a:hover, .header-search-results a:focus-visible { background: #f6f8f5; color: #087b42; }
+.header-search-results p { margin: 0; padding: 10px; font-size: 12px; }
+@media (min-width: 761px) and (max-width: 1250px) { .site-header .masthead { flex-wrap: wrap; gap: 8px 16px; padding: 8px 0; } .header-search { margin-left: auto; } .site-header .site-nav { order: 3; flex-basis: 100%; justify-content: center; flex-wrap: wrap; } }
+@media (max-width: 760px) { .site-header .masthead { flex-wrap: wrap; gap: 8px; padding: 8px 0; } .header-search { flex-basis: 100%; order: 3; margin-bottom: 4px; } .site-header .site-nav { top: 100%; } .header-search-results { width: 100%; } }
+
 :root { --green: #087b42; --deep: #064b2a; --ink: #173429; --muted: #6a786f; --gold: #d7ad3a; --wash: #f6f8f5; --line: #e2e8e2; --header-height: 76px; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-height) + 18px); }

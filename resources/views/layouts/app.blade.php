@@ -71,6 +71,13 @@
                 </div>
                 <a class="apply-nav" href="https://unicosis.mukuba.edu.zm/login" target="_blank" rel="noopener noreferrer">Apply now</a>
             </nav>
+            <form class="header-search" role="search" aria-label="Search university pages">
+                <input type="search" name="q" placeholder="Search pages…" aria-label="Search university pages" autocomplete="off" aria-controls="header-search-results">
+                <button type="submit" aria-label="Search">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+                </button>
+                <div class="header-search-results" id="header-search-results" aria-live="polite" hidden></div>
+            </form>
         </div>
     </header>
     @yield('content')

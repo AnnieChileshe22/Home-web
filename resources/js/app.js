@@ -1,5 +1,54 @@
 import './bootstrap';
 
+const headerSearch = document.querySelector('.header-search');
+if (headerSearch) {
+    const input = headerSearch.querySelector('input');
+    const results = headerSearch.querySelector('.header-search-results');
+    const pages = Array.from(document.querySelectorAll('.site-nav a[href]'))
+        .filter((link) => new URL(link.href).origin === window.location.origin)
+        .map((link) => ({ title: link.textContent.trim(), href: link.href }));
+    pages.push({ title: 'Programmes', href: new URL('programmes', document.querySelector('.brand').href).href });
+
+    const searchPages = () => {
+        const query = input.value.trim().toLowerCase();
+        results.replaceChildren();
+        results.hidden = !query;
+        if (!query) return;
+        const matches = pages.filter((page) => page.title.toLowerCase().includes(query));
+        matches.forEach((page) => {
+            const link = document.createElement('a');
+            link.href = page.href;
+            link.textContent = page.title;
+            results.append(link);
+        });
+        if (!matches.length) {
+            const message = document.createElement('p');
+            message.textContent = 'No matching pages. Try schools, fees or accommodation.';
+            results.append(message);
+        }
+    };
+    input.addEventListener('input', searchPages);
+    input.addEventListener('focus', searchPages);
+    headerSearch.addEventListener('submit', (event) => {
+        event.preventDefault();
+        searchPages();
+        results.querySelector('a')?.focus();
+    });
+    headerSearch.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            results.hidden = true;
+            input.focus();
+            results.hidden = true;
+        }
+    });
+    document.addEventListener('click', (event) => {
+        if (!headerSearch.contains(event.target)) results.hidden = true;
+    });
+    headerSearch.addEventListener('focusout', (event) => {
+        if (!headerSearch.contains(event.relatedTarget)) results.hidden = true;
+    });
+}
+
 const menuToggle = document.querySelector('.menu-toggle');
 const siteNav = document.querySelector('.site-nav');
 
