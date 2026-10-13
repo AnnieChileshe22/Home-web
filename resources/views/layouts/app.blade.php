@@ -18,16 +18,10 @@
             <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button>
             <nav class="site-nav" aria-label="Main navigation">
                 <div class="nav-dropdown">
-                    <a href="{{ url('/schools') }}" class="dropdown-trigger">Schools</a>
-                    <div class="nav-dropdown-menu" aria-label="Schools menu">
-                        <a href="{{ url('/schools/mathematics-natural-sciences') }}">school of Mathematics and Natural Science</a>
-                        <a href="{{ url('/schools') }}">School of Agriculture and Environmental Science</a>
-                        <a href="{{ url('/schools') }}">School of Medicine</a>
-                        <a href="{{ url('/schools') }}">School of Education</a>
-                        <a href="{{ url('/schools') }}">School of Applied Science and Technology</a>
-                        <a href="{{ url('/schools') }}">School of Engineering</a>
-                        <a href="{{ url('/schools') }}">School of Business</a>
-                    </div>
+                    <a class="nav-link" href="{{ url('/') }}" class="dropdown-trigger">Home</a>
+                </div>
+                <div class="nav-dropdown">
+                    <a class="nav-link" href="{{ url('/schools') }}" class="dropdown-trigger">Schools</a>
                 </div>
                 <div class="nav-dropdown">
                     <a href="{{ url('/admissions') }}" class="dropdown-trigger">Admissions</a>
