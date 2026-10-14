@@ -20,11 +20,17 @@
         <div class="page-width">
             <div class="news-heading"><h1 id="news-title" class="section-title">Events And News</h1></div>
             <div class="news-carousel" aria-label="University news and events"><div class="news-track">
-            <article class="news-card"><div class="news-image"><img src="{{ asset('images/app.jpg') }}" alt="Students on campus"><p class="news-type">Admissions</p></div><div class="news-card-body"><h2>Applications are now open</h2><p>Start your Mukuba University journey and submit your application for the next intake.</p><a href="#apply">Read more <span aria-hidden="true">&#8594;</span></a></div></article>
-            <article class="news-card"><div class="news-image"><img src="{{ asset('images/grad.jpg') }}" alt="Graduates celebrating"><p class="news-type">Upcoming event</p></div><div class="news-card-body"><h2>12th graduation ceremony</h2><p>Join us as we celebrate the achievements of our graduating class and their families.</p><a href="#contact">Read more <span aria-hidden="true">&#8594;</span></a></div></article>
-            <article class="news-card"><div class="news-image"><img src="{{ asset('images/logo.png') }}" alt="Students learning in a classroom"><p class="news-type">Academic notice</p></div><div class="news-card-body"><h2>Publication of results</h2><p>Students can review their latest examination results through the academic office.</p><a href="#contact">Read more <span aria-hidden="true">&#8594;</span></a></div></article>
-            <article class="news-card"><div class="news-image"><img src="{{ asset('images/logo.png') }}" alt="Students collaborating"><p class="news-type">Academic update</p></div><div class="news-card-body"><h2>Moving to semester learning</h2><p>Learn what the transition from terms to semester-based learning means for your studies.</p><a href="#programmes">Read more <span aria-hidden="true">&#8594;</span></a></div></article>
-            <article class="news-card"><div class="news-image"><img src="{{ asset('images/logo.png') }}" alt="Students and staff at a university event"><p class="news-type">Campus life</p></div><div class="news-card-body"><h2>Student leadership forum</h2><p>Students and staff come together to shape a stronger campus community.</p><a href="#contact">Read more <span aria-hidden="true">&#8594;</span></a></div></article>
+            @forelse ($posts as $post)
+                <article class="news-card">
+                    <div class="news-image">
+                        @if ($post->images->first())<img src="{{ Storage::disk('public')->url($post->images->first()->path) }}" alt="{{ $post->images->first()->alt_text ?: $post->title }}">@else<img src="{{ asset('images/logo.png') }}" alt="Mukuba University">@endif
+                        <p class="news-type">{{ ucfirst($post->category) }}</p>
+                    </div>
+                    <div class="news-card-body"><h2>{{ $post->title }}</h2><p>{{ \Illuminate\Support\Str::limit(strip_tags($post->body), 130) }}</p><a href="{{ route('posts.show', $post) }}">Read more <span aria-hidden="true">&#8594;</span></a></div>
+                </article>
+            @empty
+                <p class="page-description">There are no news, announcements or events to display right now.</p>
+            @endforelse
             </div>
             </div>
         </div>

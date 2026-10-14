@@ -6,10 +6,21 @@ use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ApiSectionController;
+use App\Http\Controllers\LogInController;
+use App\Http\Controllers\PostsController;
+
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [LogInController::class, 'create'])->name('login');
+    Route::post('/login', [LogInController::class, 'store'])->name('login.store');
+});
+Route::post('/logout', [LogInController::class, 'destroy'])->middleware('auth')->name('logout');
 
 Route::get('/data/home/{resource}', [ApiSectionController::class, 'home'])->name('data.home');
 Route::get('/data/{resource}', [ApiSectionController::class, 'index'])->name('data.index');
 Route::get('/data/{resource}/{id}', [ApiSectionController::class, 'show'])->name('data.show');
+
+Route::get('/posts', [PostsController::class, 'publicIndex'])->name('posts.index');
+Route::get('/posts/{post}', [PostsController::class, 'publicShow'])->name('posts.show');
 
 Route::resource('/', IndexController::class)->only(['index']);
 
@@ -53,8 +64,19 @@ Route::get('/university-partners', function () {
     return view('university-partners');
 });
 
+Route::middleware('auth')->group(function () {
+Route::resource('admin/posts', PostsController::class)->names('admin.posts')->except(['index', 'show']);
+Route::get('/admin/posts', [PostsController::class, 'index'])->name('admin.posts.index');
+Route::get('/admin/posts/{post}', [PostsController::class, 'show'])->name('admin.posts.show');
+
 Route::get('/admin', function () {
     return view('admin.index');
+})->name('admin.index');
+
+Route::get('/admin/{section}', function ($section) {
+    abort_unless(in_array($section, ['news', 'events', 'accommodation', 'programmes', 'study', 'announcements'], true), 404);
+    return view('admin.index', ['currentSection' => $section]);
+})->name('admin.section');
 });
 
 Route::get('/programmes', [ProgramController::class, 'index']);

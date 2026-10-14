@@ -12,35 +12,20 @@ const today = new Date().toISOString();
 function example(section, title, summary, category, image, extra = {}) {
     return { id: crypto.randomUUID(), section, title, summary, category, image: image ? config.imageBase + '/' + image : '', body: '', status: 'Published', updatedAt: today, ...extra };
 }
-const seedItems = [
-    example('news', 'Applications are now open', 'Start your Mukuba University journey and apply for the next intake.', 'Admissions', 'app.jpg'),
-    example('news', 'Student leadership forum', 'Students and staff come together to shape a stronger campus community.', 'Campus life', 'library.jpg', { status: 'Draft' }),
-    example('events', '12th graduation ceremony', 'Celebrate the achievements of our graduating class and their families.', 'Graduation', 'grad.jpg', { status: 'Draft', eventDate: '', eventTime: '', venue: 'University main campus' }),
-    example('events', 'International Women\'s Day', 'Recognising the contributions of women in our university community.', 'Campus event', 'events/womens day.jpeg', { status: 'Draft', eventDate: '', eventTime: '', venue: 'University main campus' }),
-    ...[
-        ['Bangweulu Hostel', 'Female', 'kariba.png'], ['Kafue Hostel', 'Female', 'kafue.jpg'],
-        ['Zambezi Hostel', 'Female', 'zambezi.jpg'], ['Kariba Hostel', 'Male', 'kariba.png'],
-        ['Luangwa Hostel', 'Male', 'luangwa.jpg'], ['Luapula Hostel', 'Male', 'luangwa.jpg'],
-        ['Mansion', 'Combined', 'mansion.png'], ['Lecturers Compound', 'Combined', 'lectures.jpg'],
-    ].map(([title, gender, image]) => example('accommodation', title, 'Safe and comfortable accommodation with access to campus facilities.', 'Student residence', 'to use/' + image, { gender, availability: 'Available', facilities: 'Wi-Fi, Security, Water', price: '', spaces: '' })),
-    example('programmes', 'Bachelor of Science in Computer Science', 'Explore computing, software development and practical technology skills.', 'Undergraduate', '', { qualification: "Bachelor's degree", duration: '4 years', status: 'Draft' }),
-    example('study', 'Full-time learning', 'On-campus learning for students studying full time.', 'On campus', 'Full-time.jpg'),
-    example('study', 'Distance learning', 'Flexible study opportunities for students learning at a distance.', 'Distance', 'home.jpg'),
-    example('announcements', 'Publication of results', 'Review examination results through the academic office.', 'Academic notice', '', { status: 'Draft' }),
-];
-let items = seedItems;
+let items = [];
 let storageWarning = '';
 try {
     const saved = localStorage.getItem(storageKey);
     if (saved) {
         const parsed = JSON.parse(saved);
-        if (!Array.isArray(parsed) || !parsed.every(item => item && typeof item.id === 'string' && sectionInfo[item.section] && typeof item.title === 'string' && typeof item.summary === 'string' && ['Published', 'Draft'].includes(item.status))) throw new Error('Invalid saved content');
-        items = parsed;
+        if (!Array.isArray(parsed)) throw new Error('Invalid saved content');
+        items = parsed.filter(item => !['news', 'events', 'announcements'].includes(item.section));
+        localStorage.setItem(storageKey, JSON.stringify(items));
     }
 } catch {
     storageWarning = 'Saved preview data could not be loaded. Example content is shown; saving may be unavailable in this browser.';
 }
-let section = 'overview';
+let section = config.section || 'overview';
 let statusFilter = 'all';
 let editingId = null;
 let editingSection = 'news';
@@ -90,15 +75,21 @@ function persist(next) {
 }
 function updateOverview() {
     document.querySelectorAll('[data-count]').forEach(node => { node.textContent = items.filter(item => item.section === node.dataset.count).length; });
-    document.querySelectorAll('[data-stat]').forEach(node => { node.textContent = items.filter(item => node.dataset.stat === 'drafts' ? item.status === 'Draft' : item.section === node.dataset.stat).length; });
-    const recent = document.getElementById('recent-content'); recent.replaceChildren();
+    document.querySelectorAll('[data-stat]').forEach(node => {
+        if (['news', 'events', 'announcements', 'drafts'].includes(node.dataset.stat)) return;
+        node.textContent = items.filter(item => item.section === node.dataset.stat).length;
+    });
+    const recent = document.getElementById('recent-content');
+    if (!recent.dataset.serverRecent) {
+        recent.replaceChildren();
     [...items].sort((a, b) => String(b.updatedAt).localeCompare(String(a.updatedAt))).slice(0, 4).forEach(item => {
         const row = element('button', 'recent-item'); row.type = 'button';
         const symbol = element('span', 'recent-icon'); symbol.append(icon(sectionInfo[item.section].icon));
         const text = element('span', 'recent-item-text'); text.append(element('strong', '', item.title), element('small', '', sectionInfo[item.section].label + ' · ' + formattedDate(item.updatedAt)));
         row.append(symbol, text, badge(item.status)); row.addEventListener('click', () => openEditor(item.section, item.id)); recent.append(row);
     });
-    if (!items.length) recent.append(element('p', 'page-description', 'No content yet. Create your first post to get started.'));
+        if (!items.length) recent.append(element('p', 'page-description', 'No content yet. Create your first post to get started.'));
+    }
 }
 function closeSidebar(returnFocus = false) {
     sidebar.classList.remove('open'); scrim.hidden = true;
@@ -114,8 +105,6 @@ function navigate(key, focus = true) {
         button.classList.toggle('active', active);
         if (active) button.setAttribute('aria-current', 'page'); else button.removeAttribute('aria-current');
     });
-    document.getElementById('overview-view').hidden = key !== 'overview';
-    document.getElementById('content-view').hidden = key === 'overview';
     document.getElementById('breadcrumb').textContent = key === 'overview' ? 'Overview' : sectionInfo[key].label;
     if (key !== 'overview') {
         const info = sectionInfo[key];
@@ -124,7 +113,7 @@ function navigate(key, focus = true) {
         document.getElementById('content-eyebrow').textContent = key === 'accommodation' ? 'Student life' : 'Website content';
         document.getElementById('add-label').textContent = 'Add ' + info.singular;
         document.getElementById('title-column').textContent = key === 'accommodation' ? 'Residence' : 'Content';
-        renderContent();
+        if (document.getElementById('content-rows')) renderContent();
     }
     closeSidebar();
     if (focus) document.getElementById(key === 'overview' ? 'admin-main' : 'content-title').focus({ preventScroll: true });
@@ -220,11 +209,11 @@ form.addEventListener('submit', event => {
 });
 document.querySelectorAll('[data-close-editor]').forEach(button => button.addEventListener('click', () => dialog.close()));
 dialog.addEventListener('click', event => { if (event.target !== dialog) return; const rect = dialog.getBoundingClientRect(); if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close(); });
-document.querySelectorAll('[data-section]').forEach(button => button.addEventListener('click', () => navigate(button.dataset.section)));
 document.querySelectorAll('[data-create]').forEach(button => button.addEventListener('click', () => openEditor(button.dataset.create)));
-document.getElementById('add-content').addEventListener('click', () => openEditor(section));
+if (document.getElementById('add-content')) document.getElementById('add-content').addEventListener('click', () => openEditor(section));
 document.querySelectorAll('[data-status]').forEach(button => button.addEventListener('click', () => { statusFilter = button.dataset.status; renderContent(); }));
-search.addEventListener('input', renderContent); sort.addEventListener('change', renderContent);
+if (search) search.addEventListener('input', renderContent);
+if (sort) sort.addEventListener('change', renderContent);
 sidebarToggle.addEventListener('click', () => { const open = !sidebar.classList.contains('open'); sidebar.classList.toggle('open', open); sidebar.inert = !open; scrim.hidden = !open; sidebarToggle.setAttribute('aria-expanded', String(open)); document.body.style.overflow = open ? 'hidden' : ''; if (open) sidebar.querySelector('[data-close-sidebar]').focus(); });
 scrim.addEventListener('click', () => closeSidebar(true));
 document.querySelector('[data-close-sidebar]').addEventListener('click', () => closeSidebar(true));
@@ -242,4 +231,6 @@ window.addEventListener('storage', event => {
     if (event.key !== storageKey || !event.newValue) return;
     try { const parsed = JSON.parse(event.newValue); if (Array.isArray(parsed) && parsed.every(item => item && typeof item.id === 'string' && sectionInfo[item.section] && typeof item.title === 'string' && typeof item.summary === 'string' && ['Published', 'Draft'].includes(item.status))) { items = parsed; updateOverview(); if (section !== 'overview') renderContent(); } } catch { /* Keep the current valid preview when another tab contains invalid data. */ }
 });
-closeSidebar(); updateOverview(); if (storageWarning) notify(storageWarning);
+closeSidebar(); updateOverview();
+if (section !== 'overview') navigate(section, false);
+if (storageWarning) notify(storageWarning);
