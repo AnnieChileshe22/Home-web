@@ -25,6 +25,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#064b2a">
+    <script>(()=>{let t;try{t=localStorage.getItem("mukuba-theme")}catch{}document.documentElement.dataset.theme=t==="dark"||(t!=="light"&&matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light"})()</script>
     <title>Website Administration | Mukuba University</title>
     @vite(['resources/css/admin.css', 'resources/js/admin.js'])
 </head>
@@ -75,7 +76,7 @@
     <aside class="admin-sidebar" id="admin-sidebar" aria-label="Website administration">
         <a class="admin-brand" href="{{ url('/') }}">
             <img src="{{ asset('images/logo.png') }}" alt="Mukuba University crest">
-            <span><strong>Mukuba University</strong><small>Website administration</small></span>
+            <span><strong>Mukuba University</strong></span>
         </a>
         <button class="icon-button sidebar-close" type="button" data-close-sidebar aria-label="Close navigation"><svg
                 class="icon">
@@ -99,8 +100,6 @@
             @endforeach
         </nav>
         <div class="sidebar-footer">
-            <span class="sidebar-status"><i></i> Content workspace</span>
-            <p>Education. Freedom.<br>Responsibility.</p>
             <a href="{{ url('/') }}" target="_blank" rel="noopener noreferrer">View university website <svg
                     class="icon" aria-hidden="true">
                     <use href="#icon-arrow" />
@@ -119,6 +118,7 @@
                         id="breadcrumb">{{ $currentSection === 'overview' ? 'Overview' : ($currentSection === 'posts' ? 'Posts' : $sections[$currentSection][0] ?? 'Overview') }}</strong></span>
             </div>
             <div class="header-actions">
+                <button class="admin-theme-toggle" type="button" data-admin-theme-toggle aria-pressed="false" aria-label="Switch to dark mode" title="Switch color theme"><svg class="theme-icon theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z"/></svg><svg class="theme-icon theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><span class="sr-only">Toggle color theme</span></button>
                 <a class="website-button" href="{{ url('/') }}" target="_blank" rel="noopener noreferrer">View
                     website <svg class="icon" aria-hidden="true">
                         <use href="#icon-arrow" />
@@ -137,14 +137,10 @@
             </div>
         </header>
         <main class="admin-main" id="admin-main" tabindex="-1">
-            <div class="preview-banner"><span class="preview-tag">Content management</span>
-                <p>Manage announcements, news and events for the university website.</p>
-            </div>
             @if ($currentSection === 'overview')
             <section id="overview-view" aria-labelledby="overview-title">
                 <div class="page-heading">
                     <div>
-                        <p class="eyebrow">Mukuba University / Administration</p>
                         <h1 id="overview-title">Your website, at a glance.</h1>
                         <p class="page-description">Keep your university community informed, connected and up to date.
                         </p>
@@ -162,8 +158,7 @@
                                 <use href="#icon-arrow" />
                             </svg></a>
                     </div>
-                    <div class="welcome-emblem" aria-hidden="true"><img src="{{ asset('images/logo.png') }}"
-                            alt=""><span>Education &bull; Freedom &bull; Responsibility</span></div>
+                    
                 </div>
                 <div class="stat-grid" aria-label="Content overview">
                     @foreach (['news' => ['News posts', 'news'], 'announcements' => ['Announcements', 'news'], 'events' => ['Events', 'calendar'], 'drafts' => ['Draft posts', 'book']] as $key => [$label, $icon])
@@ -211,13 +206,7 @@
                         </div>
                     </section>
                 </div>
-                <div class="ecms-note"><svg class="icon" aria-hidden="true">
-                        <use href="#icon-book" />
-                    </svg>
-                    <p><strong>Academic content</strong> Schools and programmes on the public website currently come
-                        from ECMS. Programme edits here are previews.</p><a href="{{ url('/schools') }}"
-                        target="_blank" rel="noopener noreferrer">View schools &#8599;</a>
-                </div>
+               
             </section>
             @elseif ($currentSection === 'posts')
                 @include('admin.posts.dashboard-list')
@@ -273,7 +262,7 @@
                                         <td>{{ ucfirst($post->category) }}<small class="content-detail">{{ $post->images->count() }} image(s)</small></td>
                                         <td><span class="status-badge {{ $post->status === 'draft' ? 'draft' : '' }}">{{ ucfirst($post->status) }}</span></td>
                                         <td>{{ $post->updated_at->format('M j, Y') }}</td>
-                                        <td><a class="row-button" href="{{ route('admin.posts.edit', $post) }}">Edit</a><form method="POST" action="{{ route('admin.posts.destroy', $post) }}" style="display:inline" onsubmit="return confirm('Delete this post?')">@csrf @method('DELETE')<button class="row-button delete" type="submit">Delete</button></form></td>
+                                        <td><a class="row-button" href="{{ route('admin.posts.edit', $post) }}">Edit</a><form method="POST" action="{{ route('admin.posts.destroy', $post) }}" style="display:inline" data-confirm-delete="Delete this post?">@csrf @method('DELETE')<button class="row-button delete" type="submit">Delete</button></form></td>
                                     </tr>
                                 @empty
                                     <tr data-empty-row><td class="empty-state" colspan="5"><strong>A fresh start</strong><p>Add your first {{ $currentSection === 'events' ? 'event' : ($currentSection === 'announcements' ? 'announcement' : 'news post') }} to get started.</p><a class="button button-secondary" href="{{ route('admin.posts.create', ['category' => $categoryFilter ?? 'news']) }}">Add post</a></td></tr>
@@ -373,6 +362,21 @@
         </form>
     </dialog>
     <div class="admin-toast" id="admin-toast" role="status" hidden></div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (session('status'))
+        <script>if (window.Swal) Swal.fire({ icon: 'success', title: @json(session('status')), timer: 2600, showConfirmButton: false });</script>
+    @endif
+    <script>
+        document.querySelectorAll('form[data-confirm-delete]').forEach(form => {
+            form.addEventListener('submit', event => {
+                if (form.dataset.confirmed === 'true') return;
+                event.preventDefault();
+                Swal.fire({ title: 'Delete this post?', text: form.dataset.confirmDelete, icon: 'warning', showCancelButton: true, confirmButtonText: 'Delete', cancelButtonText: 'Cancel', confirmButtonColor: '#b42318' }).then(result => {
+                    if (result.isConfirmed) { form.dataset.confirmed = 'true'; form.requestSubmit(); }
+                });
+            });
+        });
+    </script>
     <script id="admin-config" type="application/json">{!! json_encode(['imageBase' => asset('images'), 'profileName' => $profileName, 'section' => $currentSection], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) !!}</script>
     @if ($currentSection === 'overview') <script type="module" src="{{ Vite::asset('resources/js/admin.js') }}"></script> @endif
     @if (in_array($currentSection, ['news', 'events', 'announcements'], true))

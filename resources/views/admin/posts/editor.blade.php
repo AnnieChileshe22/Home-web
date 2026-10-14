@@ -9,8 +9,9 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#064b2a"><title>{{ $editing ? 'Edit post' : 'Create post' }} | Mukuba University</title>
-    @vite(['resources/css/admin.css'])
+    <meta name="theme-color" content="#064b2a">
+    <script>(()=>{let t;try{t=localStorage.getItem("mukuba-theme")}catch{}document.documentElement.dataset.theme=t==="dark"||(t!=="light"&&matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light"})()</script><title>{{ $editing ? 'Edit post' : 'Create post' }} | Mukuba University</title>
+    @vite(['resources/css/admin.css', 'resources/js/admin-theme.js'])
     <style>
         .post-editor{max-width:1180px;margin:0 auto;padding:34px 0 60px}
         .editor-breadcrumb{display:flex;align-items:center;gap:9px;margin-bottom:22px;color:#718078;font-size:12px}
@@ -80,7 +81,7 @@
     <div class="admin-workspace">
         <header class="admin-header">
             <div class="header-location"><button class="icon-button mobile-menu" id="sidebar-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="admin-sidebar"><svg class="icon"><use href="#icon-menu"/></svg></button><span class="header-label">Website <span class="breadcrumb-divider">/</span> <strong>{{ $editing ? 'Edit post' : 'Create post' }}</strong></span></div>
-            <div class="header-actions"><a class="website-button" href="{{ route('admin.posts.index') }}">All posts</a><details class="profile-menu"><summary aria-label="Profile for {{ $profileName }}"><span class="profile-avatar">{{ mb_strtoupper($profileInitials) }}</span><span class="profile-text"><strong>{{ $profileName }}</strong><small>Website administrator</small></span><span class="profile-chevron">⌄</span></summary><div class="profile-dropdown"><strong>{{ $profileName }}</strong><p>{{ $profile?->email }}</p><form method="POST" action="{{ route('logout') }}">@csrf<button class="text-button" type="submit">Sign out</button></form></div></details></div>
+            <div class="header-actions"><button class="admin-theme-toggle" type="button" data-admin-theme-toggle aria-pressed="false" aria-label="Switch to dark mode" title="Switch color theme"><svg class="theme-icon theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z"/></svg><svg class="theme-icon theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><span class="sr-only">Toggle color theme</span></button><a class="website-button" href="{{ route('admin.posts.index') }}">All posts</a><details class="profile-menu"><summary aria-label="Profile for {{ $profileName }}"><span class="profile-avatar">{{ mb_strtoupper($profileInitials) }}</span><span class="profile-text"><strong>{{ $profileName }}</strong><small>Website administrator</small></span><span class="profile-chevron">⌄</span></summary><div class="profile-dropdown"><strong>{{ $profileName }}</strong><p>{{ $profile?->email }}</p><form method="POST" action="{{ route('logout') }}">@csrf<button class="text-button" type="submit">Sign out</button></form></div></details></div>
         </header>
         <main class="post-editor">
             <nav class="editor-breadcrumb" aria-label="Breadcrumb"><a href="{{ route('admin.index') }}">Dashboard</a><span>/</span><a href="{{ route('admin.posts.index') }}">Posts</a><span>/</span><span>{{ $editing ? 'Edit post' : 'New post' }}</span></nav>

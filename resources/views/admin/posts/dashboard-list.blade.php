@@ -41,7 +41,7 @@
                             <td>{{ ucfirst($post->category) }}<small class="content-detail">{{ $post->images->count() }} image(s)</small></td>
                             <td><span class="status-badge {{ $post->status === 'draft' ? 'draft' : '' }}">{{ ucfirst($post->status) }}</span></td>
                             <td>{{ $post->updated_at->format('M j, Y') }}</td>
-                            <td><a class="row-button" href="{{ route('admin.posts.show', $post) }}">View</a><a class="row-button" href="{{ route('admin.posts.edit', $post) }}">Edit</a><form method="POST" action="{{ route('admin.posts.destroy', $post) }}" style="display:inline" onsubmit="return confirm('Delete this post and its images?')">@csrf @method('DELETE')<button class="row-button delete" type="submit">Delete</button></form></td>
+                            <td><a class="row-button" href="{{ route('admin.posts.show', $post) }}">View</a><a class="row-button" href="{{ route('admin.posts.edit', $post) }}">Edit</a><form method="POST" action="{{ route('admin.posts.destroy', $post) }}" style="display:inline" data-confirm-delete="Delete this post and its images?">@csrf @method('DELETE')<button class="row-button delete" type="submit">Delete</button></form></td>
                         </tr>
                     @empty
                         <tr><td class="empty-state" colspan="5"><strong>No posts yet</strong><p>Posts you create will appear here.</p><a class="button button-secondary" href="{{ route('admin.posts.create') }}">Create your first post</a></td></tr>

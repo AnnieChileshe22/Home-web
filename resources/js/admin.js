@@ -1,3 +1,4 @@
+import './admin-theme.js';
 const config = JSON.parse(document.getElementById('admin-config').textContent);
 const storageKey = 'mukuba.admin.preview.v2';
 const sectionInfo = {
