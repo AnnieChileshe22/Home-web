@@ -8,6 +8,7 @@
         ->implode('');
     $sections = [
         'overview' => ['Overview', 'dashboard'],
+        'posts' => ['Posts', 'news'],
         'news' => ['News', 'news'],
         'events' => ['Events', 'calendar'],
         'accommodation' => ['Accommodation', 'home'],
@@ -84,12 +85,13 @@
         <nav class="admin-navigation" aria-label="Content sections">
             @foreach ($sections as $key => [$label, $icon])
                 <a class="nav-item {{ $key === $currentSection ? 'active' : '' }}"
-                    href="{{ $key === 'overview' ? route('admin.index') : route('admin.section', $key) }}"
+                    href="{{ $key === 'overview' ? route('admin.index') : ($key === 'posts' ? route('admin.posts.index') : route('admin.section', $key)) }}"
                     @if ($key === $currentSection) aria-current="page" @endif>
                     <svg class="icon" aria-hidden="true">
                         <use href="#icon-{{ $icon }}" />
                     </svg>
                     <span>{{ $label }}</span>
+                    @if ($key === 'posts') <span class="nav-count">{{ \App\Models\Posts::count() }}</span> @endif
                     @if (in_array($key, ['news', 'events', 'accommodation']))
                         <span class="nav-count" data-count="{{ $key }}">0</span>
                     @endif
@@ -114,7 +116,7 @@
                         <use href="#icon-menu" />
                     </svg></button>
                 <span class="header-label">Website <span class="breadcrumb-divider">/</span> <strong
-                        id="breadcrumb">Overview</strong></span>
+                        id="breadcrumb">{{ $currentSection === 'overview' ? 'Overview' : ($currentSection === 'posts' ? 'Posts' : $sections[$currentSection][0] ?? 'Overview') }}</strong></span>
             </div>
             <div class="header-actions">
                 <a class="website-button" href="{{ url('/') }}" target="_blank" rel="noopener noreferrer">View
@@ -135,8 +137,8 @@
             </div>
         </header>
         <main class="admin-main" id="admin-main" tabindex="-1">
-            <div class="preview-banner"><span class="preview-tag">Design preview</span>
-                <p>Edits are saved in this browser. Publishing to the university website is not connected yet.</p>
+            <div class="preview-banner"><span class="preview-tag">Content management</span>
+                <p>Manage announcements, news and events for the university website.</p>
             </div>
             @if ($currentSection === 'overview')
             <section id="overview-view" aria-labelledby="overview-title">
@@ -146,31 +148,31 @@
                         <h1 id="overview-title">Your website, at a glance.</h1>
                         <p class="page-description">Keep your university community informed, connected and up to date.
                         </p>
-                    </div><button class="button button-primary" type="button" data-create="news"><svg
+                    </div><a class="button button-primary" href="{{ route('admin.posts.create') }}"><svg
                             class="icon" aria-hidden="true">
                             <use href="#icon-plus" />
-                        </svg>Create a post</button>
+                        </svg>Create a post</a>
                 </div>
                 <div class="welcome-panel">
                     <div><span class="welcome-kicker">A little update makes a big difference</span>
                         <h2>What is happening at Mukuba?</h2>
                         <p>Share the latest news, announce an event or help students find their home on campus.</p>
-                        <button class="button button-gold" type="button" data-create="events">Add an event <svg
+                        <a class="button button-gold" href="{{ route('admin.posts.create', ['category' => 'event']) }}">Add an event <svg
                                 class="icon" aria-hidden="true">
                                 <use href="#icon-arrow" />
-                            </svg></button>
+                            </svg></a>
                     </div>
                     <div class="welcome-emblem" aria-hidden="true"><img src="{{ asset('images/logo.png') }}"
                             alt=""><span>Education &bull; Freedom &bull; Responsibility</span></div>
                 </div>
                 <div class="stat-grid" aria-label="Content overview">
-                    @foreach (['news' => ['News posts', 'news'], 'events' => ['Events', 'calendar'], 'accommodation' => ['Accommodation', 'home'], 'drafts' => ['Drafts', 'book']] as $key => [$label, $icon])
+                    @foreach (['news' => ['News posts', 'news'], 'announcements' => ['Announcements', 'news'], 'events' => ['Events', 'calendar'], 'drafts' => ['Draft posts', 'book']] as $key => [$label, $icon])
                         <article class="stat-card">
                             <div class="stat-top"><span>{{ $label }}</span><svg class="icon"
                                     aria-hidden="true">
                                     <use href="#icon-{{ $icon }}" />
                                 </svg></div><strong
-                                data-stat="{{ $key }}">0</strong><small>{{ $key === 'drafts' ? 'Ready when you are' : 'In your content workspace' }}</small>
+                                data-stat="{{ $key }}">{{ $key === 'drafts' ? \App\Models\Posts::where('status', 'draft')->count() : \App\Models\Posts::where('category', ['events' => 'event', 'announcements' => 'announcement'][$key] ?? $key)->count() }}</strong><small>In your content workspace</small>
                         </article>
                     @endforeach
                 </div>
@@ -180,10 +182,16 @@
                             <div>
                                 <h2>Recent content</h2>
                                 <p>Your latest posts and updates</p>
-                            </div><a class="text-button" href="{{ route('admin.section', 'news') }}">Manage news
+                            </div><a class="text-button" href="{{ route('admin.posts.index') }}">Manage posts
                                 &#8594;</a>
                         </div>
-                        <div id="recent-content" class="recent-content"></div>
+                        <div id="recent-content" class="recent-content" data-server-recent>
+                            @forelse (\App\Models\Posts::latest()->take(4)->get() as $post)
+                                <a class="recent-item" href="{{ route('admin.posts.show', $post) }}"><span class="recent-icon"><svg class="icon"><use href="#icon-news" /></svg></span><span class="recent-item-text"><strong>{{ $post->title }}</strong><small>{{ ucfirst($post->category) }} · {{ $post->updated_at->format('M j, Y') }}</small></span></a>
+                            @empty
+                                <p class="page-description">No content yet. Create your first post to get started.</p>
+                            @endforelse
+                        </div>
                     </section>
                     <section class="admin-panel">
                         <div class="panel-heading">
@@ -193,12 +201,12 @@
                             </div>
                         </div>
                         <div class="quick-actions">
-                            @foreach (['news' => ['Post university news', 'Updates, stories and achievements', 'news'], 'events' => ['Announce an event', 'Dates, venues and what to expect', 'calendar'], 'accommodation' => ['Add accommodation', 'Hostels, facilities and availability', 'home']] as $key => [$label, $description, $icon])
-                                <button class="quick-action" type="button" data-create="{{ $key }}"><span
+                            @foreach (['news' => ['Post university news', 'Updates, stories and achievements', 'news'], 'event' => ['Announce an event', 'Dates, venues and what to expect', 'calendar'], 'announcement' => ['Create an announcement', 'Important notices for students and staff', 'news']] as $key => [$label, $description, $icon])
+                                <a class="quick-action" href="{{ route('admin.posts.create', ['category' => $key]) }}"><span
                                         class="quick-icon"><svg class="icon" aria-hidden="true">
                                             <use href="#icon-{{ $icon }}" />
                                         </svg></span><span><strong>{{ $label }}</strong><small>{{ $description }}</small></span><span
-                                        aria-hidden="true">&#8594;</span></button>
+                                    aria-hidden="true">&#8594;</span></a>
                             @endforeach
                         </div>
                     </section>
@@ -211,24 +219,29 @@
                         target="_blank" rel="noopener noreferrer">View schools &#8599;</a>
                 </div>
             </section>
+            @elseif ($currentSection === 'posts')
+                @include('admin.posts.dashboard-list')
             @else
+            @php
+                $categoryFilter = ['news' => 'news', 'events' => 'event', 'announcements' => 'announcement'][$currentSection] ?? null;
+                $sectionPosts = $categoryFilter ? \App\Models\Posts::with('images')->where('category', $categoryFilter)->latest()->get() : collect();
+                $publishedCount = $sectionPosts->where('status', 'published')->count();
+                $draftCount = $sectionPosts->where('status', 'draft')->count();
+                $archivedCount = $sectionPosts->where('status', 'archived')->count();
+            @endphp
             <section id="content-view" aria-labelledby="content-title">
+                @if (session('status'))<p class="success-box" role="status">{{ session('status') }}</p>@endif
                 <div class="page-heading">
                     <div>
                         <p class="eyebrow" id="content-eyebrow">Website content</p>
                         <h1 id="content-title" tabindex="-1">News</h1>
                         <p class="page-description" id="content-description"></p>
-                    </div><button class="button button-primary" id="add-content" type="button"><svg class="icon"
+                    </div><a class="button button-primary" id="add-content" href="{{ route('admin.posts.create', ['category' => ['news' => 'news', 'events' => 'event', 'announcements' => 'announcement'][$currentSection] ?? 'news']) }}"><svg class="icon"
                             aria-hidden="true">
                             <use href="#icon-plus" />
-                        </svg><span id="add-label">Add news</span></button>
+                        </svg><span id="add-label">Add {{ $currentSection === 'events' ? 'event' : ($currentSection === 'announcements' ? 'announcement' : 'news') }}</span></a>
                 </div>
-                <div class="content-tabs" aria-label="Content status"><button type="button"
-                        class="content-tab active" data-status="all" aria-pressed="true">All content <span
-                            id="total-count">0</span></button><button type="button" class="content-tab"
-                        data-status="Published" aria-pressed="false">Published <span
-                            id="published-count">0</span></button><button type="button" class="content-tab"
-                        data-status="Draft" aria-pressed="false">Drafts <span id="draft-count">0</span></button>
+                <div class="content-tabs" aria-label="Content status"><button type="button" class="content-tab active" data-status="all" aria-pressed="true">All content <span id="total-count">{{ $sectionPosts->count() }}</span></button><button type="button" class="content-tab" data-status="published" aria-pressed="false">Published <span id="published-count">{{ $publishedCount }}</span></button><button type="button" class="content-tab" data-status="draft" aria-pressed="false">Drafts <span id="draft-count">{{ $draftCount }}</span></button><button type="button" class="content-tab" data-status="archived" aria-pressed="false">Archived <span id="archived-count">{{ $archivedCount }}</span></button>
                 </div>
                 <div class="admin-panel content-panel">
                     <div class="content-toolbar"><label class="search-box"><svg class="icon" aria-hidden="true">
@@ -250,11 +263,25 @@
                                     <th scope="col"><span class="sr-only">Actions</span></th>
                                 </tr>
                             </thead>
-                            <tbody id="content-rows"></tbody>
+                            <tbody id="content-rows">
+                                @forelse ($sectionPosts as $post)
+                                    <tr data-post-row data-title="{{ mb_strtolower($post->title) }}" data-category="{{ $post->category }}" data-status="{{ $post->status }}" data-date="{{ $post->updated_at->timestamp }}">
+                                        <td><div class="content-cell">
+                                            @if ($post->images->first())<img class="content-thumbnail" src="{{ Storage::disk('public')->url($post->images->first()->path) }}" alt="">@else<span class="content-thumbnail recent-icon"><svg class="icon"><use href="#icon-{{ $currentSection === 'events' ? 'calendar' : 'news' }}"/></svg></span>@endif
+                                            <div><strong>{{ $post->title }}</strong><p>{{ \Illuminate\Support\Str::limit(strip_tags($post->body), 150) }}</p></div>
+                                        </div></td>
+                                        <td>{{ ucfirst($post->category) }}<small class="content-detail">{{ $post->images->count() }} image(s)</small></td>
+                                        <td><span class="status-badge {{ $post->status === 'draft' ? 'draft' : '' }}">{{ ucfirst($post->status) }}</span></td>
+                                        <td>{{ $post->updated_at->format('M j, Y') }}</td>
+                                        <td><a class="row-button" href="{{ route('admin.posts.edit', $post) }}">Edit</a><form method="POST" action="{{ route('admin.posts.destroy', $post) }}" style="display:inline" onsubmit="return confirm('Delete this post?')">@csrf @method('DELETE')<button class="row-button delete" type="submit">Delete</button></form></td>
+                                    </tr>
+                                @empty
+                                    <tr data-empty-row><td class="empty-state" colspan="5"><strong>A fresh start</strong><p>Add your first {{ $currentSection === 'events' ? 'event' : ($currentSection === 'announcements' ? 'announcement' : 'news post') }} to get started.</p><a class="button button-secondary" href="{{ route('admin.posts.create', ['category' => $categoryFilter ?? 'news']) }}">Add post</a></td></tr>
+                                @endforelse
+                            </tbody>
                         </table>
                     </div>
-                    <div class="table-footer"><span id="results-count" aria-live="polite"></span><span>Changes saved
-                            on this device</span></div>
+                    <div class="table-footer"><span id="results-count" aria-live="polite">Showing {{ $sectionPosts->count() }} of {{ $sectionPosts->count() }} items</span><span>Posts saved to the website database</span></div>
                 </div>
             </section>
             @endif
@@ -347,6 +374,41 @@
     </dialog>
     <div class="admin-toast" id="admin-toast" role="status" hidden></div>
     <script id="admin-config" type="application/json">{!! json_encode(['imageBase' => asset('images'), 'profileName' => $profileName, 'section' => $currentSection], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) !!}</script>
+    @if ($currentSection === 'overview') <script type="module" src="{{ Vite::asset('resources/js/admin.js') }}"></script> @endif
+    @if (in_array($currentSection, ['news', 'events', 'announcements'], true))
+    <script>
+        const postRows=[...document.querySelectorAll('[data-post-row]')];
+        const searchInput=document.querySelector('#content-search');
+        const sortSelect=document.querySelector('#content-sort');
+        const countLabel=document.querySelector('#results-count');
+        const statusTabs=[...document.querySelectorAll('[data-status]')];
+        let activeStatus='all';
+        function filterPosts(){
+            const query=searchInput.value.trim().toLowerCase();
+            const matching=postRows.filter(row=>{
+                const matchesQuery=row.textContent.toLowerCase().includes(query);
+                const matchesStatus=activeStatus==='all'||row.dataset.status===activeStatus;
+                row.hidden=!(matchesQuery&&matchesStatus);
+                return !row.hidden;
+            });
+            const tbody=document.querySelector('#content-rows');
+            const empty=tbody.querySelector('[data-empty-row]');
+            if(empty) empty.hidden=postRows.length>0;
+            if(sortSelect.value==='title') matching.sort((a,b)=>a.dataset.title.localeCompare(b.dataset.title));
+            else matching.sort((a,b)=>Number(b.dataset.date)-Number(a.dataset.date));
+            matching.forEach(row=>tbody.append(row));
+            countLabel.textContent='Showing '+matching.length+' of '+postRows.length+' items';
+        }
+        searchInput.addEventListener('input',filterPosts);
+        sortSelect.addEventListener('change',filterPosts);
+        statusTabs.forEach(tab=>tab.addEventListener('click',()=>{
+            activeStatus=tab.dataset.status;
+            statusTabs.forEach(item=>{const selected=item===tab;item.classList.toggle('active',selected);item.setAttribute('aria-pressed',String(selected));});
+            filterPosts();
+        }));
+        filterPosts();
+    </script>
+    @endif
 </body>
 
 </html>
