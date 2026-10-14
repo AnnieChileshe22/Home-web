@@ -55,7 +55,12 @@ Route::get('/university-partners', function () {
 
 Route::get('/admin', function () {
     return view('admin.index');
-});
+})->name('admin.index');
+
+Route::get('/admin/{section}', function ($section) {
+    abort_unless(in_array($section, ['news', 'events', 'accommodation', 'programmes', 'study', 'announcements'], true), 404);
+    return view('admin.index', ['currentSection' => $section]);
+})->name('admin.section');
 
 Route::get('/programmes', [ProgramController::class, 'index']);
 

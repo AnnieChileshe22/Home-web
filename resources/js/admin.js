@@ -40,7 +40,7 @@ try {
 } catch {
     storageWarning = 'Saved preview data could not be loaded. Example content is shown; saving may be unavailable in this browser.';
 }
-let section = 'overview';
+let section = config.section || 'overview';
 let statusFilter = 'all';
 let editingId = null;
 let editingSection = 'news';
@@ -114,8 +114,6 @@ function navigate(key, focus = true) {
         button.classList.toggle('active', active);
         if (active) button.setAttribute('aria-current', 'page'); else button.removeAttribute('aria-current');
     });
-    document.getElementById('overview-view').hidden = key !== 'overview';
-    document.getElementById('content-view').hidden = key === 'overview';
     document.getElementById('breadcrumb').textContent = key === 'overview' ? 'Overview' : sectionInfo[key].label;
     if (key !== 'overview') {
         const info = sectionInfo[key];
@@ -124,7 +122,7 @@ function navigate(key, focus = true) {
         document.getElementById('content-eyebrow').textContent = key === 'accommodation' ? 'Student life' : 'Website content';
         document.getElementById('add-label').textContent = 'Add ' + info.singular;
         document.getElementById('title-column').textContent = key === 'accommodation' ? 'Residence' : 'Content';
-        renderContent();
+        if (document.getElementById('content-rows')) renderContent();
     }
     closeSidebar();
     if (focus) document.getElementById(key === 'overview' ? 'admin-main' : 'content-title').focus({ preventScroll: true });
@@ -220,11 +218,11 @@ form.addEventListener('submit', event => {
 });
 document.querySelectorAll('[data-close-editor]').forEach(button => button.addEventListener('click', () => dialog.close()));
 dialog.addEventListener('click', event => { if (event.target !== dialog) return; const rect = dialog.getBoundingClientRect(); if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close(); });
-document.querySelectorAll('[data-section]').forEach(button => button.addEventListener('click', () => navigate(button.dataset.section)));
 document.querySelectorAll('[data-create]').forEach(button => button.addEventListener('click', () => openEditor(button.dataset.create)));
-document.getElementById('add-content').addEventListener('click', () => openEditor(section));
+if (document.getElementById('add-content')) document.getElementById('add-content').addEventListener('click', () => openEditor(section));
 document.querySelectorAll('[data-status]').forEach(button => button.addEventListener('click', () => { statusFilter = button.dataset.status; renderContent(); }));
-search.addEventListener('input', renderContent); sort.addEventListener('change', renderContent);
+if (search) search.addEventListener('input', renderContent);
+if (sort) sort.addEventListener('change', renderContent);
 sidebarToggle.addEventListener('click', () => { const open = !sidebar.classList.contains('open'); sidebar.classList.toggle('open', open); sidebar.inert = !open; scrim.hidden = !open; sidebarToggle.setAttribute('aria-expanded', String(open)); document.body.style.overflow = open ? 'hidden' : ''; if (open) sidebar.querySelector('[data-close-sidebar]').focus(); });
 scrim.addEventListener('click', () => closeSidebar(true));
 document.querySelector('[data-close-sidebar]').addEventListener('click', () => closeSidebar(true));
@@ -242,4 +240,6 @@ window.addEventListener('storage', event => {
     if (event.key !== storageKey || !event.newValue) return;
     try { const parsed = JSON.parse(event.newValue); if (Array.isArray(parsed) && parsed.every(item => item && typeof item.id === 'string' && sectionInfo[item.section] && typeof item.title === 'string' && typeof item.summary === 'string' && ['Published', 'Draft'].includes(item.status))) { items = parsed; updateOverview(); if (section !== 'overview') renderContent(); } } catch { /* Keep the current valid preview when another tab contains invalid data. */ }
 });
-closeSidebar(); updateOverview(); if (storageWarning) notify(storageWarning);
+closeSidebar(); updateOverview();
+if (section !== 'overview') navigate(section, false);
+if (storageWarning) notify(storageWarning);
