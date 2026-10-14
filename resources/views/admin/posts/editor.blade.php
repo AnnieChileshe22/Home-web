@@ -72,8 +72,7 @@
             <a class="nav-item" href="{{ route('admin.index') }}"><svg class="icon"><use href="#icon-dashboard"/></svg><span>Overview</span></a>
             <a class="nav-item active" href="{{ route('admin.posts.index') }}" aria-current="page"><svg class="icon"><use href="#icon-news"/></svg><span>Posts</span><span class="nav-count">{{ \App\Models\Posts::count() }}</span></a>
             <a class="nav-item" href="{{ route('admin.section', 'accommodation') }}"><svg class="icon"><use href="#icon-home"/></svg><span>Accommodation</span></a>
-            <a class="nav-item" href="{{ route('admin.section', 'programmes') }}"><svg class="icon"><use href="#icon-book"/></svg><span>Programmes</span></a>
-            <a class="nav-item" href="{{ route('admin.section', 'study') }}"><svg class="icon"><use href="#icon-layers"/></svg><span>Study modes</span></a>
+            <a class="nav-item" href="{{ route('admin.section', 'calendar') }}"><svg class="icon"><use href="#icon-calendar"/></svg><span>Academic Calendar</span></a>
         </nav>
         <div class="sidebar-footer"><span class="sidebar-status"><i></i> Content workspace</span><p>Education. Freedom.<br>Responsibility.</p><a href="{{ url('/') }}" target="_blank" rel="noopener noreferrer">View university website <svg class="icon"><use href="#icon-arrow"/></svg></a></div>
     </aside>

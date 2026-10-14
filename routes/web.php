@@ -74,7 +74,7 @@ Route::get('/admin', function () {
 })->name('admin.index');
 
 Route::get('/admin/{section}', function ($section) {
-    abort_unless(in_array($section, ['news', 'events', 'accommodation', 'programmes', 'study', 'announcements'], true), 404);
+    abort_unless(in_array($section, ['news', 'events', 'accommodation', 'calendar', 'programmes', 'study', 'announcements'], true), 404);
     return view('admin.index', ['currentSection' => $section]);
 })->name('admin.section');
 });

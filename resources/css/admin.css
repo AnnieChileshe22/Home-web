@@ -49,3 +49,25 @@ html[data-theme="dark"] .admin-sidebar .nav-item:hover{background:#ffffff14;colo
 html[data-theme="dark"] .admin-sidebar .nav-item.active{background:#e4c56e;color:#16482f}
 html[data-theme="dark"] .admin-sidebar .nav-count{color:#e4eee7;background:#ffffff16}
 html[data-theme="dark"] .admin-sidebar .nav-item.active .nav-count{color:#16482f;background:#16482f12}
+.calendar-admin-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:20px;align-items:start}
+.calendar-form{padding:24px}
+.calendar-form h2{margin:0;color:var(--deep);font:400 21px/1.25 Georgia,serif}
+.calendar-form-intro{margin:7px 0 22px;color:var(--muted);font-size:11px}
+.calendar-form .form-field{margin-bottom:16px}
+.calendar-form .form-field b{color:var(--green)}
+.calendar-form .form-field input,.calendar-form .form-field select,.calendar-form .form-field textarea{width:100%;min-height:42px;padding:10px 12px;border:1px solid var(--line);border-radius:5px;background:#fff;color:var(--ink);font-size:12px}
+.calendar-form .form-field textarea{resize:vertical}
+.calendar-preview-note{margin:14px 0 0;color:var(--muted);font-size:10px}
+.calendar-form-error{margin:12px 0 0;color:#b42318;font-size:11px}
+.calendar-entry-list{padding:0 20px}
+.calendar-entry{display:grid;grid-template-columns:minmax(115px,.45fr) minmax(0,1fr) auto;align-items:start;gap:13px;padding:17px 0;border-bottom:1px solid var(--line)}
+.calendar-entry:last-child{border-bottom:0}
+.calendar-entry-date{color:var(--green);font-size:11px;font-weight:700;line-height:1.5}
+.calendar-entry-details h3{margin:0;color:var(--ink);font-size:12px}
+.calendar-entry-details p{margin:4px 0 0;color:var(--muted);font-size:10px}
+.calendar-entry-details .calendar-entry-description{margin-top:8px;line-height:1.55}
+.calendar-entry .row-button{white-space:nowrap}
+.calendar-empty{padding:28px 0;color:var(--muted);font-size:11px;text-align:center}
+html[data-theme="dark"] .calendar-form .form-field input,html[data-theme="dark"] .calendar-form .form-field select,html[data-theme="dark"] .calendar-form .form-field textarea{background:#142019;color:#e3eee7;border-color:#45594a}
+@media(max-width:900px){.calendar-admin-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.calendar-form{padding:18px}.calendar-entry-list{padding:0 16px}.calendar-entry{grid-template-columns:1fr auto;gap:5px 10px}.calendar-entry-date{grid-column:1}.calendar-entry-details{grid-column:1}.calendar-entry .row-button{grid-column:2;grid-row:1}}

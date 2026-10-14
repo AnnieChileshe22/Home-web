@@ -12,8 +12,7 @@
         'news' => ['News', 'news'],
         'events' => ['Events', 'calendar'],
         'accommodation' => ['Accommodation', 'home'],
-        'programmes' => ['Programmes', 'book'],
-        'study' => ['Study modes', 'layers'],
+        'calendar' => ['Academic Calendar', 'calendar'],
         'announcements' => ['Announcements', 'news'],
     ];
     $currentSection = $currentSection ?? request()->route('section', 'overview');
@@ -208,6 +207,39 @@
                 </div>
                
             </section>
+            @elseif ($currentSection === 'calendar')
+            <section aria-labelledby="calendar-title" class="calendar-admin-page">
+                <div class="page-heading">
+                    <div>
+                        <p class="eyebrow">Institution schedule</p>
+                        <h1 id="calendar-title" tabindex="-1">Academic Calendar</h1>
+                        <p class="page-description">Add key academic dates and activities for the university community.</p>
+                    </div>
+                </div>
+                <div class="calendar-admin-grid">
+                    <form class="admin-panel calendar-form" id="calendar-form">
+                        <h2>Add a calendar entry</h2>
+                        <p class="calendar-form-intro">Enter an important date, deadline, or academic activity.</p>
+                        <label class="form-field"><span>Activity title <b>*</b></span><input name="title" required maxlength="140" placeholder="e.g. Semester one begins"></label>
+                        <div class="form-grid">
+                            <label class="form-field"><span>Activity type</span><select name="category"><option>Academic dates</option><option>Registration</option><option>Examinations</option><option>University event</option><option>Holiday / closure</option></select></label>
+                            <label class="form-field"><span>Start date <b>*</b></span><input name="startDate" type="date" required></label>
+                        </div>
+                        <div class="form-grid">
+                            <label class="form-field"><span>End date</span><input name="endDate" type="date"></label>
+                            <label class="form-field"><span>Venue (optional)</span><input name="venue" maxlength="140" placeholder="e.g. Main campus"></label>
+                        </div>
+                        <label class="form-field"><span>Additional details</span><textarea name="description" rows="4" maxlength="1200" placeholder="Add any information students and staff need"></textarea></label>
+                        <button class="button button-primary" type="submit">Add to calendar</button>
+                        <p class="calendar-preview-note">This page is a front-end preview. Entries are saved in this browser only.</p>
+                        <p class="calendar-form-error" id="calendar-form-error" role="alert" hidden></p>
+                    </form>
+                    <section class="admin-panel calendar-list-panel" aria-labelledby="calendar-entries-title">
+                        <div class="panel-heading"><div><h2 id="calendar-entries-title">Calendar entries</h2><p id="calendar-entry-count">0 dates added</p></div></div>
+                        <div id="calendar-entries" class="calendar-entry-list" aria-live="polite"></div>
+                    </section>
+                </div>
+            </section>
             @elseif ($currentSection === 'posts')
                 @include('admin.posts.dashboard-list')
             @else
@@ -378,6 +410,57 @@
         });
     </script>
     <script id="admin-config" type="application/json">{!! json_encode(['imageBase' => asset('images'), 'profileName' => $profileName, 'section' => $currentSection], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) !!}</script>
+    @if ($currentSection === 'calendar')
+    <script>
+        (() => {
+            const storageKey = 'mukuba.academic-calendar.preview.v1';
+            const form = document.querySelector('#calendar-form');
+            const list = document.querySelector('#calendar-entries');
+            const count = document.querySelector('#calendar-entry-count');
+            const error = document.querySelector('#calendar-form-error');
+            let entries = [];
+            try {
+                const saved = JSON.parse(localStorage.getItem(storageKey) || '[]');
+                if (Array.isArray(saved)) entries = saved.filter(entry => entry && typeof entry.id === 'string' && typeof entry.title === 'string');
+            } catch { error.textContent = 'Saved entries could not be read from this browser.'; error.hidden = false; }
+
+            const formatDate = value => new Intl.DateTimeFormat('en-ZM', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Africa/Lusaka' }).format(new Date(value + 'T12:00:00'));
+            const render = () => {
+                list.replaceChildren();
+                entries.sort((a, b) => a.startDate.localeCompare(b.startDate));
+                count.textContent = entries.length + (entries.length === 1 ? ' date added' : ' dates added');
+                if (!entries.length) {
+                    const empty = document.createElement('p'); empty.className = 'calendar-empty'; empty.textContent = 'Your calendar entries will appear here.'; list.append(empty); return;
+                }
+                entries.forEach(entry => {
+                    const item = document.createElement('article'); item.className = 'calendar-entry';
+                    const date = document.createElement('time'); date.className = 'calendar-entry-date'; date.dateTime = entry.startDate;
+                    date.textContent = entry.endDate && entry.endDate !== entry.startDate ? formatDate(entry.startDate) + ' – ' + formatDate(entry.endDate) : formatDate(entry.startDate);
+                    const details = document.createElement('div'); details.className = 'calendar-entry-details';
+                    const title = document.createElement('h3'); title.textContent = entry.title;
+                    const meta = document.createElement('p'); meta.textContent = entry.category + (entry.venue ? ' · ' + entry.venue : '');
+                    details.append(title, meta);
+                    if (entry.description) { const description = document.createElement('p'); description.className = 'calendar-entry-description'; description.textContent = entry.description; details.append(description); }
+                    const remove = document.createElement('button'); remove.className = 'row-button delete'; remove.type = 'button'; remove.textContent = 'Remove'; remove.setAttribute('aria-label', 'Remove ' + entry.title);
+                    remove.addEventListener('click', () => { entries = entries.filter(existing => existing.id !== entry.id); save(); });
+                    item.append(date, details, remove); list.append(item);
+                });
+            };
+            const save = () => {
+                try { localStorage.setItem(storageKey, JSON.stringify(entries)); error.hidden = true; render(); }
+                catch { error.textContent = 'This browser could not save the entry. Check available browser storage and try again.'; error.hidden = false; }
+            };
+            form.addEventListener('submit', event => {
+                event.preventDefault(); error.hidden = true;
+                const data = Object.fromEntries(new FormData(form));
+                if (data.endDate && data.endDate < data.startDate) { error.textContent = 'The end date must be on or after the start date.'; error.hidden = false; return; }
+                entries.push({ ...data, id: crypto.randomUUID() });
+                save(); form.reset();
+            });
+            render();
+        })();
+    </script>
+    @endif
     @if ($currentSection === 'overview') <script type="module" src="{{ Vite::asset('resources/js/admin.js') }}"></script> @endif
     @if (in_array($currentSection, ['news', 'events', 'announcements'], true))
     <script>
