@@ -128,15 +128,15 @@
                             class="profile-chevron" aria-hidden="true">&#8964;</span></summary>
                     <div class="profile-dropdown"><strong>{{ $profileName }}</strong>
                         <p>{{ $profile?->email ?? 'No user is currently signed in.' }}</p>
-                        <span>{{ $profile ? 'Signed in to Mukuba University' : 'Login will be connected in the next stage.' }}</span>
+                        <span>Signed in to Mukuba University</span>
+                        <form method="POST" action="{{ route('logout') }}" style="margin-top: 12px">@csrf<button type="submit" class="text-button">Sign out</button></form>
                     </div>
                 </details>
             </div>
         </header>
         <main class="admin-main" id="admin-main" tabindex="-1">
             <div class="preview-banner"><span class="preview-tag">Design preview</span>
-                <p>Edits are saved in this browser. Publishing to the university website and login are not connected
-                    yet.</p>
+                <p>Edits are saved in this browser. Publishing to the university website is not connected yet.</p>
             </div>
             @if ($currentSection === 'overview')
             <section id="overview-view" aria-labelledby="overview-title">

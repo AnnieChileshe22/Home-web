@@ -6,6 +6,13 @@ use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ApiSectionController;
+use App\Http\Controllers\LogInController;
+
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [LogInController::class, 'create'])->name('login');
+    Route::post('/login', [LogInController::class, 'store'])->name('login.store');
+});
+Route::post('/logout', [LogInController::class, 'destroy'])->middleware('auth')->name('logout');
 
 Route::get('/data/home/{resource}', [ApiSectionController::class, 'home'])->name('data.home');
 Route::get('/data/{resource}', [ApiSectionController::class, 'index'])->name('data.index');
@@ -53,6 +60,7 @@ Route::get('/university-partners', function () {
     return view('university-partners');
 });
 
+Route::middleware('auth')->group(function () {
 Route::get('/admin', function () {
     return view('admin.index');
 })->name('admin.index');
@@ -61,6 +69,7 @@ Route::get('/admin/{section}', function ($section) {
     abort_unless(in_array($section, ['news', 'events', 'accommodation', 'programmes', 'study', 'announcements'], true), 404);
     return view('admin.index', ['currentSection' => $section]);
 })->name('admin.section');
+});
 
 Route::get('/programmes', [ProgramController::class, 'index']);
 
