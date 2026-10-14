@@ -16,6 +16,33 @@
             </div>
         </div>
     </section>
+    <section class="announcement-section" aria-labelledby="announcements-title">
+        <div class="page-width">
+            <h2 class="announcement-section-title" id="announcements-title">Announcements</h2>
+            <div class="announcement-carousel" role="region" aria-roledescription="carousel" aria-label="Important university announcements" data-announcement-carousel>
+                <div class="announcement-track" data-announcement-track aria-live="off">
+                    @forelse ($announcements as $announcement)
+                        <article class="announcement-slide" role="group" aria-roledescription="slide" aria-label="Announcement {{ $loop->iteration }} of {{ $loop->count }}" data-announcement-slide>
+                            <span class="announcement-label">Important notice</span>
+                            <h2>{{ $announcement->title }}</h2>
+                            <p>{{ \Illuminate\Support\Str::limit(strip_tags($announcement->body), 240) }}</p>
+                            <a class="announcement-view" href="{{ route('posts.show', $announcement) }}"><span aria-hidden="true">&#9673;</span> View full announcement</a>
+                        </article>
+                    @empty
+                        <article class="announcement-slide announcement-empty" role="group" aria-roledescription="slide" data-announcement-slide>
+                            <span class="announcement-label">Important notice</span>
+                            <h2>No current announcements</h2>
+                            <p>Check back here for important university updates.</p>
+                        </article>
+                    @endforelse
+                </div>
+                @if ($announcements->count() > 1)
+                    <button class="announcement-control announcement-previous" type="button" data-announcement-prev aria-label="Show previous announcement"><span aria-hidden="true">&#8249;</span></button>
+                    <button class="announcement-control announcement-next" type="button" data-announcement-next aria-label="Show next announcement"><span aria-hidden="true">&#8250;</span></button>
+                @endif
+            </div>
+        </div>
+    </section>
     <section class="intro" aria-labelledby="news-title">
         <div class="page-width">
             <div class="news-heading"><h1 id="news-title" class="section-title">Events And News</h1></div>
@@ -53,7 +80,6 @@
         <div class="page-width">
             <div class="hostel-preview-heading">
                 <div>
-                    <p class="hostel-preview-kicker">Campus accommodation</p>
                     <h2 id="hostel-preview-title" class="section-title left">Our Hostels</h2>
                 </div>
                 <div class="hostel-preview-actions">
@@ -62,46 +88,46 @@
             </div>
             <div class="hostel-carousel" role="region" aria-label="Mukuba University hostels" aria-roledescription="carousel">
                 <div class="hostel-preview-grid">
-                    <article class="hostel-preview-card">
+                    <a class="hostel-preview-card" href="{{ url('/accommodation/bangweulu') }}" aria-label="View Bangweulu Hostel details">
                         <img src="{{ asset('images/to use/kariba.png') }}" alt="Bangweulu Hostel">
                         <h3>Bangweulu Hostel</h3>
                         <div class="hostel-preview-details"><span>Gender: Female</span><span>Combined: No</span></div>
-                    </article>
-                    <article class="hostel-preview-card">
+                    </a>
+                    <a class="hostel-preview-card" href="{{ url('/accommodation/kafue') }}" aria-label="View Kafue Hostel details">
                         <img src="{{ asset('images/to use/kafue.jpg') }}" alt="Kafue Hostel">
                         <h3>Kafue Hostel</h3>
                         <div class="hostel-preview-details"><span>Gender: Female</span><span>Combined: No</span></div>
-                    </article>
-                    <article class="hostel-preview-card">
+                    </a>
+                    <a class="hostel-preview-card" href="{{ url('/accommodation/zambezi') }}" aria-label="View Zambezi Hostel details">
                         <img src="{{ asset('images/to use/zambezi.jpg') }}" alt="Zambezi Hostel">
                         <h3>Zambezi Hostel</h3>
                         <div class="hostel-preview-details"><span>Gender: Female</span><span>Combined: No</span></div>
-                    </article>
-                    <article class="hostel-preview-card">
+                    </a>
+                    <a class="hostel-preview-card" href="{{ url('/accommodation/kariba') }}" aria-label="View Kariba Hostel details">
                         <img src="{{ asset('images/to use/kariba.png') }}" alt="Kariba Hostel">
                         <h3>Kariba Hostel</h3>
                         <div class="hostel-preview-details"><span>Gender: Male</span><span>Combined: No</span></div>
-                    </article>
-                    <article class="hostel-preview-card">
+                    </a>
+                    <a class="hostel-preview-card" href="{{ url('/accommodation/luangwa') }}" aria-label="View Luangwa Hostel details">
                         <img src="{{ asset('images/to use/luangwa.jpg') }}" alt="Luangwa Hostel">
                         <h3>Luangwa Hostel</h3>
                         <div class="hostel-preview-details"><span>Gender: Male</span><span>Combined: No</span></div>
-                    </article>
-                    <article class="hostel-preview-card">
+                    </a>
+                    <a class="hostel-preview-card" href="{{ url('/accommodation/luapula') }}" aria-label="View Luapula Hostel details">
                         <img src="{{ asset('images/to use/luangwa.jpg') }}" alt="Luapula Hostel">
                         <h3>Luapula Hostel</h3>
                         <div class="hostel-preview-details"><span>Gender: Male</span><span>Combined: No</span></div>
-                    </article>
-                    <article class="hostel-preview-card">
+                    </a>
+                    <a class="hostel-preview-card" href="{{ url('/accommodation/mansion') }}" aria-label="View Mansion details">
                         <img src="{{ asset('images/to use/mansion.png') }}" alt="Mansion">
                         <h3>Mansion</h3>
                         <div class="hostel-preview-details"><span>Gender: Male &amp; Female</span><span>Combined: Yes</span></div>
-                    </article>
-                    <article class="hostel-preview-card">
+                    </a>
+                    <a class="hostel-preview-card" href="{{ url('/accommodation/lecturers-compound') }}" aria-label="View Lecturers Compound details">
                         <img src="{{ asset('images/to use/lectures.jpg') }}" alt="Lecturers Compound">
                         <h3>Lecturers Compound</h3>
                         <div class="hostel-preview-details"><span>Gender: Male &amp; Female</span><span>Combined: Yes</span></div>
-                    </article>
+                    </a>
                 </div>
 
             </div>
@@ -217,6 +243,43 @@
     });
     document.querySelectorAll('[data-school-prev], [data-school-next], [data-program-prev], [data-program-next]').forEach(button => button.disabled = true);
     setupCarousel('.news-track', '.news-card', '[data-news-prev]', '[data-news-next]', 18, () => 1);
+    const announcementCarousel = document.querySelector('[data-announcement-carousel]');
+    if (announcementCarousel) {
+        const announcementTrack = announcementCarousel.querySelector('[data-announcement-track]');
+        const announcementSlides = [...announcementTrack.querySelectorAll('[data-announcement-slide]')];
+        const announcementPrevious = announcementCarousel.querySelector('[data-announcement-prev]');
+        const announcementNext = announcementCarousel.querySelector('[data-announcement-next]');
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let announcementIndex = 0;
+        let announcementTimer;
+        const showAnnouncement = (index) => {
+            announcementIndex = (index + announcementSlides.length) % announcementSlides.length;
+            announcementTrack.style.transform = `translateX(-${announcementIndex * announcementCarousel.clientWidth}px)`;
+            announcementSlides.forEach((slide, slideIndex) => {
+                const active = slideIndex === announcementIndex;
+                slide.setAttribute('aria-hidden', String(!active));
+                slide.inert = !active;
+            });
+        };
+        window.addEventListener('resize', () => showAnnouncement(announcementIndex));
+        const stopAnnouncementTimer = () => window.clearInterval(announcementTimer);
+        const startAnnouncementTimer = () => {
+            stopAnnouncementTimer();
+            if (announcementSlides.length > 1 && !reducedMotion) {
+                announcementTimer = window.setInterval(() => showAnnouncement(announcementIndex + 1), 6500);
+            }
+        };
+        announcementPrevious?.addEventListener('click', () => { showAnnouncement(announcementIndex - 1); startAnnouncementTimer(); });
+        announcementNext?.addEventListener('click', () => { showAnnouncement(announcementIndex + 1); startAnnouncementTimer(); });
+        announcementCarousel.addEventListener('pointerenter', stopAnnouncementTimer);
+        announcementCarousel.addEventListener('pointerleave', startAnnouncementTimer);
+        announcementCarousel.addEventListener('focusin', stopAnnouncementTimer);
+        announcementCarousel.addEventListener('focusout', (event) => {
+            if (!announcementCarousel.contains(event.relatedTarget)) startAnnouncementTimer();
+        });
+        showAnnouncement(0);
+        startAnnouncementTimer();
+    }
     setupCarousel('.school-grid', '.school-card', '[data-school-prev]', '[data-school-next]', 22);
     const hostelVisibleCards = () => (window.innerWidth <= 760 ? 1 : window.innerWidth <= 960 ? 2 : 3);
     setupCarousel('.hostel-preview-grid', '.hostel-preview-card', '[data-hostel-prev]', '[data-hostel-next]', 22, hostelVisibleCards, hostelVisibleCards);
