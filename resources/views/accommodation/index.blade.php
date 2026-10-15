@@ -4,7 +4,6 @@
         <div class="container">
             <header class="page-header">
                 <h1>University Hostels</h1>
-                <p>Explore our range of accommodation options,each designed to provide a safe and comfortable living environment for students.</p>
             </header>
 
             <section class="category-section" aria-labelledby="female-hostels">
