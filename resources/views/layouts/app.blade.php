@@ -23,7 +23,6 @@
                 <img class="brand-logo" src="{{ asset('images/logo.png') }}" alt="Mukuba University logo">
                 <span class="brand-copy"><strong>Mukuba University</strong><small><span class="hero-education">Education</span>, <span class="hero-freedom">Freedom</span>, <span class="hero-responsibility">Responsibility</span></small></span>
             </a>
-            <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button>
             <nav class="site-nav" aria-label="Main navigation">
                 <div class="nav-dropdown">
                     <a class="nav-link" href="{{ url('/') }}" class="dropdown-trigger">Home</a>
@@ -78,11 +77,6 @@
                     </div>
                 </div>
                 <a class="apply-nav" href="https://unicosis.mukuba.edu.zm/login" target="_blank" rel="noopener noreferrer">Apply now</a>
-            <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
-                <svg class="theme-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z"/></svg>
-                <svg class="theme-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
-                <span class="theme-label">Dark mode</span>
-            </button>
             </nav>
             <form class="header-search" role="search" aria-label="Search university pages">
                 <input type="search" name="q" placeholder="Search pages…" aria-label="Search university pages" autocomplete="off" aria-controls="header-search-results">
@@ -91,6 +85,12 @@
                 </button>
                 <div class="header-search-results" id="header-search-results" aria-live="polite" hidden></div>
             </form>
+            <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
+                <svg class="theme-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z"/></svg>
+                <svg class="theme-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
+                <span class="theme-label">Dark mode</span>
+            </button>
+            <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button>
         </div>
     </header>
     @yield('content')

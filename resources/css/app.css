@@ -1906,3 +1906,18 @@ html[data-theme="dark"] .academic-calendar-source-note { border-color: #344b40; 
     .academic-calendar-card-header,.academic-calendar-entry,.academic-calendar-source-note { border-color: #d9e0da !important; background: #fff !important; }
     .academic-calendar-card-header h2,.academic-calendar-details h3,#academic-calendar-title { color: #173429 !important; }
 }
+
+@media (max-width: 760px) {
+    .site-header .masthead { flex-wrap: nowrap; justify-content: flex-start; gap: 6px; padding: 6px 0; }
+    .site-header .brand { flex: 0 0 auto; margin-right: auto; }
+    .site-header .brand-logo { width: 34px; height: 40px; }
+    .site-header .brand-copy { display: none; }
+    .site-header .site-nav { order: 5; top: 100%; }
+    .site-header .header-search { order: 2; flex: 0 1 112px; min-width: 0; margin: 0; }
+    .site-header .header-search input { padding: 5px 8px; font-size: 11px; }
+    .site-header .header-search button { padding: 5px; }
+    .site-header .header-search button svg { width: 16px; height: 16px; }
+    .site-header .theme-toggle { order: 3; flex: 0 0 32px; width: 32px; height: 32px; padding: 7px; color: #fff; }
+    .site-header .menu-toggle { order: 4; display: grid; flex: 0 0 36px; place-items: center; margin: 0; padding: 4px; }
+    .site-header .menu-toggle span { margin: 3px; }
+}
