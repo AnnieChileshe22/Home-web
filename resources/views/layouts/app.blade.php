@@ -72,7 +72,7 @@
                     <a class="dropdown-trigger">Directorates</a>
                     <div class="nav-dropdown-menu" aria-label="Directorates menu">
                         <a href="{{ url('/innovation-and-research') }}">Innovation &amp; Research</a>
-                        <a href="{{ url('/directorate-of-research-and-graduate-studies') }}">Directorate of Research &amp; Graduate Studies</a>
+                        <a href="{{ url('/directorate-of-research-and-graduate-studies') }}">Research &amp; Graduate Studies</a>
                         <a href="{{ url('/') }}#contact">Open Distance Learning</a>
                     </div>
                 </div>

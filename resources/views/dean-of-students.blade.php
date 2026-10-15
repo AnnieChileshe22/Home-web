@@ -7,7 +7,7 @@
 
             <section class="dean-profile" aria-labelledby="dean-profile-title">
                 <div class="dean-profile-copy">
-                    <h2 id="dean-profile-title">Dr. SIMANGO, Benson</h2>
+                    <h2 id="dean-profile-title">Dr. BENSON SIMANGO</h2>
                     <p>Dr. Benson Simango is Dean of Students for Mukuba University. He earned his undergraduate degree at the University of Zambia, his master’s degree in educational administration and management at the National University of Ireland and his Doctor of Education (D.ED.) degree in education management and leadership at the University of South Africa. He began work in the Dean of Students office in 2017 and was appointed substantively as Dean of Students in January 2020. He is responsible for providing leadership, administration and general oversight for the Office of the Dean of Students as well as Student Conduct, Student Services, and facilitates Student Development through the guidance and counselling unit.</p>
                 </div>
                 <img class="dean-photo" src="https://mukuba.edu.zm/wp-content/uploads/2021/11/DSC_3836.jpg" alt="Dean of Students Dr. Benson Simango">
