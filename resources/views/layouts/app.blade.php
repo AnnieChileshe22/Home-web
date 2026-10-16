@@ -123,9 +123,9 @@
             </div>
             <div class="footer-links">
                 <h2>Useful Links</h2>
-                <a href="https://mukuba.edu.zm/sample-page/" target="_blank" rel="noopener noreferrer">Maps and Directions</a>
-                <a href="https://mukuba.edu.zm/news/" target="_blank" rel="noopener noreferrer">News</a>
-                <a href="https://mukuba.edu.zm/jobs/" target="_blank" rel="noopener noreferrer">Jobs/Careers</a>
+                <a href="{{ route('maps-and-directions') }}">Maps and Directions</a>
+                <a href="{{ route('news-events') }}">News</a>
+                <a href="{{ route('jobs-and-careers') }}">Jobs/Careers</a>
                 <a href="https://www.zaqa.gov.zm/" target="_blank" rel="noopener noreferrer">ZAQA</a>
                 <a href="https://hea.org.zm/" target="_blank" rel="noopener noreferrer">HEA</a>
                 <a href="https://mukuba.edu.zm/research/" target="_blank" rel="noopener noreferrer">Research</a>
