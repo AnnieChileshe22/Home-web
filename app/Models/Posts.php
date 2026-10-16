@@ -12,7 +12,7 @@ class Posts extends Model
 
     protected $fillable = ['title', 'body', 'category', 'status'];
 
-    public const CATEGORIES = ['announcement', 'news', 'event'];
+    public const CATEGORIES = ['news', 'event'];
     public const STATUSES = ['draft', 'published', 'archived'];
 
     public $incrementing = false;

@@ -8,6 +8,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ApiSectionController;
 use App\Http\Controllers\LogInController;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\AnnouncementsController;
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LogInController::class, 'create'])->name('login');
@@ -21,6 +22,8 @@ Route::get('/data/{resource}/{id}', [ApiSectionController::class, 'show'])->name
 
 Route::get('/posts', [PostsController::class, 'publicIndex'])->name('posts.index');
 Route::get('/posts/{post}', [PostsController::class, 'publicShow'])->name('posts.show');
+Route::get('/announcements', [AnnouncementsController::class, 'publicIndex'])->name('announcements.index');
+Route::get('/announcements/{announcement}', [AnnouncementsController::class, 'publicShow'])->name('announcements.show');
 
 Route::resource('/', IndexController::class)->only(['index']);
 
@@ -65,6 +68,7 @@ Route::get('/university-partners', function () {
 });
 
 Route::middleware('auth')->group(function () {
+Route::resource('admin/announcements', AnnouncementsController::class)->names('admin.announcements')->except(['show']);
 Route::resource('admin/posts', PostsController::class)->names('admin.posts')->except(['index', 'show']);
 Route::get('/admin/posts', [PostsController::class, 'index'])->name('admin.posts.index');
 Route::get('/admin/posts/{post}', [PostsController::class, 'show'])->name('admin.posts.show');

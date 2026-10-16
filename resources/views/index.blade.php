@@ -25,8 +25,20 @@
                         <article class="announcement-slide" role="group" aria-roledescription="slide" aria-label="Announcement {{ $loop->iteration }} of {{ $loop->count }}" data-announcement-slide>
                             <span class="announcement-label">Important notice</span>
                             <h2>{{ $announcement->title }}</h2>
-                            <p>{{ \Illuminate\Support\Str::limit(strip_tags($announcement->body), 240) }}</p>
-                            <a class="announcement-view" href="{{ route('posts.show', $announcement) }}"><span aria-hidden="true">&#9673;</span> View full announcement</a>
+                            @if ($announcement->body)<p>{{ \Illuminate\Support\Str::limit(strip_tags($announcement->body), 240) }}</p>@endif
+                            @if ($announcement->attachments->isNotEmpty())
+                                <div class="announcement-attachments">
+                                    @foreach ($announcement->attachments as $attachment)
+                                        @if (str_starts_with($attachment->mime_type, 'image/'))
+                                            <a class="announcement-image-link" href="{{ Storage::disk('public')->url($attachment->path) }}"><img src="{{ Storage::disk('public')->url($attachment->path) }}" alt="{{ $attachment->original_name }}"></a>
+                                        @else
+                                            <a class="announcement-view" href="{{ Storage::disk('public')->url($attachment->path) }}" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">&#128196;</span><span>{{ $attachment->original_name }}</span><span class="announcement-file-type">PDF</span></a>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            @else
+                                <a class="announcement-view" href="{{ route('announcements.show', $announcement) }}">Read full announcement <span aria-hidden="true">&#8594;</span></a>
+                            @endif
                         </article>
                     @empty
                         <article class="announcement-slide announcement-empty" role="group" aria-roledescription="slide" data-announcement-slide>

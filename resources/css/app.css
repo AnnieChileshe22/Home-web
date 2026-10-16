@@ -1822,7 +1822,11 @@ html[data-theme="dark"] {
 .announcement-label { display: inline-flex; align-items: center; min-height: 29px; margin-bottom: 15px; padding: 0 12px; border: 1px solid #f8e8bf; border-radius: 999px; color: #c78a11; background: #fffaf0; font-size: 10px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase; }
 .announcement-slide h2 { max-width: 850px; margin: 0 0 10px; color: var(--theme-text-111, #111); font-size: clamp(19px, 2.15vw, 25px); font-weight: 700; line-height: 1.22; text-transform: uppercase; }
 .announcement-slide p { max-width: 950px; margin: 0 0 16px; color: var(--theme-muted, #5b6676); font-size: 15px; line-height: 1.65; }
-.announcement-view { display: inline-flex; align-items: center; gap: 9px; min-height: 38px; padding: 0 16px; border-radius: 7px; color: white; background: #d98b00; font-size: 13px; font-weight: 700; text-decoration: none; }
+.announcement-attachments { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 12px; margin-top: 4px; }
+.announcement-view { display: inline-flex; align-items: center; gap: 9px; min-height: 42px; max-width: min(100%, 520px); padding: 0 16px; border-radius: 7px; color: white; background: #d98b00; font-size: 13px; font-weight: 700; text-decoration: none; }
+.announcement-file-type { flex: 0 0 auto; padding: 3px 7px; border-radius: 4px; background: rgba(255,255,255,.18); font-size: 10px; letter-spacing: .4px; }
+.announcement-image-link { display: block; max-width: 100%; }
+.announcement-image-link img { display: block; width: auto; max-width: min(100%, 680px); max-height: 300px; border-radius: 8px; object-fit: contain; }
 .announcement-view:hover { background: #bd7700; }
 .announcement-control { position: absolute; z-index: 1; top: 50%; display: grid; width: 34px; height: 44px; place-items: center; padding: 0; transform: translateY(-50%); color: var(--theme-text-173429, #173429); background: transparent; font-size: 28px; line-height: 1; }
 .announcement-control:hover { color: #c78000; }
@@ -1833,6 +1837,7 @@ html[data-theme="dark"] .announcement-carousel { border-color: #e4b54d; backgrou
 html[data-theme="dark"] .announcement-label { border-color: #594820; color: #f1c65a; background: #302815; }
 html[data-theme="dark"] .announcement-slide h2 { color: #e3eee7; }
 html[data-theme="dark"] .announcement-slide p { color: #b4c6bb; }
+html[data-theme="dark"] .announcement-image-link img { border: 1px solid #344b40; }
 html[data-theme="dark"] .announcement-control { color: #e3eee7; }
 @media (max-width: 760px) { .announcement-slide { padding: 17px 37px 20px 20px; } .announcement-label { min-height: 26px; margin-bottom: 12px; font-size: 9px; } .announcement-slide h2 { font-size: 18px; } .announcement-slide p { font-size: 13px; } .announcement-control { width: 28px; font-size: 24px; } }
 @media (prefers-reduced-motion: reduce) { .announcement-track { transition: none; } }

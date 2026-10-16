@@ -3,7 +3,7 @@
 @section('content')
 <main class="page-width" style="padding:48px 0 72px">
     <p class="eyebrow">Mukuba University</p>
-    <h1>News, announcements and events</h1>
+    <h1>News and events</h1>
     <nav aria-label="Filter posts" style="display:flex;gap:16px;margin:24px 0">
         <a href="{{ route('posts.index') }}">All</a>
         @foreach (\App\Models\Posts::CATEGORIES as $category)
