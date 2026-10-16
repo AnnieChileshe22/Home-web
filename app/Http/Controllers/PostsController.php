@@ -23,6 +23,16 @@ class PostsController extends Controller
         return view('posts.index', ['posts' => $query->paginate(12)->withQueryString()]);
     }
 
+    public function newsEvents(): View
+    {
+        $published = Posts::with('images')->where('status', 'published');
+
+        return view('news-events', [
+            'news' => (clone $published)->where('category', 'news')->latest()->paginate(9, ['*'], 'newsPage'),
+            'events' => (clone $published)->where('category', 'event')->latest()->paginate(9, ['*'], 'eventPage'),
+        ]);
+    }
+
     public function publicShow(Posts $post): View
     {
         abort_unless($post->status === 'published', 404);

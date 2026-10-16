@@ -21,6 +21,7 @@ Route::get('/data/{resource}', [ApiSectionController::class, 'index'])->name('da
 Route::get('/data/{resource}/{id}', [ApiSectionController::class, 'show'])->name('data.show');
 
 Route::get('/posts', [PostsController::class, 'publicIndex'])->name('posts.index');
+Route::get('/news-events', [PostsController::class, 'newsEvents'])->name('news-events');
 Route::get('/posts/{post}', [PostsController::class, 'publicShow'])->name('posts.show');
 Route::get('/announcements', [AnnouncementsController::class, 'publicIndex'])->name('announcements.index');
 Route::get('/announcements/{announcement}', [AnnouncementsController::class, 'publicShow'])->name('announcements.show');
@@ -66,6 +67,14 @@ Route::get('/management', function () {
 Route::get('/university-partners', function () {
     return view('university-partners');
 });
+
+Route::get('/maps-and-directions', function () {
+    return view('maps-and-directions');
+})->name('maps-and-directions');
+
+Route::get('/jobs-and-careers', function () {
+    return view('jobs-and-careers');
+})->name('jobs-and-careers');
 
 Route::middleware('auth')->group(function () {
 Route::resource('admin/announcements', AnnouncementsController::class)->names('admin.announcements')->except(['show']);
