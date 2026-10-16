@@ -14,7 +14,7 @@
     </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="{{ asset('css/api-sections.css') }}">
-    <script src="{{ asset('js/api-sections.js') }}" defer></script>
+    <script src="{{ asset('js/api-sections.js') }}?v={{ filemtime(public_path('js/api-sections.js')) }}" defer></script>
 </head>
 <body>
     <header class="site-header">

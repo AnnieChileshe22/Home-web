@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Request;
 use Throwable;
 
 class ApiSectionController extends Controller
 {
-    public function index(string $resource)
+    public function index(Request $request, string $resource)
     {
-        return $this->section($resource, null, false);
+        return $this->section($resource, null, false, $request);
     }
 
     public function home(string $resource)
@@ -22,7 +23,7 @@ class ApiSectionController extends Controller
         return $this->section($resource, $id, false);
     }
 
-    private function section(string $resource, ?string $id, bool $home)
+    private function section(string $resource, ?string $id, bool $home, ?Request $request = null)
     {
         abort_unless(in_array($resource, ['schools', 'programs', 'departments']), 404);
         abort_if($resource === 'departments' && $id === null, 404);
@@ -45,9 +46,22 @@ class ApiSectionController extends Controller
                 if (! array_is_list($data)) {
                     return $this->emptySection();
                 }
+                $variables = [$resource => $data];
+                if ($resource === 'programs') {
+                    $data = array_values(array_filter($data, 'is_array'));
+                    $qualification = $request?->query('qualification');
+                    if (in_array($qualification, ['BSc', 'MSc', 'Diploma'], true)) {
+                        $data = array_values(array_filter($data, fn (array $item) => ($item['qualification_type'] ?? null) === $qualification));
+                    }
+                    $page = max(1, (int) ($request?->query('page', 1) ?? 1));
+                    $hasNextPage = count($data) > $page * 20;
+                    $data = array_slice($data, ($page - 1) * 20, 20);
+                    $variables['hasNextPage'] = $hasNextPage;
+                    $variables['page'] = $page;
+                }
                 $data = array_map(fn (array $item) => $this->thumbnail($item), $data);
                 $view = $home ? 'home-' . $resource : $resource . '-index';
-                $variables = [$resource => $data];
+                $variables[$resource] = $data;
             } else {
                 if (empty($data['name'])) {
                     return $this->emptySection();
