@@ -73,6 +73,14 @@ Route::get('/jobs-and-careers', function () {
     return view('jobs-and-careers');
 })->name('jobs-and-careers');
 
+Route::get('/library', function () {
+    return view('library');
+})->name('library');
+
+Route::get('/cict', function () {
+    return view('cict');
+})->name('cict');
+
 Route::middleware('auth')->group(function () {
 Route::resource('admin/posts', PostsController::class)->names('admin.posts')->except(['index', 'show']);
 Route::get('/admin/posts', [PostsController::class, 'index'])->name('admin.posts.index');

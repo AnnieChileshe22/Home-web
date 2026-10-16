@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Mukuba University</title>
+    <title>@yield('title', 'Mukuba University')</title>
     <script>
         (() => {
             let theme;
@@ -71,6 +71,7 @@
                 <div class="nav-dropdown">
                     <a class="dropdown-trigger">Directorates</a>
                     <div class="nav-dropdown-menu" aria-label="Directorates menu">
+                        <a href="{{ route('cict') }}">Center for Information Communication Technology</a>
                         <a href="{{ url('/innovation-and-research') }}">Innovation &amp; Research</a>
                         <a href="{{ url('/directorate-of-research-and-graduate-studies') }}">Research &amp; Graduate Studies</a>
                         <a href="{{ url('/') }}#contact">Open Distance Learning</a>
@@ -133,9 +134,9 @@
             <div class="footer-links">
                 <h2>About Us</h2>
                 <a href="https://mukuba.edu.zm/about/" target="_blank" rel="noopener noreferrer">About the University</a>
-                <a href="https://mukuba.edu.zm/library/" target="_blank" rel="noopener noreferrer">Library</a>
+                        <a href="{{ route('library') }}">Library</a>
                 <a href="https://moodle.mukuba.edu.zm/moodle/" target="_blank" rel="noopener noreferrer">E-Learning</a>
-                <a href="https://mukuba.edu.zm/ict-policy/" target="_blank" rel="noopener noreferrer">ICT Policy</a>
+                <a href="{{ route('cict') }}#ict-policy">ICT Policy</a>
                 <a href="https://mukuba.edu.zm/council/" target="_blank" rel="noopener noreferrer">Council</a>
                 <a href="https://mukuba.edu.zm/strategic-plan/" target="_blank" rel="noopener noreferrer">Strategic Plan</a>
             </div>
