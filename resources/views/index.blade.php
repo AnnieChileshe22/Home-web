@@ -77,10 +77,10 @@
     <section id="schools" class="section page-width" aria-labelledby="schools-title"><div class="school-heading"><h2 id="schools-title" class="section-title">Our Schools</h2></div><div class="school-carousel" aria-label="Mukuba University schools"><div class="school-grid" data-api-section="{{ route('data.home', 'schools') }}" aria-busy="true" aria-live="polite">@include('partials.loading')
     </div></div></section>
     <section id="programmes" class="section programmes" aria-labelledby="programmes-title"><div class="page-width"><h2 id="programmes-title" class="section-title">Programmes on offer</h2><div class="programme-grid">
-        <a href="/programmes" class="programme-card-link"><article class="programme-card"><h3>Diploma Programmes</h3></article></a>
-        <a href="/programmes" class="programme-card-link"><article class="programme-card"><h3>Bachelor's Degree Programmes</h3></article></a>
-        <a href="/programmes" class="programme-card-link"><article class="programme-card"><h3>Masters Programmes</h3></article></a>
-    </div><div class="hero-actions"><a id="apply" class="apply-button" href="#contact">Apply now</a></div></div></section>
+        <a href="{{ route('programs.index', ['qualification' => 'Diploma']) }}" class="programme-card-link"><article class="programme-card"><h3>Diploma Programmes</h3></article></a>
+        <a href="{{ route('programs.index', ['qualification' => 'BSc']) }}" class="programme-card-link"><article class="programme-card"><h3>Bachelor's Degree Programmes</h3></article></a>
+        <a href="{{ route('programs.index', ['qualification' => 'MSc']) }}" class="programme-card-link"><article class="programme-card"><h3>Masters Programmes</h3></article></a>
+    </div><div class="hero-actions"><a id="apply" class="apply-button" href="https://unicosis.mukuba.edu.zm/login">Apply now</a></div></div></section>
 
     <section id="programs" class="section page-width" aria-labelledby="programs-title"><div class="school-heading">
         <h2 id="programs-title" class="section-title">Our Programs</h2>

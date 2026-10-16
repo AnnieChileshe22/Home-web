@@ -52,6 +52,12 @@
         const filters = document.querySelector('[data-programme-filters]');
         const list = document.querySelector('[data-programmes-list]');
         if (filters && list) {
+            programmeState.qualification = filters.dataset.initialQualification || '';
+            filters.querySelectorAll('button[data-qualification]').forEach(button => {
+                const active = button.dataset.qualification === programmeState.qualification;
+                button.classList.toggle('is-active', active);
+                button.setAttribute('aria-pressed', String(active));
+            });
             filters.addEventListener('click', event => {
                 const button = event.target.closest('button[data-qualification]');
                 if (!button) return;
