@@ -135,7 +135,7 @@
                 <h2>About Us</h2>
                 <a href="https://mukuba.edu.zm/about/" target="_blank" rel="noopener noreferrer">About the University</a>
                         <a href="{{ route('library') }}">Library</a>
-                <a href="https://moodle.mukuba.edu.zm/moodle/" target="_blank" rel="noopener noreferrer">E-Learning</a>
+                <a href="{{ url('https://app.myloft.xyz/user/login?institute=clv672kgw4n4jx8jyodtkqsb7') }}" target="_blank" rel="noopener noreferrer">E-Learning</a>
                 <a href="{{ route('cict') }}#ict-policy">ICT Policy</a>
                 <a href="https://mukuba.edu.zm/council/" target="_blank" rel="noopener noreferrer">Council</a>
                 <a href="https://mukuba.edu.zm/strategic-plan/" target="_blank" rel="noopener noreferrer">Strategic Plan</a>
