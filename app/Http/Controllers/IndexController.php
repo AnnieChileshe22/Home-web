@@ -9,7 +9,8 @@ class IndexController extends Controller
     public function index()
     {
         return view('index', [
-            'posts' => Posts::with('images')->where('status', 'published')->latest()->take(8)->get(),
+            'announcements' => Posts::with('images')->where('status', 'published')->where('category', 'announcement')->latest()->get(),
+            'posts' => Posts::with('images')->where('status', 'published')->whereIn('category', ['news', 'event'])->latest()->take(8)->get(),
         ]);
     }
 }

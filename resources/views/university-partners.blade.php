@@ -9,7 +9,7 @@
                 <h2 id="partners-heading">UNIVERSITY PARTNERS</h2>
 
                 <div class="partners-grid">
-                    <a href="https://www.cuts.ac.zm/" target="_blank" rel="noopener noreferrer" class="partner-card">
+                    <a href="https://cut.ac.zw/welcome/home" target="_blank" rel="noopener noreferrer" class="partner-card">
                         <img src="{{ asset('images/partners/chinhoyi.png') }}" alt="Chinhoyi University">
                         <span>CHINHOYI UNIVERSITY</span>
                     </a>
@@ -39,7 +39,7 @@
                         <span>TEACHING COUNCIL OF ZAMBIA</span>
                     </a>
 
-                    <a href="http://www.tcz.ac.zm/" target="_blank" rel="noopener noreferrer" class="partner-card">
+                    <a href="https://www.unesco.org/en" target="_blank" rel="noopener noreferrer" class="partner-card">
                         <img src="{{ asset('images/partners/Screenshot-2022-03-31-at-13-05-02-unesco-logo-260px.webp-WEBP-Image-260-×-173-pixels.png') }}" alt="UNESCO">
                         <span>UNESCO</span>
                     </a>

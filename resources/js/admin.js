@@ -1,3 +1,4 @@
+import './admin-theme.js';
 const config = JSON.parse(document.getElementById('admin-config').textContent);
 const storageKey = 'mukuba.admin.preview.v2';
 const sectionInfo = {
@@ -80,6 +81,7 @@ function updateOverview() {
         node.textContent = items.filter(item => item.section === node.dataset.stat).length;
     });
     const recent = document.getElementById('recent-content');
+    if (!recent) return;
     if (!recent.dataset.serverRecent) {
         recent.replaceChildren();
     [...items].sort((a, b) => String(b.updatedAt).localeCompare(String(a.updatedAt))).slice(0, 4).forEach(item => {
