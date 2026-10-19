@@ -183,8 +183,8 @@ class PostsController extends Controller
     {
         return match ($category) {
             'news' => 'news',
-            'announcement' => 'announcements',
             'event' => 'events',
+            default => 'news',
         };
     }
 }

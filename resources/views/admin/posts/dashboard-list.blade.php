@@ -3,7 +3,7 @@
         <div>
             <p class="eyebrow">Website content</p>
             <h1 id="posts-title">Posts</h1>
-            <p class="page-description">Manage announcements, university news and events.</p>
+            <p class="page-description">Manage university news and events. Announcements have their own workspace.</p>
         </div>
         <a class="button button-primary" href="{{ route('admin.posts.create') }}"><svg class="icon" aria-hidden="true"><use href="#icon-plus"/></svg>Create a post</a>
     </div>

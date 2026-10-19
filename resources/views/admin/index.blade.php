@@ -11,7 +11,7 @@
         'posts' => ['Posts', 'news'],
         'news' => ['News', 'news'],
         'events' => ['Events', 'calendar'],
-        'accommodation' => ['Accommodation', 'home'],
+        'hostels' => ['Hostels', 'home'],
         'calendar' => ['Academic Calendar', 'calendar'],
         'announcements' => ['Announcements', 'news'],
     ];
@@ -85,14 +85,16 @@
         <nav class="admin-navigation" aria-label="Content sections">
             @foreach ($sections as $key => [$label, $icon])
                 <a class="nav-item {{ $key === $currentSection ? 'active' : '' }}"
-                    href="{{ $key === 'overview' ? route('admin.index') : ($key === 'posts' ? route('admin.posts.index') : route('admin.section', $key)) }}"
+                    href="{{ $key === 'overview' ? route('admin.index') : ($key === 'posts' ? route('admin.posts.index') : ($key === 'announcements' ? route('admin.announcements.index') : route('admin.section', $key))) }}"
                     @if ($key === $currentSection) aria-current="page" @endif>
                     <svg class="icon" aria-hidden="true">
                         <use href="#icon-{{ $icon }}" />
                     </svg>
                     <span>{{ $label }}</span>
                     @if ($key === 'posts') <span class="nav-count">{{ \App\Models\Posts::count() }}</span> @endif
-                    @if (in_array($key, ['news', 'events', 'accommodation']))
+                    @if ($key === 'announcements') <span class="nav-count">{{ \App\Models\Announcement::count() }}</span> @endif
+                    @if ($key === 'hostels') <span class="nav-count">{{ \App\Models\Hostels::count() }}</span> @endif
+                    @if (in_array($key, ['news', 'events']))
                         <span class="nav-count" data-count="{{ $key }}">0</span>
                     @endif
                 </a>
@@ -166,7 +168,7 @@
                                     aria-hidden="true">
                                     <use href="#icon-{{ $icon }}" />
                                 </svg></div><strong
-                                data-stat="{{ $key }}">{{ $key === 'drafts' ? \App\Models\Posts::where('status', 'draft')->count() : \App\Models\Posts::where('category', ['events' => 'event', 'announcements' => 'announcement'][$key] ?? $key)->count() }}</strong><small>In your content workspace</small>
+                                data-stat="{{ $key }}">{{ $key === 'drafts' ? \App\Models\Posts::where('status', 'draft')->count() : ($key === 'announcements' ? \App\Models\Announcement::count() : \App\Models\Posts::where('category', ['events' => 'event'][$key] ?? $key)->count()) }}</strong><small>In your content workspace</small>
                         </article>
                     @endforeach
                 </div>
@@ -196,7 +198,7 @@
                         </div>
                         <div class="quick-actions">
                             @foreach (['news' => ['Post university news', 'Updates, stories and achievements', 'news'], 'event' => ['Announce an event', 'Dates, venues and what to expect', 'calendar'], 'announcement' => ['Create an announcement', 'Important notices for students and staff', 'news']] as $key => [$label, $description, $icon])
-                                <a class="quick-action" href="{{ route('admin.posts.create', ['category' => $key]) }}"><span
+                                <a class="quick-action" href="{{ $key === 'announcement' ? route('admin.announcements.create') : route('admin.posts.create', ['category' => $key]) }}"><span
                                         class="quick-icon"><svg class="icon" aria-hidden="true">
                                             <use href="#icon-{{ $icon }}" />
                                         </svg></span><span><strong>{{ $label }}</strong><small>{{ $description }}</small></span><span
@@ -242,9 +244,21 @@
             </section>
             @elseif ($currentSection === 'posts')
                 @include('admin.posts.dashboard-list')
+            @elseif ($currentSection === 'hostels')
+                @if (!empty($hostelForm))
+                    @include('admin.hostels.form')
+                @else
+                    @include('admin.hostels.list')
+                @endif
+            @elseif ($currentSection === 'announcements')
+                @if (!empty($announcementForm))
+                    @include('admin.announcements.form')
+                @else
+                    @include('admin.announcements.dashboard-list')
+                @endif
             @else
             @php
-                $categoryFilter = ['news' => 'news', 'events' => 'event', 'announcements' => 'announcement'][$currentSection] ?? null;
+                $categoryFilter = ['news' => 'news', 'events' => 'event'][$currentSection] ?? null;
                 $sectionPosts = $categoryFilter ? \App\Models\Posts::with('images')->where('category', $categoryFilter)->latest()->get() : collect();
                 $publishedCount = $sectionPosts->where('status', 'published')->count();
                 $draftCount = $sectionPosts->where('status', 'draft')->count();
@@ -257,7 +271,7 @@
                         <p class="eyebrow" id="content-eyebrow">Website content</p>
                         <h1 id="content-title" tabindex="-1">News</h1>
                         <p class="page-description" id="content-description"></p>
-                    </div><a class="button button-primary" id="add-content" href="{{ route('admin.posts.create', ['category' => ['news' => 'news', 'events' => 'event', 'announcements' => 'announcement'][$currentSection] ?? 'news']) }}"><svg class="icon"
+                    </div><a class="button button-primary" id="add-content" href="{{ $currentSection === 'announcements' ? route('admin.announcements.create') : route('admin.posts.create', ['category' => ['news' => 'news', 'events' => 'event'][$currentSection] ?? 'news']) }}"><svg class="icon"
                             aria-hidden="true">
                             <use href="#icon-plus" />
                         </svg><span id="add-label">Add {{ $currentSection === 'events' ? 'event' : ($currentSection === 'announcements' ? 'announcement' : 'news') }}</span></a>
@@ -462,7 +476,7 @@
     </script>
     @endif
     @if ($currentSection === 'overview') <script type="module" src="{{ Vite::asset('resources/js/admin.js') }}"></script> @endif
-    @if (in_array($currentSection, ['news', 'events', 'announcements'], true))
+            @if (in_array($currentSection, ['news', 'events'], true))
     <script>
         const postRows=[...document.querySelectorAll('[data-post-row]')];
         const searchInput=document.querySelector('#content-search');

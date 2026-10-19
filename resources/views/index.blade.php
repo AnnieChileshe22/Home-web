@@ -25,8 +25,20 @@
                         <article class="announcement-slide" role="group" aria-roledescription="slide" aria-label="Announcement {{ $loop->iteration }} of {{ $loop->count }}" data-announcement-slide>
                             <span class="announcement-label">Important notice</span>
                             <h2>{{ $announcement->title }}</h2>
-                            <p>{{ \Illuminate\Support\Str::limit(strip_tags($announcement->body), 240) }}</p>
-                            <a class="announcement-view" href="{{ route('posts.show', $announcement) }}"><span aria-hidden="true">&#9673;</span> View full announcement</a>
+                            @if ($announcement->body)<p>{{ \Illuminate\Support\Str::limit(strip_tags($announcement->body), 240) }}</p>@endif
+                            @if ($announcement->attachments->isNotEmpty())
+                                <div class="announcement-attachments">
+                                    @foreach ($announcement->attachments as $attachment)
+                                        @if (str_starts_with($attachment->mime_type, 'image/'))
+                                            <a class="announcement-image-link" href="{{ Storage::disk('public')->url($attachment->path) }}"><img src="{{ Storage::disk('public')->url($attachment->path) }}" alt="{{ $attachment->original_name }}"></a>
+                                        @else
+                                            <a class="announcement-view" href="{{ Storage::disk('public')->url($attachment->path) }}" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">&#128196;</span><span>{{ $attachment->original_name }}</span><span class="announcement-file-type">PDF</span></a>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            @else
+                                <a class="announcement-view" href="{{ route('announcements.show', $announcement) }}">Read full announcement <span aria-hidden="true">&#8594;</span></a>
+                            @endif
                         </article>
                     @empty
                         <article class="announcement-slide announcement-empty" role="group" aria-roledescription="slide" data-announcement-slide>
@@ -65,10 +77,10 @@
     <section id="schools" class="section page-width" aria-labelledby="schools-title"><div class="school-heading"><h2 id="schools-title" class="section-title">Our Schools</h2></div><div class="school-carousel" aria-label="Mukuba University schools"><div class="school-grid" data-api-section="{{ route('data.home', 'schools') }}" aria-busy="true" aria-live="polite">@include('partials.loading')
     </div></div></section>
     <section id="programmes" class="section programmes" aria-labelledby="programmes-title"><div class="page-width"><h2 id="programmes-title" class="section-title">Programmes on offer</h2><div class="programme-grid">
-        <a href="/programmes" class="programme-card-link"><article class="programme-card"><h3>Diploma Programmes</h3></article></a>
-        <a href="/programmes" class="programme-card-link"><article class="programme-card"><h3>Bachelor's Degree Programmes</h3></article></a>
-        <a href="/programmes" class="programme-card-link"><article class="programme-card"><h3>Masters Programmes</h3></article></a>
-    </div><div class="hero-actions"><a id="apply" class="apply-button" href="#contact">Apply now</a></div></div></section>
+        <a href="{{ route('programs.index', ['qualification' => 'Diploma']) }}" class="programme-card-link"><article class="programme-card"><h3>Diploma Programmes</h3></article></a>
+        <a href="{{ route('programs.index', ['qualification' => 'BSc']) }}" class="programme-card-link"><article class="programme-card"><h3>Bachelor's Degree Programmes</h3></article></a>
+        <a href="{{ route('programs.index', ['qualification' => 'MSc']) }}" class="programme-card-link"><article class="programme-card"><h3>Masters Programmes</h3></article></a>
+    </div><div class="hero-actions"><a id="apply" class="apply-button" href="https://unicosis.mukuba.edu.zm/login">Apply now</a></div></div></section>
 
     <section id="programs" class="section page-width" aria-labelledby="programs-title"><div class="school-heading">
         <h2 id="programs-title" class="section-title">Our Programs</h2>
@@ -88,46 +100,25 @@
             </div>
             <div class="hostel-carousel" role="region" aria-label="Mukuba University hostels" aria-roledescription="carousel">
                 <div class="hostel-preview-grid">
-                    <a class="hostel-preview-card" href="{{ url('/accommodation/bangweulu') }}" aria-label="View Bangweulu Hostel details">
-                        <img src="{{ asset('images/to use/kariba.png') }}" alt="Bangweulu Hostel">
-                        <h3>Bangweulu Hostel</h3>
-                        <div class="hostel-preview-details"><span>Gender: Female</span><span>Combined: No</span></div>
-                    </a>
-                    <a class="hostel-preview-card" href="{{ url('/accommodation/kafue') }}" aria-label="View Kafue Hostel details">
-                        <img src="{{ asset('images/to use/kafue.jpg') }}" alt="Kafue Hostel">
-                        <h3>Kafue Hostel</h3>
-                        <div class="hostel-preview-details"><span>Gender: Female</span><span>Combined: No</span></div>
-                    </a>
-                    <a class="hostel-preview-card" href="{{ url('/accommodation/zambezi') }}" aria-label="View Zambezi Hostel details">
-                        <img src="{{ asset('images/to use/zambezi.jpg') }}" alt="Zambezi Hostel">
-                        <h3>Zambezi Hostel</h3>
-                        <div class="hostel-preview-details"><span>Gender: Female</span><span>Combined: No</span></div>
-                    </a>
-                    <a class="hostel-preview-card" href="{{ url('/accommodation/kariba') }}" aria-label="View Kariba Hostel details">
-                        <img src="{{ asset('images/to use/kariba.png') }}" alt="Kariba Hostel">
-                        <h3>Kariba Hostel</h3>
-                        <div class="hostel-preview-details"><span>Gender: Male</span><span>Combined: No</span></div>
-                    </a>
-                    <a class="hostel-preview-card" href="{{ url('/accommodation/luangwa') }}" aria-label="View Luangwa Hostel details">
-                        <img src="{{ asset('images/to use/luangwa.jpg') }}" alt="Luangwa Hostel">
-                        <h3>Luangwa Hostel</h3>
-                        <div class="hostel-preview-details"><span>Gender: Male</span><span>Combined: No</span></div>
-                    </a>
-                    <a class="hostel-preview-card" href="{{ url('/accommodation/luapula') }}" aria-label="View Luapula Hostel details">
-                        <img src="{{ asset('images/to use/luangwa.jpg') }}" alt="Luapula Hostel">
-                        <h3>Luapula Hostel</h3>
-                        <div class="hostel-preview-details"><span>Gender: Male</span><span>Combined: No</span></div>
-                    </a>
-                    <a class="hostel-preview-card" href="{{ url('/accommodation/mansion') }}" aria-label="View Mansion details">
-                        <img src="{{ asset('images/to use/mansion.png') }}" alt="Mansion">
-                        <h3>Mansion</h3>
-                        <div class="hostel-preview-details"><span>Gender: Male &amp; Female</span><span>Combined: Yes</span></div>
-                    </a>
-                    <a class="hostel-preview-card" href="{{ url('/accommodation/lecturers-compound') }}" aria-label="View Lecturers Compound details">
-                        <img src="{{ asset('images/to use/lectures.jpg') }}" alt="Lecturers Compound">
-                        <h3>Lecturers Compound</h3>
-                        <div class="hostel-preview-details"><span>Gender: Male &amp; Female</span><span>Combined: Yes</span></div>
-                    </a>
+                    @forelse ($hostels as $hostel)
+                        <a class="hostel-preview-card" href="{{ route('hostels.public.show', $hostel) }}" aria-label="View {{ $hostel->name }} details">
+                            @if ($hostel->images->first())
+                                <img src="{{ Storage::disk('public')->url($hostel->images->first()->path) }}" alt="{{ $hostel->images->first()->alt_text ?: $hostel->name }}">
+                            @else
+                                <img src="{{ asset('images/logo.png') }}" alt="Mukuba University">
+                            @endif
+                            <h3>{{ $hostel->name }}</h3>
+                            <div class="hostel-preview-details">
+                                @forelse (collect($hostel->features ?? [])->take(3) as $feature)
+                                    <span>{{ $feature }}</span>
+                                @empty
+                                    <span>{{ ucfirst($hostel->gender) }} hostel</span>
+                                @endforelse
+                            </div>
+                        </a>
+                    @empty
+                        <p class="page-description">Hostel listings will be available soon.</p>
+                    @endforelse
                 </div>
 
             </div>
