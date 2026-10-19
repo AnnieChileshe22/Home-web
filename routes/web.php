@@ -9,6 +9,7 @@ use App\Http\Controllers\ApiSectionController;
 use App\Http\Controllers\LogInController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\AnnouncementsController;
+use App\Http\Controllers\HostelsController;
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LogInController::class, 'create'])->name('login');
@@ -78,6 +79,7 @@ Route::get('/jobs-and-careers', function () {
 
 Route::middleware('auth')->group(function () {
 Route::resource('admin/announcements', AnnouncementsController::class)->names('admin.announcements')->except(['show']);
+Route::resource('admin/hostels', HostelsController::class)->names('admin.hostels');
 Route::resource('admin/posts', PostsController::class)->names('admin.posts')->except(['index', 'show']);
 Route::get('/admin/posts', [PostsController::class, 'index'])->name('admin.posts.index');
 Route::get('/admin/posts/{post}', [PostsController::class, 'show'])->name('admin.posts.show');
@@ -87,7 +89,7 @@ Route::get('/admin', function () {
 })->name('admin.index');
 
 Route::get('/admin/{section}', function ($section) {
-    abort_unless(in_array($section, ['news', 'events', 'accommodation', 'calendar', 'programmes', 'study', 'announcements'], true), 404);
+    abort_unless(in_array($section, ['news', 'events', 'hostels', 'calendar', 'programmes', 'study', 'announcements'], true), 404);
     return view('admin.index', ['currentSection' => $section]);
 })->name('admin.section');
 });
@@ -98,13 +100,8 @@ Route::get('/programmes/computer-science', function () {
     return view('programs.computer-science');
 });
 
-Route::get('/accommodation', function () {
-    return view('accommodation.index');
-});
-
-Route::get('/accommodation/{hostel}', function ($hostel) {
-    return view('accommodation.show', ['hostel' => $hostel]);
-});
+Route::get('/accommodation', [HostelsController::class, 'publicIndex'])->name('hostels.public.index');
+Route::get('/accommodation/{hostel}', [HostelsController::class, 'publicShow'])->name('hostels.public.show');
 
 
 Route::resource('schools', SchoolController::class);

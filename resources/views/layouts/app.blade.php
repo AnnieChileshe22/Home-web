@@ -57,7 +57,7 @@
                     <div class="nav-dropdown-menu" aria-label="Student affairs menu">
                         <a href="{{ url('https://unicosis.mukuba.edu.zm/login') }}" target="_blank" rel="noopener noreferrer">Student Portal</a>
                         <a href="{{ url('https://app.myloft.xyz/user/login?institute=clv672kgw4n4jx8jyodtkqsb7') }}" target="_blank" rel="noopener noreferrer">E-Resources</a>
-                        <a href="{{ url('/accommodation') }}">Accommodation</a>
+                        <a href="{{ route('hostels.public.index') }}">Hostels</a>
                         <a href="{{ url('/dean-of-students') }}">Dean of Students</a>
                     </div>
                 </div>
