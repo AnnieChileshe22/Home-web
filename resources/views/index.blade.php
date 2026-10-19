@@ -100,46 +100,25 @@
             </div>
             <div class="hostel-carousel" role="region" aria-label="Mukuba University hostels" aria-roledescription="carousel">
                 <div class="hostel-preview-grid">
-                    <a class="hostel-preview-card" href="{{ url('/accommodation/bangweulu') }}" aria-label="View Bangweulu Hostel details">
-                        <img src="{{ asset('images/to use/kariba.png') }}" alt="Bangweulu Hostel">
-                        <h3>Bangweulu Hostel</h3>
-                        <div class="hostel-preview-details"><span>Gender: Female</span><span>Combined: No</span></div>
-                    </a>
-                    <a class="hostel-preview-card" href="{{ url('/accommodation/kafue') }}" aria-label="View Kafue Hostel details">
-                        <img src="{{ asset('images/to use/kafue.jpg') }}" alt="Kafue Hostel">
-                        <h3>Kafue Hostel</h3>
-                        <div class="hostel-preview-details"><span>Gender: Female</span><span>Combined: No</span></div>
-                    </a>
-                    <a class="hostel-preview-card" href="{{ url('/accommodation/zambezi') }}" aria-label="View Zambezi Hostel details">
-                        <img src="{{ asset('images/to use/zambezi.jpg') }}" alt="Zambezi Hostel">
-                        <h3>Zambezi Hostel</h3>
-                        <div class="hostel-preview-details"><span>Gender: Female</span><span>Combined: No</span></div>
-                    </a>
-                    <a class="hostel-preview-card" href="{{ url('/accommodation/kariba') }}" aria-label="View Kariba Hostel details">
-                        <img src="{{ asset('images/to use/kariba.png') }}" alt="Kariba Hostel">
-                        <h3>Kariba Hostel</h3>
-                        <div class="hostel-preview-details"><span>Gender: Male</span><span>Combined: No</span></div>
-                    </a>
-                    <a class="hostel-preview-card" href="{{ url('/accommodation/luangwa') }}" aria-label="View Luangwa Hostel details">
-                        <img src="{{ asset('images/to use/luangwa.jpg') }}" alt="Luangwa Hostel">
-                        <h3>Luangwa Hostel</h3>
-                        <div class="hostel-preview-details"><span>Gender: Male</span><span>Combined: No</span></div>
-                    </a>
-                    <a class="hostel-preview-card" href="{{ url('/accommodation/luapula') }}" aria-label="View Luapula Hostel details">
-                        <img src="{{ asset('images/to use/luangwa.jpg') }}" alt="Luapula Hostel">
-                        <h3>Luapula Hostel</h3>
-                        <div class="hostel-preview-details"><span>Gender: Male</span><span>Combined: No</span></div>
-                    </a>
-                    <a class="hostel-preview-card" href="{{ url('/accommodation/mansion') }}" aria-label="View Mansion details">
-                        <img src="{{ asset('images/to use/mansion.png') }}" alt="Mansion">
-                        <h3>Mansion</h3>
-                        <div class="hostel-preview-details"><span>Gender: Male &amp; Female</span><span>Combined: Yes</span></div>
-                    </a>
-                    <a class="hostel-preview-card" href="{{ url('/accommodation/lecturers-compound') }}" aria-label="View Lecturers Compound details">
-                        <img src="{{ asset('images/to use/lectures.jpg') }}" alt="Lecturers Compound">
-                        <h3>Lecturers Compound</h3>
-                        <div class="hostel-preview-details"><span>Gender: Male &amp; Female</span><span>Combined: Yes</span></div>
-                    </a>
+                    @forelse ($hostels as $hostel)
+                        <a class="hostel-preview-card" href="{{ route('hostels.public.show', $hostel) }}" aria-label="View {{ $hostel->name }} details">
+                            @if ($hostel->images->first())
+                                <img src="{{ Storage::disk('public')->url($hostel->images->first()->path) }}" alt="{{ $hostel->images->first()->alt_text ?: $hostel->name }}">
+                            @else
+                                <img src="{{ asset('images/logo.png') }}" alt="Mukuba University">
+                            @endif
+                            <h3>{{ $hostel->name }}</h3>
+                            <div class="hostel-preview-details">
+                                @forelse (collect($hostel->features ?? [])->take(3) as $feature)
+                                    <span>{{ $feature }}</span>
+                                @empty
+                                    <span>{{ ucfirst($hostel->gender) }} hostel</span>
+                                @endforelse
+                            </div>
+                        </a>
+                    @empty
+                        <p class="page-description">Hostel listings will be available soon.</p>
+                    @endforelse
                 </div>
 
             </div>
