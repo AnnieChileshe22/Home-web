@@ -1288,6 +1288,80 @@ main.programmes-page {
             background: #115e59;
         }
 
+
+        @media (max-width: 640px) {
+            main.programmes-page {
+                padding: 8px 0;
+                overflow-x: clip;
+            }
+
+            main.programmes-page .container {
+                width: calc(100% - 20px);
+                min-width: 0;
+            }
+
+            main.programmes-page .page-header {
+                margin-bottom: 24px;
+            }
+
+            main.programmes-page .page-header h1 {
+                font-size: clamp(1.8rem, 8vw, 2.3rem);
+                line-height: 1.15;
+            }
+
+            main.programmes-page .page-header p {
+                letter-spacing: 0.12em;
+            }
+
+            main.programmes-page .programme-filters {
+                flex-wrap: nowrap;
+                gap: 6px;
+                max-width: 100%;
+                margin-top: 16px;
+                padding: 0 0 5px;
+                overflow-x: auto;
+                overscroll-behavior-x: contain;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: thin;
+            }
+
+            main.programmes-page .programme-filters button {
+                flex: 0 0 auto;
+                padding: 9px 12px;
+                font-size: 0.85rem;
+                white-space: nowrap;
+            }
+
+            main.programmes-page .programmes-grid {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 16px;
+            }
+
+            main.programmes-page .programme-card {
+                min-width: 0;
+                padding-bottom: 14px;
+                border-radius: 16px;
+            }
+
+            main.programmes-page .programme-image {
+                height: auto;
+                aspect-ratio: 16 / 9;
+                border-radius: 15px 15px 0 0;
+            }
+
+            main.programmes-page .programme-body {
+                padding: 18px 16px;
+                overflow-wrap: anywhere;
+            }
+
+            main.programmes-page .programme-card h2 {
+                font-size: 1.25rem;
+            }
+
+            main.programmes-page .programme-link {
+                padding: 11px 15px;
+            }
+        }
 /* resources/views/requirements.blade.php */
 main.requirements-page { min-height: 62vh; padding: 10px; background: var(--theme-surface-f5f7f3, #f5f7f3); }
         main.requirements-page .requirements-content { width: min(900px, calc(100% - 40px)); margin: 0 auto; }
