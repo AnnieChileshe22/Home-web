@@ -144,18 +144,37 @@
     <section class="alumni page-width" aria-labelledby="alumni-title"><h2 id="alumni-title" class="section-title">Graduates testimonies</h2><div class="alumni-quote"><div class="portrait">AM</div><p>"MUKU gave me the confidence to lead, the perspective to grow, and friendships I will always value."</p><strong>Alumni Association</strong></div></section>
     <section class="section page-width events" aria-labelledby="events-title">
         <h2 id="events-title" class="section-title">Events</h2>
-        <div class="event-carousel" role="region" aria-label="Mukuba University event photos" aria-roledescription="carousel">
-            <div class="event-track">
-                @foreach (['eve.jpg', 'event.jpg', 'gr.jpg', 'grad.jpg', 'graduation.jpg', 'master.jpg', 'nut.jpg', 'womens day.jpeg'] as $eventPhoto)
-                    <article class="event-slide" role="group" aria-roledescription="slide" aria-label="Event photo {{ $loop->iteration }} of {{ $loop->count }}">
-                        <img src="{{ asset('images/events/' . $eventPhoto) }}" alt="Mukuba University event photo {{ $loop->iteration }}" @if ($loop->first) fetchpriority="high" @else loading="lazy" @endif>
+        <div class="event-carousel" role="region" aria-label="University events" aria-roledescription="carousel" data-event-carousel>
+            @if ($events->isNotEmpty())
+            <div class="event-track" data-event-track aria-live="off">
+                @foreach ($events as $event)
+                    @php($eventImage = $event->images->first())
+                    <article class="event-slide" role="group" aria-roledescription="slide" aria-label="{{ $loop->iteration }} of {{ $loop->count }}" data-event-slide>
+                        <a class="event-slide-link" href="{{ route('posts.show', $event) }}" tabindex="{{ $loop->first ? '0' : '-1' }}">
+                            @if ($eventImage)
+                                <img src="{{ Storage::disk('public')->url($eventImage->path) }}" alt="{{ $eventImage->alt_text ?: $event->title }}" @if ($loop->first) fetchpriority="high" @else loading="lazy" @endif>
+                            @else
+                                <div class="event-slide-fallback" aria-hidden="true"><img src="{{ asset('images/logo.png') }}" alt=""></div>
+                            @endif
+                            <h3>{{ $event->title }}</h3>
+                        </a>
                     </article>
                 @endforeach
             </div>
+            @if ($events->count() > 1)
             <div class="school-controls">
-                <button class="school-control" type="button" data-event-prev aria-label="Show previous event photo"><span aria-hidden="true">&#8592;</span></button>
-                <button class="school-control" type="button" data-event-next aria-label="Show next event photo"><span aria-hidden="true">&#8594;</span></button>
+                <button class="school-control" type="button" data-event-prev aria-label="Show previous event"><span aria-hidden="true">&#8592;</span></button>
+                <button class="school-control" type="button" data-event-next aria-label="Show next event"><span aria-hidden="true">&#8594;</span></button>
             </div>
+            <div class="event-pagination" aria-label="Choose an event slide">
+                @foreach ($events as $event)
+                    <button type="button" data-event-dot="{{ $loop->index }}" aria-label="Show event {{ $loop->iteration }}: {{ $event->title }}" @if ($loop->first) aria-current="true" @endif></button>
+                @endforeach
+            </div>
+            @endif
+            @else
+                <p class="event-empty">There are no published events to display right now.</p>
+            @endif
         </div>
     </section>
     <section class="partner-strip" aria-labelledby="partners-title">
@@ -274,6 +293,50 @@
     setupCarousel('.school-grid', '.school-card', '[data-school-prev]', '[data-school-next]', 22);
     const hostelVisibleCards = () => (window.innerWidth <= 760 ? 1 : window.innerWidth <= 960 ? 2 : 3);
     setupCarousel('.hostel-preview-grid', '.hostel-preview-card', '[data-hostel-prev]', '[data-hostel-next]', 22, hostelVisibleCards, hostelVisibleCards);
-    setupCarousel('.event-track', '.event-slide', '[data-event-prev]', '[data-event-next]', 0, () => 1);
+    const eventCarousel = document.querySelector('[data-event-carousel]');
+    if (eventCarousel) {
+        const eventTrack = eventCarousel.querySelector('[data-event-track]');
+        const eventSlides = [...eventCarousel.querySelectorAll('[data-event-slide]')];
+        const eventDots = [...eventCarousel.querySelectorAll('[data-event-dot]')];
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let eventIndex = 0;
+        let eventTimer;
+        const showEvent = (index) => {
+            eventIndex = (index + eventSlides.length) % eventSlides.length;
+            eventTrack.style.transform = `translateX(-${eventIndex * 100}%)`;
+            eventSlides.forEach((slide, slideIndex) => {
+                const active = slideIndex === eventIndex;
+                slide.setAttribute('aria-hidden', String(!active));
+                slide.inert = !active;
+                const link = slide.querySelector('.event-slide-link');
+                if (link) link.tabIndex = active ? 0 : -1;
+            });
+            eventDots.forEach((dot, dotIndex) => {
+                if (dotIndex === eventIndex) dot.setAttribute('aria-current', 'true');
+                else dot.removeAttribute('aria-current');
+            });
+        };
+        const stopEventTimer = () => window.clearInterval(eventTimer);
+        const startEventTimer = () => {
+            stopEventTimer();
+            if (eventSlides.length > 1 && !reducedMotion) eventTimer = window.setInterval(() => showEvent(eventIndex + 1), 6500);
+        };
+        eventCarousel.querySelector('[data-event-prev]')?.addEventListener('click', () => { showEvent(eventIndex - 1); startEventTimer(); });
+        eventCarousel.querySelector('[data-event-next]')?.addEventListener('click', () => { showEvent(eventIndex + 1); startEventTimer(); });
+        eventDots.forEach(dot => dot.addEventListener('click', () => { showEvent(Number(dot.dataset.eventDot)); startEventTimer(); }));
+        eventCarousel.addEventListener('pointerenter', stopEventTimer);
+        eventCarousel.addEventListener('pointerleave', startEventTimer);
+        eventCarousel.addEventListener('focusin', stopEventTimer);
+        eventCarousel.addEventListener('focusout', event => { if (!eventCarousel.contains(event.relatedTarget)) startEventTimer(); });
+        let pointerStartX = null;
+        eventCarousel.addEventListener('touchstart', event => { pointerStartX = event.changedTouches[0].clientX; }, { passive: true });
+        eventCarousel.addEventListener('touchend', event => {
+            if (pointerStartX === null) return;
+            const distance = event.changedTouches[0].clientX - pointerStartX;
+            pointerStartX = null;
+            if (Math.abs(distance) > 45 && eventSlides.length > 1) { showEvent(eventIndex + (distance < 0 ? 1 : -1)); startEventTimer(); }
+        }, { passive: true });
+        if (eventSlides.length) { showEvent(0); startEventTimer(); }
+    }
 </script>
 @endsection

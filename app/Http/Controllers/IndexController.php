@@ -13,6 +13,7 @@ class IndexController extends Controller
         return view('index', [
             'announcements' => Announcement::with('attachments')->where('status', 'published')->latest()->get(),
             'posts' => Posts::with('images')->where('status', 'published')->whereIn('category', ['news', 'event'])->latest()->take(8)->get(),
+            'events' => Posts::with('images')->where('status', 'published')->where('category', 'event')->latest()->take(8)->get(),
             'hostels' => Hostels::with('images')->orderBy('name')->get(),
         ]);
     }
