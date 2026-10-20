@@ -2354,3 +2354,53 @@ html[data-theme="dark"] .cict-section-heading h2 { color: var(--theme-text-e2ece
 @media (max-width: 960px) { .cict-staff-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }.cict-department-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }.cict-department-card:last-child { grid-column: 1 / -1; } }
 @media (max-width: 700px) { .cict-hero-inner { min-height: 0; grid-template-columns: 1fr; gap: 25px; padding-top: 42px; padding-bottom: 34px; }.cict-hero-graphic { grid-template-columns: 70px 1fr; justify-items: start; text-align: left; }.cict-hero-graphic svg { width: 65px; }.cict-purpose-grid { grid-template-columns: 1fr; }.cict-policy-panel { grid-template-columns: 44px 1fr; gap: 13px; padding: 18px; }.cict-policy-icon { width: 42px; height: 42px; }.cict-policy-button { grid-column: 1 / -1; justify-self: start; }.cict-support-grid { grid-template-columns: 1fr; }.cict-page-nav { top: 57px; }.cict-page-nav .page-width { gap: 18px; } }
 @media (max-width: 520px) { .cict-department-grid { grid-template-columns: 1fr; }.cict-department-card:last-child { grid-column: auto; }.cict-staff-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }.cict-careers-panel { align-items: flex-start; flex-direction: column; padding: 19px; }.cict-section-heading h2 { font-size: 27px; }.cict-page-nav .page-width { width: calc(100% - 24px); }.cict-page-nav a { min-height: 44px; font-size: 10px; } }
+
+.about-university-page { color: var(--theme-text-173429, var(--ink)); }
+.about-university-hero { padding: 68px 0; background: var(--theme-surface-f6f8f5, var(--wash)); }
+.about-university-hero-inner { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 58px; }
+.about-university-intro { max-width: 560px; }
+.about-university-eyebrow { margin: 0 0 14px; color: var(--theme-green, var(--green)); font-size: 12px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+.about-university-intro h1 { margin: 0 0 18px; color: var(--theme-deep, var(--deep)); font-size: clamp(38px, 5vw, 62px); line-height: 1.07; letter-spacing: -.035em; }
+.about-university-intro > p:not(.about-university-eyebrow) { max-width: 510px; margin: 0 0 26px; color: var(--theme-muted, var(--muted)); font-size: 17px; line-height: 1.7; }
+.about-university-button { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 14px; padding: 12px 18px; border: 2px solid var(--green); border-radius: 3px; color: white; background: var(--green); font-size: 14px; font-weight: 700; text-decoration: none; transition: background .18s ease, color .18s ease; }
+.about-university-button:hover { color: var(--theme-deep, var(--deep)); background: var(--theme-surface-ffffff, white); }
+.about-university-button:focus-visible, .about-university-text-link:focus-visible, .about-university-secondary:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+.about-university-image { position: relative; margin: 0; }
+.about-university-image img { display: block; width: 100%; height: 390px; object-fit: cover; }
+.about-university-image figcaption { margin-top: 8px; color: var(--theme-muted, var(--muted)); font-size: 12px; }
+.about-university-section { padding: 76px 0; }
+.about-university-story { display: grid; grid-template-columns: .8fr 1.2fr; gap: 72px; }
+.about-university-story h2, .about-visit-inner h2 { max-width: 410px; margin: 0; color: var(--theme-deep, var(--deep)); font-size: clamp(30px, 4vw, 42px); line-height: 1.15; }
+.about-university-prose { max-width: 670px; }
+.about-university-prose p { margin: 0 0 18px; color: var(--theme-muted, var(--muted)); font-size: 16px; line-height: 1.8; }
+.about-university-text-link { display: inline-flex; gap: 10px; margin-top: 7px; color: var(--theme-green, var(--green)); font-weight: 700; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.about-university-purpose { padding: 62px 0; background: var(--theme-surface-e8f0eb, #e8f0eb); }
+.about-purpose-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+.about-purpose-grid article + article { padding-left: 48px; border-left: 1px solid rgba(8,123,66,.22); }
+.about-purpose-grid h2 { margin: 0 0 12px; color: var(--theme-deep, var(--deep)); font-size: 25px; line-height: 1.25; }
+.about-purpose-grid article > p:last-child { max-width: 460px; margin: 0; color: var(--theme-muted, var(--muted)); font-size: 16px; line-height: 1.75; }
+.about-university-visit { padding: 54px 0; color: white; background: var(--theme-deep, var(--deep)); }
+.about-visit-inner { display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+.about-visit-inner h2 { color: white; }
+.about-visit-inner > div:first-child > p:last-child { margin: 12px 0 0; color: #e4eee7; line-height: 1.6; }
+.about-visit-inner > div:first-child > p:last-child a { color: white; text-underline-offset: 3px; }
+.about-visit-inner > div:first-child > p:last-child a:focus-visible { outline: 3px solid #e6c86f; outline-offset: 3px; }
+.about-visit-inner .about-university-eyebrow { color: #e6c86f; }
+.about-visit-actions { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.about-visit-actions .about-university-button { border-color: #e6c86f; color: var(--theme-deep, var(--deep)); background: #e6c86f; }
+.about-visit-actions .about-university-button:hover { color: white; background: transparent; }
+.about-university-secondary { color: white; font-weight: 700; text-underline-offset: 4px; }
+@media (max-width: 760px) {
+  .about-university-hero { padding: 42px 0; }
+  .about-university-hero-inner, .about-university-story { grid-template-columns: 1fr; gap: 28px; }
+  .about-university-intro h1 { font-size: clamp(36px, 10vw, 50px); }
+  .about-university-intro > p:not(.about-university-eyebrow) { font-size: 16px; }
+  .about-university-image img { height: clamp(220px, 62vw, 350px); }
+  .about-university-section { padding: 48px 0; }
+  .about-purpose-grid { grid-template-columns: 1fr; gap: 30px; }
+  .about-purpose-grid article + article { padding: 28px 0 0; border-top: 1px solid rgba(8,123,66,.22); border-left: 0; }
+  .about-university-visit { padding: 42px 0; }
+  .about-visit-inner { align-items: flex-start; flex-direction: column; }
+  .about-visit-actions { align-items: flex-start; flex-direction: column; gap: 18px; }
+}
+@media (prefers-reduced-motion: reduce) { .about-university-page *, .about-university-page *::before, .about-university-page *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }

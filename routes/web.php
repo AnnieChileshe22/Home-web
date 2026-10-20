@@ -73,6 +73,8 @@ Route::get('/maps-and-directions', function () {
     return view('maps-and-directions');
 })->name('maps-and-directions');
 
+Route::view('/about', 'about')->name('about');
+
 Route::get('/jobs-and-careers', function () {
     return view('jobs-and-careers');
 })->name('jobs-and-careers');

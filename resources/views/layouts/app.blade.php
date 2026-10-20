@@ -78,8 +78,9 @@
                     </div>
                 </div>
                 <div class="nav-dropdown">
-                    <a class="dropdown-trigger">About us</a>
+                    <a class="dropdown-trigger" href="{{ route('about') }}">About us</a>
                     <div class="nav-dropdown-menu" aria-label="About us menu">
+                        <a href="{{ route('about') }}">About the University</a>
                         <a href="{{ url('/management') }}">Management</a>
                         <a href="{{ url('/university-partners') }}">University Partners</a>
                     </div>
@@ -133,7 +134,7 @@
             </div>
             <div class="footer-links">
                 <h2>About Us</h2>
-                <a href="https://mukuba.edu.zm/about/" target="_blank" rel="noopener noreferrer">About the University</a>
+                <a href="{{ route('about') }}">About the University</a>
                         <a href="{{ route('library') }}">Library</a>
                 <a href="{{ url('https://app.myloft.xyz/user/login?institute=clv672kgw4n4jx8jyodtkqsb7') }}" target="_blank" rel="noopener noreferrer">E-Learning</a>
                 <a href="{{ route('cict') }}#ict-policy">ICT Policy</a>
