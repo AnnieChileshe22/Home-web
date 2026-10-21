@@ -2286,6 +2286,7 @@ main.cict-page { padding: 0; color: var(--theme-ink, #173429); background: var(-
 .cict-eyebrow { margin: 0 0 8px; color: var(--theme-green, #087b42); font-size: 10px; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase; }
 .cict-hero .cict-eyebrow { color: #e4c56e; }
 .cict-hero h1 { max-width: 700px; margin: 0 0 15px; color: #fff; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(38px, 5.4vw, 60px); line-height: 1.04; }
+main.cict-page .cict-hero #cict-title { color: #fff; }
 .cict-hero-copy > p:not(.cict-eyebrow) { max-width: 650px; margin: 0; color: #eff8f2; font-size: 16px; line-height: 1.7; }
 .cict-hero-actions { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 23px; }
 .cict-hero-actions a { display: inline-flex; min-height: 43px; align-items: center; gap: 9px; padding: 0 14px; border-radius: 4px; font-size: 11px; font-weight: 800; }
