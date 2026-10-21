@@ -106,7 +106,9 @@
             <button class="menu-toggle" type="button" aria-label="Open navigation" aria-controls="mobile-navigation" aria-expanded="false"><span></span><span></span><span></span></button>
         </div>
     </header>
-    @yield('content')
+    <div class="site-main">
+        @yield('content')
+    </div>
     <footer id="contact" class="site-footer">
         <div class="page-width footer-grid">
             <div class="footer-brand">

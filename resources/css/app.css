@@ -30,8 +30,9 @@ html[data-theme="dark"] .api-section-status { color: #b4c6bb; }
 :root { --green: #087b42; --deep: #064b2a; --ink: #173429; --muted: #6a786f; --gold: #d7ad3a; --wash: #f6f8f5; --line: #e2e8e2; --header-height: 76px; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-height) + 18px); }
-body { margin: 0; color: var(--theme-ink, var(--ink)); background: var(--theme-surface-fff, #fff); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.5; overflow-x: hidden; }
+body { display: flex; min-height: 100vh; min-height: 100dvh; flex-direction: column; margin: 0; color: var(--theme-ink, var(--ink)); background: var(--theme-surface-fff, #fff); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.5; overflow-x: hidden; }
 body, main, section, article, div, nav, header, footer { max-width: 100%; }
+.site-main { flex: 1 0 auto; min-width: 0; }
 main { padding: 10px; }
 main#top { padding: 0; }
 a { color: inherit; text-decoration: none; } img { display: block; max-width: 100%; }
