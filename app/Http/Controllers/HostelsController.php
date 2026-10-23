@@ -111,6 +111,9 @@ class HostelsController extends Controller
             'images.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:15360'],
             'remove_images' => ['nullable', 'array'],
             'remove_images.*' => ['integer', 'distinct', Rule::exists('hostel_images', 'id')->where('hostel_id', $hostel?->id)],
+        ], [
+            'images.max' => 'You can upload up to 20 photos at a time.',
+            'images.*.max' => 'Each photo must be 15 MB or smaller. Please choose a smaller photo and try again.',
         ]);
 
         $features = collect($validated['features'])->map(fn ($feature) => trim($feature))->filter();
