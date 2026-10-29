@@ -10,6 +10,7 @@ use App\Http\Controllers\LogInController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\AnnouncementsController;
 use App\Http\Controllers\HostelsController;
+use App\Http\Controllers\ProfileController;
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LogInController::class, 'create'])->name('login');
@@ -61,9 +62,8 @@ Route::get('/directorate-of-research-and-graduate-studies', function () {
     return view('directorate-of-research-and-graduate-studies');
 });
 
-Route::get('/management', function () {
-    return view('management');
-});
+Route::get('/management', [ProfileController::class, 'publicIndex'])->name('management');
+Route::get('/profiles/{profile}', [ProfileController::class, 'show'])->name('profiles.show');
 
 Route::get('/university-partners', function () {
     return view('university-partners');
@@ -88,6 +88,8 @@ Route::get('/cict', function () {
 })->name('cict');
 
 Route::middleware('auth')->group(function () {
+Route::resource('admin/profiles', ProfileController::class)->names('admin.profiles')->except('show');
+Route::get('admin/profiles/{profile}', [ProfileController::class, 'adminShow'])->name('admin.profiles.show');
 Route::resource('admin/announcements', AnnouncementsController::class)->names('admin.announcements')->except(['show']);
 Route::resource('admin/hostels', HostelsController::class)->names('admin.hostels');
 Route::resource('admin/posts', PostsController::class)->names('admin.posts')->except(['index', 'show']);
