@@ -12,6 +12,7 @@
         'news' => ['News', 'news'],
         'events' => ['Events', 'calendar'],
         'hostels' => ['Hostels', 'home'],
+        'profiles' => ['Management profiles', 'book'],
         'calendar' => ['Academic Calendar', 'calendar'],
         'announcements' => ['Announcements', 'news'],
     ];
@@ -94,6 +95,7 @@
                     @if ($key === 'posts') <span class="nav-count">{{ \App\Models\Posts::count() }}</span> @endif
                     @if ($key === 'announcements') <span class="nav-count">{{ \App\Models\Announcement::count() }}</span> @endif
                     @if ($key === 'hostels') <span class="nav-count">{{ \App\Models\Hostels::count() }}</span> @endif
+                    @if ($key === 'profiles') <span class="nav-count">{{ \App\Models\Profile::count() }}</span> @endif
                     @if (in_array($key, ['news', 'events']))
                         <span class="nav-count" data-count="{{ $key }}">0</span>
                     @endif
@@ -249,6 +251,12 @@
                     @include('admin.hostels.form')
                 @else
                     @include('admin.hostels.list')
+                @endif
+            @elseif ($currentSection === 'profiles')
+                @if (!empty($profileFormView))
+                    @include($profileFormView)
+                @else
+                    @include('admin.profiles.list')
                 @endif
             @elseif ($currentSection === 'announcements')
                 @if (!empty($announcementForm))
